@@ -69,6 +69,20 @@ html, body {
     .page-heading h4 span {
         opacity: 0.3;
     }
+
+#notification-card{
+    z-index: 99;
+    position: fixed;            
+    bottom: 0px;
+    right: 0px;
+    padding: 0px;
+    margin: 32px;
+}
+
+.main-content{
+    background-image: url("/assets/img/main_bg.jpg");    
+    background-repeat: repeat;    
+}
 /* ========================================== */
 /* miscellaneous Style Classes Ends From Here */
 /* ========================================== */
@@ -160,6 +174,9 @@ disable-button {
     disable-button:hover {
         all: unset;
     }
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+    background-color: var(--theme-color-primary);
+}
 /* =========================================== */
 /* Input Control Related Styles Ends From Here */
 /* =========================================== */
@@ -208,7 +225,7 @@ header {
             color: var(--theme-color-primary-light);
             box-shadow: inset 4px 4px 24px -12px rgba(0,0,0,0.75);
             text-decoration: none;
-        }
+        }    
 /* ==================================== */
 /* Header Related Styles Ends From Here */
 /* ==================================== */
@@ -240,10 +257,6 @@ header {
 /* ======================================= */
 
 
-.main-content{    
-    background-image: url("/assets/img/main_bg.jpg");    
-    background-repeat: repeat;    
-}
 
 
 /* ====================================== */

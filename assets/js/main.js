@@ -8,6 +8,11 @@ $.validator.addMethod("valueNotEquals", function (value, element, arg) {
 
 
 
+var API_URL = "http://localhost:51859/api/"
+
+
+
+
 //=========================================================
 // Utility Functions For Form Flow Control Starts From Here
 //=========================================================
@@ -20,6 +25,29 @@ function toggleThemeButton(id) {
         $(id).removeClass("theme-button-disabled");
         $(id).addClass("theme-button-primary");
         $(id).removeAttr('disabled');
+    }
+}
+
+function toggleThemeSpinner(id) {
+    if ($(id).hasClass("fade")) {
+        $(id).addClass("show");
+        $(id).removeClass("fade");        
+    } else {
+        $(id).addClass("fade");
+        $(id).removeClass("show");        
+    }
+}
+
+function showToast(title,text){
+    if ($('#notification-card').hasClass("fade")) {
+        $('#notification-card').removeClass("fade");
+        $('#notification-card').addClass("show");
+        $('#notification-title').html(title);
+        $('#notification-text').html(text);
+        setTimeout(() => {
+            $('#notification-card').removeClass("show");
+            $('#notification-card').addClass("fade");
+        }, 3000);
     }
 }
 
@@ -55,9 +83,56 @@ function disableAllButtons() {
     disableThemeButton("#collapseButton3");
 }
 
+function addserviceCategory(categoryId,name){
+    $('#servicesContainer')
+        .append('<div class="card border-0" id="serviceCategory'+categoryId+'">'
+                +'<div class="border-0" id="serviceCategoryHeading'+categoryId+'">'
+                    +'<button id="serviceCategoryName'+categoryId+'"' 
+                        + 'class="m-2 theme-button-primary"'
+                        + 'type="button" data-toggle="collapse"' 
+                        + 'data-target="#serviceCategoryCollpase'+categoryId+'"'
+                        + 'aria-expanded="true"'+
+                        + 'aria-controls="serviceCategoryCollpase'+categoryId+'">'
+                            + name
+                        + '</button>'
+                + '</div>'
+                + '<div id="serviceCategoryCollpase'+categoryId+'"' 
+                    + 'class="collapse show"'
+                    + 'aria-labelledby="serviceCategoryHeading'+categoryId+'"'
+                    + 'data-parent="#servicesContainer">'
+                        + '<div class="card-body">'
+                        + '</div>'
+                + '</div>'
+            + '</div>');
+}
+
+function addService(categoryid, serviceid, name, price, description){
+    $('#serviceCategoryCollpase'+categoryid+' > div')
+        .append('<div class="form-group">'
+                    + '<div id="category'+categoryid+'service'+serviceid+'description"' 
+                        + 'class="custom-control custom-checkbox" data-toggle="tooltip"'
+                        + 'data-placement="left" title="'+description+'">'
+                            + '<input type="checkbox" class="custom-control-input service-checkbox"'
+                                + 'id="category'+categoryid+'service'+serviceid+'" checked="">'
+                            + '<label class="custom-control-label"'
+                                + 'for="category3service1">'+name+'</label>'
+                            + '<small id="category'+categoryid+'service'+serviceid+'price">'
+                            + ' - '+price+' INR.</small>'
+                    + '</div>'
+                + '</div>');
+}
+
+function selectService(serviceid){
+
+}
+
+function diselectService(serviceId){
+
+}
+
 function init() {
     disableAllButtons();
-    hideElement("#serviceBookingForm2");
+    hideElement("#serviceBookingForm2");    
 }
 //=======================================================
 // Utility Functions For Form Flow Control Ends From Here
@@ -71,10 +146,11 @@ $(function () {
 
 
 
+
     //=============================================
     //Intialization Functions For Form Flow Control
     //=============================================
-    //init();
+    init();    
 
 
 
@@ -103,6 +179,7 @@ $(function () {
 
         if ($("#serviceBookingForm1").valid()) {
             enableThemeButton("#submitButtonForm1");
+
         } else {
             disableThemeButton("#submitButtonForm1");
         }
@@ -110,8 +187,30 @@ $(function () {
     });
 
     $('#submitButtonForm1').on('click', function () {
-        //Perform Ajax Call here
-        displayElement("#serviceBookingForm2");
+        disableThemeButton("#submitButtonForm1");                
+        displayElement("#serviceBookingForm2");                                   
+        showToast("Attention","Otp has been sent successfully to your email.");
+        // $.ajax({
+        //     url: API_URL,
+        //     type: 'GET',
+        //     contentType: 'application/json',
+        //     success: function (response) {
+        //         if(response != null){
+        //             toggleThemeSpinner('#themeSpinner1');
+        //             displayElement("#serviceBookingForm2");                                   
+        //             showToast("Attention","Otp has been sent successfully to your email.");
+        //         }else{
+        //             showToast("Error","Email Address Not Found");
+        //             toggleThemeSpinner('#themeSpinner1');
+        //             enableThemeButton("#submitButtonForm1");
+        //         }
+        //     },
+        //     error: function(XMLHttpRequest, textStatus, errorThrown){
+        //         alert("Status: " + textStatus); alert("Error: " + errorThrown);
+        //         toggleThemeSpinner("#themeSpinner1");
+        //         enableThemeButton("#submitButtonForm1");
+        //     }                        
+        // });
     });
     //=================================================
     //Form 1 Validation and Flow Control Ends From Here
@@ -124,6 +223,7 @@ $(function () {
     //Form 2 Validation and Flow Control Starts From Here
     //===================================================
     $("#serviceBookingForm2").validate({
+
         rules: {
             Otp: {
                 required: true,
@@ -131,6 +231,7 @@ $(function () {
                 maxlength: 5
             }
         },
+
         messages: {
             Otp: {
                 required: "Please enter the OTP.",
@@ -138,9 +239,11 @@ $(function () {
                 maxlength: "OTP must be of 5 digits."
             }
         },
+        
         success: function () {
             enableThemeButton("#submitButtonForm2");
         }
+
     });
 
     $('#serviceBookingForm2 input').on('keypress', function () {
@@ -154,14 +257,15 @@ $(function () {
     });
 
     $('#submitButtonForm2').on('click', function () {
-        //Perform Ajax Call here                
-        disableThemeButton("#submitButtonForm1");
         disableThemeButton("#submitButtonForm2");
+        //Perform Ajax Call here
+        //And Populate The Car Details in Form Controls
+        disableThemeButton("#submitButtonForm1");        
         enableThemeButton("#collapseButton2");
         $("#collapseButton2").click();
     });
     //=================================================
-    //Form 1 Validation and Flow Control Ends From Here
+    //Form 2 Validation and Flow Control Ends From Here
     //=================================================
 
 
@@ -171,18 +275,22 @@ $(function () {
     //Form 3 Validation and Flow Control Starts From Here
     //===================================================
     $("#serviceBookingForm3").validate({
+
         rules: {
             LicensePlateNumber: { valueNotEquals: "default" }
         },
+
         messages: {
             LicensePlateNumber: { valueNotEquals: "Please select your car" }
         },
+
         success: function () {
             enableThemeButton("#submitButtonForm3");
         }
+
     });
 
-    $('#serviceBookingForm2 select').on('change', function () {
+    $('#serviceBookingForm3 select').on('change', function () {
 
         if ($("#serviceBookingForm3").valid()) {
             enableThemeButton("#submitButtonForm3");
@@ -193,16 +301,22 @@ $(function () {
     });
 
     $('#submitButtonForm3').on('click', function () {
-        //Perform Ajax Call here                
+        //Perform Ajax Call here
         disableThemeButton("#submitButtonForm3");
         enableThemeButton("#collapseButton3");
         $("#collapseButton3").click();
+        
+        //add ajax call for getting services.
+        //on success add following code
+                
     });
     //=================================================
     //Form 3 Validation and Flow Control Ends From Here
     //=================================================
-
-
+    
+    $('.service-checkbox').change(function(){
+        selectService(this.id);
+    });
 
 
 });
