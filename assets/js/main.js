@@ -119,7 +119,7 @@ function addService(categoryid, serviceid, name, price, description){
                             + '<small id="category'+categoryid+'service'+serviceid+'price">'
                             + ' - '+price+' INR.</small>'
                     + '</div>'
-                + '</div>');
+                + '</div>');    
 }
 
 function selectService(serviceId,categoryId,name,price){
@@ -135,11 +135,19 @@ function selectService(serviceId,categoryId,name,price){
                             + '<i class="fa fa-times" aria-hidden="true"></i>'
                         + '</button>'
                     + '</td>'
-                +'</tr>');
+                +'</tr>');                
+        
+    var currnetTotal = parseInt($('#serviceTotalCost').html());
+    currnetTotal += parseInt(price);
+    $('#serviceTotalCost').html(currnetTotal);    
 }
 
-function diselectService(serviceId,categoryId){    
+function diselectService(serviceId,categoryId,price){
+    console.log(price);
     $('#selectedService'+serviceId+categoryId).hide('slide', function(){ $('#selectedService'+serviceId+categoryId).remove(); });
+    var currnetTotal = parseInt($('#serviceTotalCost').html());
+    currnetTotal -= parseInt(price);
+    $('#serviceTotalCost').html(currnetTotal); 
 }
 
 function init() {
@@ -162,7 +170,7 @@ $(function () {
     //=============================================
     //Intialization Functions For Form Flow Control
     //=============================================
-    init();   
+    //init();   
 
 
 
@@ -328,18 +336,19 @@ $(function () {
     
 
     $('.service-checkbox').click(function(){
-        if($(this).prop("checked") == true){
-            var elementId = this.id;
-            var name = $('#'+elementId+'name').html();
-            var price = $('#'+elementId+'price').html();
-            var serviceid = $(this.id).attr('service-id');
-            var categoryid = $(this.id).attr('category-id');
+
+        var elementId = this.id;
+        var name = $('#'+elementId+'name').html();
+        var price = $('#'+elementId+'price').html();
+        var serviceid = $(this.id).attr('service-id');
+        var categoryid = $(this.id).attr('category-id');
+
+        if($(this).prop("checked") == true){            
             selectService(serviceid,categoryid,name,price);            
-        } else if($(this).prop("checked") == false){
-            var serviceid = $(this.id).attr('service-id');
-            var categoryid = $(this.id).attr('category-id');
-            diselectService(serviceid,categoryid);
+        } else if($(this).prop("checked") == false){            
+            diselectService(serviceid,categoryid,price);
         }
+        
     });
 
     //Still in progress do not remove
