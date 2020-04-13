@@ -79,9 +79,23 @@ html, body {
     margin: 32px;
 }
 
-.main-content{
-    background-image: url("/assets/img/main_bg.jpg");    
+.main-content{    
     background-repeat: repeat;    
+}
+
+.service-diselect-button{
+    color: var(--theme-color-primary);
+    background-color: var(--theme-color-secondary-text);
+    border-style: none;
+    display: block;
+}
+.service-diselect-button:hover{
+    cursor: pointer;    
+}
+.service-diselect-button:focus{
+    color: var(--theme-color-secondary-text);    
+    background-color: var(--theme-color-primary);
+    cursor: pointer;    
 }
 /* ========================================== */
 /* miscellaneous Style Classes Ends From Here */

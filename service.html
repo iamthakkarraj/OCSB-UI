@@ -322,7 +322,15 @@
                         <div class="row m-4">
 
                             <div class="card shadow-md border-0 p-4 col-6">
-                                Selected Services
+
+                                <table id="selectedServiceContainer" class="table table-striped">
+                                    <tr> 
+                                        <th>Name</th>                                    
+                                        <th>price</th> 
+                                        <th></th>
+                                    </tr>                                   
+                                </table>
+                                
                             </div>
 
                             <div class="card-body px-4 col-6">
@@ -351,17 +359,17 @@
                                                 <div class="card-body">
 
                                                     <div class="form-group">
+
                                                         <div id="category1service1description"
                                                             class="custom-control custom-checkbox" data-toggle="tooltip"
                                                             data-placement="left" title="Service Description">
                                                             <input type="checkbox" class="custom-control-input service-checkbox"
-                                                                id="category1service1" checked="">
+                                                                id="category1service1" service-id="1" category-id="1" >
                                                             <label class="custom-control-label"
-                                                                for="category1service1">Service 1</label>
+                                                                id="category1service1name" for="category1service1">Service 1</label>
                                                             <small id="category1service1price"> - 234.00 INR.</small>
                                                         </div>
-                                                    
-                                                    
+                                                                                                        
                                                     </div>
 
                                                     <div class="form-group">
@@ -369,9 +377,9 @@
                                                             class="custom-control custom-checkbox" data-toggle="tooltip"
                                                             data-placement="left" title="Service Description">
                                                             <input type="checkbox" class="custom-control-input service-checkbox" 
-                                                                id="category1service2" checked="">
+                                                                id="category1service2" service-id="2" category-id="1">
                                                             <label class="custom-control-label"
-                                                                for="category1service2">Service 1</label>
+                                                                id="category1service3name" for="category1service2">Service 1</label>
                                                             <small id="category1service2price"> - 234.00 INR.</small>
                                                         </div>
                                                     </div>
@@ -381,8 +389,8 @@
                                                             class="custom-control custom-checkbox" data-toggle="tooltip"
                                                             data-placement="left" title="Service Description">
                                                             <input type="checkbox" class="custom-control-input service-checkbox"
-                                                                id="category1service3" checked="">
-                                                            <label class="custom-control-label"
+                                                                id="category1service3" service-id="3" category-id="1" >
+                                                            <label id="category1service3name" class="custom-control-label"
                                                                 for="category1service3">Service 1</label>
                                                             <small id="category1service3price"> - 234.00 INR.</small>
                                                         </div>
@@ -393,11 +401,11 @@
                                                             class="custom-control custom-checkbox" data-toggle="tooltip"
                                                             data-placement="left" title="Service Description">
                                                             <input type="checkbox" class="custom-control-input service-checkbox"
-                                                                id="category1service4" checked="">
-                                                            <label class="custom-control-label"
+                                                                id="category1service4" service-id="4" category-id="1" >
+                                                            <label id="category1service4name" class="custom-control-label"
                                                                 for="category1service4">Service 1</label>
-                                                            <small id="category1service4price"> - 234.00 INR.</small>
-                                                        </div>
+                                                            <small id="category1service4price"> 234.00 INR.</small>
+                                                        </div>                                                        
                                                     </div>
 
                                                 </div>
@@ -430,9 +438,9 @@
                                                             class="custom-control custom-checkbox" data-toggle="tooltip"
                                                             data-placement="left" title="Service Description">
                                                             <input type="checkbox" class="custom-control-input service-checkbox"
-                                                                id="category2service1" checked="">
+                                                                id="category2service1" service-id="1" category-id="2" >
                                                             <label class="custom-control-label"
-                                                                for="category2service1">Service 1</label>
+                                                                id="category2service1name"  for="category2service1">Service 1</label>
                                                             <small id="category2service1price"> - 234.00 INR.</small>
                                                         </div>
                                                     </div>
@@ -442,9 +450,9 @@
                                                             class="custom-control custom-checkbox" data-toggle="tooltip"
                                                             data-placement="left" title="Service Description">
                                                             <input type="checkbox" class="custom-control-input service-checkbox"
-                                                                id="category2service2" checked="">
+                                                                id="category2service2" service-id="2" category-id="2" >
                                                             <label class="custom-control-label"
-                                                                for="category2service2">Service 1</label>
+                                                                id="category2service2name" for="category2service2">Service 1</label>
                                                             <small id="category2service2price"> - 234.00 INR.</small>
                                                         </div>
                                                     </div>
@@ -454,9 +462,9 @@
                                                             class="custom-control custom-checkbox" data-toggle="tooltip"
                                                             data-placement="left" title="Service Description">
                                                             <input type="checkbox" class="custom-control-input service-checkbox"
-                                                                id="category2service3" checked="">
+                                                                id="category2service3" service-id="3" category-id="2" >
                                                             <label class="custom-control-label"
-                                                                for="category2service3">Service 1</label>
+                                                                id="category2service3name" for="category2service3">Service 1</label>
                                                             <small id="category2service3price"> - 234.00 INR.</small>
                                                         </div>
                                                     </div>
@@ -466,9 +474,9 @@
                                                             class="custom-control custom-checkbox" data-toggle="tooltip"
                                                             data-placement="left" title="Service Description">
                                                             <input type="checkbox" class="custom-control-input service-checkbox"
-                                                                id="category2service4" checked="">
+                                                                id="category2service4" service-id="4" category-id="2" >
                                                             <label class="custom-control-label"
-                                                                for="category2service4">Service 1</label>
+                                                                id="category2service4name" for="category2service4">Service 1</label>
                                                             <small id="category2service4price"> - 234.00 INR.</small>
                                                         </div>
                                                     </div>
@@ -501,9 +509,9 @@
                                                             class="custom-control custom-checkbox" data-toggle="tooltip"
                                                             data-placement="left" title="Service Description">
                                                             <input type="checkbox" class="custom-control-input service-checkbox"
-                                                                id="category3service1" checked="">
+                                                                id="category3service1" service-id="1" category-id="3">
                                                             <label class="custom-control-label"
-                                                                for="category3service1">Service 1</label>
+                                                                id="category3service1name" for="category3service1">Service 1</label>
                                                             <small id="category3service1price"> - 234.00 INR.</small>
                                                         </div>
                                                     </div>
@@ -513,9 +521,9 @@
                                                             class="custom-control custom-checkbox" data-toggle="tooltip"
                                                             data-placement="left" title="Service Description">
                                                             <input type="checkbox" class="custom-control-input service-checkbox"
-                                                                id="category3service2" checked="">
+                                                                id="category3service2"  service-id="2" category-id="3">
                                                             <label class="custom-control-label"
-                                                                for="category3service2">Service 1</label>
+                                                                id="category3service2name" for="category3service2">Service 1</label>
                                                             <small id="category3service2price"> - 234.00 INR.</small>
                                                         </div>
                                                     </div>
@@ -525,9 +533,9 @@
                                                             class="custom-control custom-checkbox" data-toggle="tooltip"
                                                             data-placement="left" title="Service Description">
                                                             <input type="checkbox" class="custom-control-input service-checkbox"
-                                                                id="category3service3" checked="">
+                                                                id="category3service3" service-id="3" category-id="3">
                                                             <label class="custom-control-label"
-                                                                for="category3service3">Service 1</label>
+                                                                id="category3service3name" for="category3service3">Service 1</label>
                                                             <small id="category3service3price"> - 234.00 INR.</small>
                                                         </div>
                                                     </div>
@@ -537,9 +545,9 @@
                                                             class="custom-control custom-checkbox" data-toggle="tooltip"
                                                             data-placement="left" title="Service Description">
                                                             <input type="checkbox" class="custom-control-input service-checkbox"
-                                                                id="category3service4" checked="">
+                                                                id="category3service4"  service-id="4" category-id="3" >
                                                             <label class="custom-control-label"
-                                                                for="category3service4">Service 1</label>
+                                                                id="category3service4name" for="category3service4">Service 1</label>
                                                             <small id="category3service4price"> - 234.00 INR.</small>
                                                         </div>
                                                     </div>
@@ -572,10 +580,13 @@
     <!-- =========================== -->
 
 
+
+
     <div id="notification-card" class="card col-3 shadow-md fade">
         <div id="notification-title" class="card-header theme-bg-primary">Oops !</div>
         <div id="notification-text" class="card-body">Email address not found</div>
     </div>
+
 
 
 
@@ -682,8 +693,7 @@
     <script src="./assets/js/jquery.validate.min.js"></script>
 
     <!-- Multiselect JS CDN -->
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js"></script>
 
     <!-- Chosen JS CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.js"></script>

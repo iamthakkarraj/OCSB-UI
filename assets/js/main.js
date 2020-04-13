@@ -122,12 +122,24 @@ function addService(categoryid, serviceid, name, price, description){
                 + '</div>');
 }
 
-function selectService(serviceid){
-
+function selectService(serviceId,categoryId,name,price){
+    $('#selectedServiceContainer')
+        .append('<tr id="selectedService'+serviceId+categoryId+'">'
+                    +'<td id="selectedServiceName'+serviceId+categoryId+'">'+name+'</td>'
+                    + '<td id="selectedServicePrice'+serviceId+categoryId+'">'+price+'</td>'
+                    + '<td>'
+                        + '<button id="selectedService'+serviceId+categoryId+'"'
+                        + 'service-id="'+serviceId+'"' 
+                        + 'category-id="'+categoryId+'"'
+                            + 'class="service-diselect-button shadow-md px-2 rounded">'
+                            + '<i class="fa fa-times" aria-hidden="true"></i>'
+                        + '</button>'
+                    + '</td>'
+                +'</tr>');
 }
 
-function diselectService(serviceId){
-
+function diselectService(serviceId,categoryId){    
+    $('#selectedService'+serviceId+categoryId).hide('slide', function(){ $('#selectedService'+serviceId+categoryId).remove(); });
 }
 
 function init() {
@@ -150,7 +162,7 @@ $(function () {
     //=============================================
     //Intialization Functions For Form Flow Control
     //=============================================
-    init();    
+    //init();    
 
 
 
@@ -314,9 +326,30 @@ $(function () {
     //Form 3 Validation and Flow Control Ends From Here
     //=================================================
     
-    $('.service-checkbox').change(function(){
-        selectService(this.id);
+
+    $('.service-checkbox').click(function(){
+        if($(this).prop("checked") == true){
+            var elementId = this.id;
+            var name = $('#'+elementId+'name').html();
+            var price = $('#'+elementId+'price').html();
+            var serviceid = $(this.id).attr('service-id');
+            var categoryid = $(this.id).attr('category-id');
+            selectService(serviceid,categoryid,name,price);            
+        } else if($(this).prop("checked") == false){
+            var serviceid = $(this.id).attr('service-id');
+            var categoryid = $(this.id).attr('category-id');
+            diselectService(serviceid,categoryid);
+        }
     });
+
+    //Still in progress do not remove
+    // $('.service-diselect-button').click(function(){
+    //     var serviceid = $(this.id).attr('service-id');
+    //     var categoryid = $(this.id).attr('category-id');
+    //     diselectService(serviceid,categoryid);
+    //     alert('#category'+serviceid+'service'+categoryid);
+    //     $('#category'+serviceid+'service'+categoryid).click();
+    // });
 
 
 });
