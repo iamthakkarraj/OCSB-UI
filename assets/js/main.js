@@ -139,7 +139,8 @@ function selectService(serviceId,categoryId,name,price){
         
     var currnetTotal = parseInt($('#serviceTotalCost').html());
     currnetTotal += parseInt(price);
-    $('#serviceTotalCost').html(currnetTotal);    
+    $('#serviceTotalCost').html(currnetTotal);
+    $('#AddedServices').val().append(serviceId);        
 }
 
 function diselectService(serviceId,categoryId,price){
@@ -277,12 +278,17 @@ $(function () {
     });
 
     $('#submitButtonForm2').on('click', function () {
+
         disableThemeButton("#submitButtonForm2");
+
         //Perform Ajax Call here
+
         //And Populate The Car Details in Form Controls
+
         disableThemeButton("#submitButtonForm1");        
         enableThemeButton("#collapseButton2");
         $("#collapseButton2").click();
+        
     });
     //=================================================
     //Form 2 Validation and Flow Control Ends From Here
@@ -321,19 +327,40 @@ $(function () {
     });
 
     $('#submitButtonForm3').on('click', function () {
+
         //Perform Ajax Call here
+
         disableThemeButton("#submitButtonForm3");
         enableThemeButton("#collapseButton3");
         $("#collapseButton3").click();
         
-        //add ajax call for getting services.
-        //on success add following code
+        //add ajax call for getting services.        
                 
     });
     //=================================================
     //Form 3 Validation and Flow Control Ends From Here
     //=================================================
     
+
+
+    //=================================================
+    //Form 3 Validation and Flow Control Ends From Here
+    //=================================================    
+    $("#serviceBookingForm4").validate({
+
+        rules: {
+            AddedServices: { required: "Please select any services" }
+        },
+
+        messages: {
+            TotalCost: { required: "Please select any services" }
+        },
+
+        success: function () {
+            enableThemeButton("#submitButtonForm4");
+        }
+
+    });
 
     $('.service-checkbox').click(function(){
 
@@ -348,7 +375,7 @@ $(function () {
         } else if($(this).prop("checked") == false){            
             diselectService(serviceid,categoryid,price);
         }
-        
+
     });
 
     //Still in progress do not remove
@@ -359,6 +386,22 @@ $(function () {
     //     alert('#category'+serviceid+'service'+categoryid);
     //     $('#category'+serviceid+'service'+categoryid).click();
     // });
+
+    $('#submitButtonForm4').on('click', function () {
+
+        //Perform Ajax Call here
+
+        disableThemeButton("#submitButtonForm4");
+        enableThemeButton("#collapseButton4");
+        $("#collapseButton4").click();        
+
+        //add ajax call for getting Dealer List               
+    });
+    //===================================================
+    //Form 3 Validation and Flow Control Starts From Here
+    //===================================================
+    
+    
 
 
 });
