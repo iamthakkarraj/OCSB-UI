@@ -13,17 +13,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Google Fonts CDN -->
-    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&family=Montserrat&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&family=Montserrat&display=swap" rel="stylesheet">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
-
+    <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css">
+    
     <!-- Font-Awesome CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Local CSS -->
-    <link type="text/css" rel="stylesheet" href="/assets/css/styles.css" />
+    <link type="text/css" rel="stylesheet" href="./assets/css/styles.css" />
 
 </head>
 
@@ -214,7 +213,8 @@
 
                                 <div class="form-group">
                                     <button class="theme-button-primary" type="button" id="submitButtonForm2">
-                                        Submit </button>
+                                        Submit 
+                                    </button>
                                 </div>
 
                             </form>
@@ -323,7 +323,7 @@
 
                             <div class="row mb-4 mx-1">
 
-                                <div class="card shadow-md border-0 p-4 col-6">
+                                <div class="card shadow-md border-0 p-4 col-6" style="overflow: scroll; max-height: 400px;">
 
                                     <table id="selectedServiceContainer" class="table table-striped">
                                         <tr>
@@ -333,7 +333,7 @@
                                         </tr>
                                     </table>
 
-                                    <table class="table">
+                                    <table id="selectedServiceSummary" class="table">
                                         <tr>
                                             <td>Total </td>
                                             <td id="serviceTotalCost">00</td>
@@ -341,12 +341,7 @@
                                     </table>
 
                                 </div>
-
-                                <form>
-                                    <input type="text" name="AddedServices" id="AddedServices" />
-                                    <input type="text" name="TotalCost" id="TotalCost" />
-                                </form>
-
+                                
                                 <div class="card-body px-4 col-6">
 
                                     <div class="row">
@@ -663,7 +658,157 @@
 
                                 </div>
 
+                                <form id="serviceBookingForm4">
+                                    
+                                    <input type="text" class="fade hidden-input-control" name="SelectedServices" id="AddedServices" />
+                                    <input type="number" class="fade hidden-input-control" name="TotalCost" id="TotalCost" />
+
+                                    <div class="form-group">
+                                        <button class="theme-button-primary" type="button" id="submitButtonForm4">
+                                            Next
+                                        </button>
+                                    </div>                                    
+
+                                </form>
+
                             </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card border-0">
+
+                    <div class="border-0 col-3 pb-3" id="frameHeading4">
+
+                        <button id="collapseButton4" class="theme-button-primary w-100 text-left pl-4" type="button"
+                            data-toggle="collapse" data-target="#frame-4" aria-expanded="true" aria-controls="frame-4">
+                            + <i class="fa fa-id-card-o" aria-hidden="true"></i> Select your dealer
+                        </button>
+
+                    </div>
+
+                    <div id="frame-4" class="collapse" aria-labelledby="frameHeading4"
+                        data-parent="#sercviceBookingAccordin">
+
+                        <div class="card-body col-12 p-0 mx-4">
+
+                            <h4 class="row p-3">
+                                Please choose your date and select the dealer
+                            </h4>   
+
+                            <div class="row mb-4 mx-1">
+
+                                <div class="card shadow-md border-0 p-4 col-8" style="overflow: scroll; max-height: 400px;">
+
+                                    <table id="dealerListContainer" class="table table-striped p-4">
+
+                                        <tr>
+                                            <th> </th>
+                                            <th> Name </th>                                    
+                                            <th> Phone No. </th>                                            
+                                        </tr>
+
+                                        <tr>
+                                            <td> 
+                                                <div class="custom-control custom-checkbox" data-placement="left">
+                                                    <input type="checkbox"
+                                                        class="custom-control-input dealer-checkbox"
+                                                        id="dealer1" dealer-id="1" />
+                                                    <label class="custom-control-label" for="dealer1"></label>
+                                                </div>
+                                            </td>
+                                            <td id="dealerName1"> Lorem Ipsum </td>                                    
+                                            <td id="dealerPhoneNo1"> +99 9090909090 </td>                                    
+                                        </tr>
+
+                                        <tr>
+                                            <td> 
+                                                <div class="custom-control custom-checkbox" data-placement="left">
+                                                    <input type="checkbox"
+                                                        class="custom-control-input dealer-checkbox"
+                                                        id="dealer2" dealer-id="2">
+                                                    <label class="custom-control-label" for="dealer2"></label>
+                                                </div>
+                                            </td>
+                                            <td id="dealerName2"> Lorem Ipsum </td>                                    
+                                            <td id="dealerPhoneNo2"> +99 9090909090 </td>                                    
+                                        </tr>
+
+                                        <tr>
+                                            <td> 
+                                                <div class="custom-control custom-checkbox"
+                                                    data-toggle="tooltip" data-placement="left">
+                                                    <input type="checkbox"
+                                                        class="custom-control-input dealer-checkbox"
+                                                        id="dealer3" dealer-id="3">
+                                                    <label class="custom-control-label" for="dealer3"></label>
+                                                </div>
+                                            </td>
+                                            <td id="dealerName3"> Lorem Ipsum </td>                                    
+                                            <td id="dealerPhoneNo3"> +99 9090909090 </td>                                    
+                                        </tr>             
+
+                                        <tr>
+                                            <td> 
+                                                <div class="custom-control custom-checkbox"data-placement="left">
+                                                    <input type="checkbox"
+                                                        class="custom-control-input dealer-checkbox"
+                                                        id="dealer4" dealer-id="4">
+                                                        <label class="custom-control-label" for="dealer4"></label>
+                                                </div>
+                                            </td>
+                                            <td id="dealerName4"> Lorem Ipsum </td>                                    
+                                            <td id="dealerPhoneNo4"> +99 9090909090 </td>
+                                        </tr>   
+
+                                        <tr>
+                                            <td> 
+                                                <div class="custom-control custom-checkbox"data-placement="left">
+                                                    <input type="checkbox"
+                                                        class="custom-control-input dealer-checkbox"
+                                                        id="dealer5" dealer-id="5">
+                                                        <label class="custom-control-label" for="dealer6"></label>
+                                                </div>
+                                            </td>
+                                            <td id="dealerName5"> Lorem Ipsum </td>                                    
+                                            <td id="dealerPhoneNo5"> +99 9090909090 </td>                                                                        
+                                        </tr>     
+
+                                        <tr>
+                                            <td> 
+                                                <div class="custom-control custom-checkbox"data-placement="left">
+                                                    <input type="checkbox"
+                                                        class="custom-control-input dealer-checkbox"
+                                                        id="dealer6" dealer-id="6">
+                                                        <label class="custom-control-label" for="dealer6"></label>
+                                                </div>
+                                            </td>
+                                            <td id="dealerName6"> Lorem Ipsum </td>                                    
+                                            <td id="dealerPhoneNo6"> +99 9090909090 </td>                                                                        
+                                        </tr>        
+                                        
+                                    </table>
+                            
+                                </div>
+
+                                <div class="col-4 pr-5">                                    
+                                    <input type="datetime-local" name="PlanDateTime" class="theme-form-control" id="PlanDateTime" /> 
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <button class="theme-button-primary" type="button" id="submitButtonForm5">
+                                    Next
+                                </button>
+                            </div>
+                                                        
+                            <form id="serviceBookingForm5">
+                                <input type="number" name="dealerId" id="dealerId" class="fade hidden-input-control">
+                            </form>
 
                         </div>
 
@@ -696,13 +841,13 @@
     <!-- ================== -->
     <!-- Hidden Form Fields -->
     <!-- ================== -->
-    <form>
-        <input type="hidden" name="Email" id="Email" />
-        <input type="hidden" name="Otp" id="Email" />                
-        <input type="hidden" name="LicenseNumber" id="LicenseNumber" />
-        <input type="hidden" name="Brand" id="Brand" />
-        <input type="hidden" name="Model" id="Model" />                
-        <input type="hidden" name="DealerId" id="DealerId" />        
+    <!-- <form>
+        Done <input type="hidden" name="Email" id="Email" />
+        Done <input type="hidden" name="Otp" id="Email" />                
+        Done <input type="hidden" name="LicenseNumber" id="LicenseNumber" />
+        Done <input type="hidden" name="Brand" id="Brand" />
+        Done <input type="hidden" name="Model" id="Model" />                
+        Done <input type="hidden" name="DealerId" id="DealerId" />        
         <ipnut type="hidden" name="PlanDateTime" id="PlanDateTime" />
         <ipnut type="hidden" name="CustomerNote" id="CustomerNote" />
         <input type="hidden" name="PickUpLat" id="PickUpLate" />
@@ -711,7 +856,7 @@
         <input type="hidden" name="DropLong" id="DropLang" />
         <input type="hidden" name="PickUpAddress" id="PickUpAddress" />
         <input type="hidden" name="DropAddress" id="DropAddress" />
-    </form>
+    </form> -->
 
 
 
@@ -807,26 +952,21 @@
     <!-- Script Embedding Starts From Here -->
     <!-- ================================= -->
     <!-- Jquery -->
-    <script src="/assets/js/jquery-3.4.1.slim.min.js"></script>
+    <script src="./assets/js/jquery-3.4.1.slim.min.js"></script>
 
     <!-- Popper Js -->
-    <script src="assets/js/popper.min.js"></script>
+    <script src="./assets/js/popper.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <!-- Bootstrap JS -->
-    <script src="assets/js/bootstrap.min.js"></script>
-
+    <script src="./assets/js/bootstrap.min.js"></script>
+    
     <!-- Jquery Validate -->
     <script src="./assets/js/jquery.validate.min.js"></script>
-
-    <!-- Multiselect JS CDN -->
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js"></script>
-
-    <!-- Chosen JS CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.js"></script>
-
+    
     <!-- Local JS -->
-    <script src="assets/js/main.js"></script>
+    <script src="./assets/js/main.js"></script>
     <!-- =============================== -->
     <!-- Script Embedding Ends From Here -->
     <!-- =============================== -->

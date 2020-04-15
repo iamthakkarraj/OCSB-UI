@@ -8,6 +8,17 @@ $.validator.addMethod("valueNotEquals", function (value, element, arg) {
 
 
 
+//==============================
+//Date Time Picker Customization
+//=======================
+$('#datetimepicker2').datetimepicker({
+    language: 'en',
+    pick12HourFormat: true
+});
+
+
+
+
 var API_URL = "http://localhost:51859/api/"
 
 
@@ -79,10 +90,27 @@ function disableAllButtons() {
     disableThemeButton("#submitButtonForm1");
     disableThemeButton("#submitButtonForm2");
     disableThemeButton("#submitButtonForm3");
+    disableThemeButton("#submitButtonForm4");
+    disableThemeButton("#submitButtonForm5");
     disableThemeButton("#collapseButton2");
     disableThemeButton("#collapseButton3");
+    disableThemeButton("#collapseButton4");
 }
 
+function init() {
+    disableAllButtons();
+    hideElement("#serviceBookingForm2");    
+}
+//=======================================================
+// Utility Functions For Form Flow Control Ends From Here
+//=======================================================
+
+
+
+
+//===================================================
+// Vehicle Service Related Functions Starts From Here
+//===================================================
 function addserviceCategory(categoryId,name){
     $('#servicesContainer')
         .append('<div class="card border-0" id="serviceCategory'+categoryId+'">'
@@ -106,63 +134,121 @@ function addserviceCategory(categoryId,name){
             + '</div>');
 }
 
-function addService(categoryid, serviceid, name, price, description){
-    $('#serviceCategoryCollpase'+categoryid+' > div')
+function addService(categoryId, serviceId, name, price, description){
+    $('#serviceCategoryCollpase'+categoryId+' > div')
         .append('<div class="form-group">'
-                    + '<div id="category'+categoryid+'service'+serviceid+'description"' 
+                    + '<div id="category'+categoryId+'service'+serviceId+'description"' 
                         + 'class="custom-control custom-checkbox" data-toggle="tooltip"'
                         + 'data-placement="left" title="'+description+'">'
                             + '<input type="checkbox" class="custom-control-input service-checkbox"'
-                                + 'id="category'+categoryid+'service'+serviceid+'" checked="">'
+                                + 'id="category'+categoryId+'service'+serviceId+'"'
+                                + 'service-id="'+serviceId+'"' 
+                                + 'category-id="'+categoryId+'">'
                             + '<label class="custom-control-label"'
-                                + 'for="category3service1">'+name+'</label>'
-                            + '<small id="category'+categoryid+'service'+serviceid+'price">'
+                                + 'id="category'+categoryId+'service'+serviceId+'name"'
+                                + 'for="category'+categoryId+'service'+serviceId+'">'+name+'</label>'
+                            + '<small id="category'+categoryId+'service'+serviceId+'price">'
                             + ' - '+price+' INR.</small>'
                     + '</div>'
                 + '</div>');    
 }
 
 function selectService(serviceId,categoryId,name,price){
+
     $('#selectedServiceContainer')
-        .append('<tr id="selectedService'+serviceId+categoryId+'">'
+        .append('<tr class="rounded" id="selectedService'+serviceId+categoryId+'">'                    
                     +'<td id="selectedServiceName'+serviceId+categoryId+'">'+name+'</td>'
                     + '<td id="selectedServicePrice'+serviceId+categoryId+'">'+price+'</td>'
                     + '<td>'
-                        + '<button id="selectedService'+serviceId+categoryId+'"'
-                        + 'service-id="'+serviceId+'"' 
-                        + 'category-id="'+categoryId+'"'
-                            + 'class="service-diselect-button shadow-md px-2 rounded">'
-                            + '<i class="fa fa-times" aria-hidden="true"></i>'
-                        + '</button>'
-                    + '</td>'
-                +'</tr>');                
-        
-    var currnetTotal = parseInt($('#serviceTotalCost').html());
-    currnetTotal += parseInt(price);
-    $('#serviceTotalCost').html(currnetTotal);
-    $('#AddedServices').val().append(serviceId);        
+                        // this button is right now not working but don't remove it
+                        // + '<button id="selectedService'+serviceId+categoryId+'"'
+                        // + ' data-serviceId="'+serviceId+'"' 
+                        // + ' data-categoryId="'+categoryId+'"'
+                        //     + ' class="service-diselect-button shadow-md px-2 rounded">'
+                        //     + '<i class="fa fa-times" aria-hidden="true"></i>'
+                        // + '</button>'
+                    + '</td>'                    
+                +'</tr>');
+    
+    //Updating Cost in summary table    
+    $('#serviceTotalCost')
+        .html(parseInt($('#serviceTotalCost')
+                        .html()) 
+                        + parseInt(price));
+
+    //Updating Total Cost Hiddne Field 
+    $('#TotalCost')
+        .val($('#serviceTotalCost')
+            .html());
+
+    //Updating Selected Services Hidden Field
+    $('#SelectedServices')
+        .val($('#SelectedServices')
+            .val()+'-'+serviceId+'-');
 }
 
 function diselectService(serviceId,categoryId,price){
-    console.log(price);
-    $('#selectedService'+serviceId+categoryId).hide('slide', function(){ $('#selectedService'+serviceId+categoryId).remove(); });
-    var currnetTotal = parseInt($('#serviceTotalCost').html());
-    currnetTotal -= parseInt(price);
-    $('#serviceTotalCost').html(currnetTotal); 
+
+    $('#selectedService'+serviceId+categoryId)
+        .hide('slide', function(){
+             $('#selectedService'+serviceId+categoryId)
+                .remove(); 
+            });
+    
+    //Updating Cost in summary table    
+    $('#serviceTotalCost')
+        .html(parseInt($('#serviceTotalCost')
+                        .html()) 
+                        - parseInt(price));
+
+    //Updating Total Cost Hiddne Field 
+    $('#TotalCost')
+        .val($('#serviceTotalCost')
+            .html());
+
+    //Updating Selected Services Hidden Field    
+    $('#SelectedServices')
+        .val($('#SelectedServices').val()+''.replace('-'+serviceId+'-',''));
+}   
+//=================================================
+// Vehicle Service Related Functions Ends From Here
+//=================================================
+
+
+
+
+//==================================================
+// Vehicle Dealer Related Functions Starts From Here
+//==================================================
+function addDealer(dealerId,name,phoneNo){
+    $('#dealerListContainer')
+        .append('<tr>'
+                + '<td>'
+                    + '<div class="custom-control custom-checkbox" data-placement="left">'
+                        + '<input type="checkbox"'
+                            + 'class="custom-control-input dealer-checkbox"'
+                            + 'id="dealer1" dealer-id="1" />'
+                        + '<label class="custom-control-label" for="dealer1"></label>'
+                + '</div>'
+            + '</td>'
+            + '<td id="dealerName1"> Lorem Ipsum </td>'
+            + '<td id="dealerPhoneNo1"> +99 9090909090 </td>'
+        + '</tr>');
 }
 
-function init() {
-    disableAllButtons();
-    hideElement("#serviceBookingForm2");    
+function displayDealerDetails(){
+
 }
-//=======================================================
-// Utility Functions For Form Flow Control Ends From Here
-//=======================================================
+//================================================
+// Vehicle Dealer Related Functions Ends From Here
+//================================================
 
 
 
 
-//On Document Load 
+//==========================================
+//On Document Load Function Starts From Here
+//==========================================
 $(function () {
 
 
@@ -171,7 +257,7 @@ $(function () {
     //=============================================
     //Intialization Functions For Form Flow Control
     //=============================================
-    //init();   
+    //init(); 
 
 
 
@@ -263,8 +349,8 @@ $(function () {
         
         success: function () {
             enableThemeButton("#submitButtonForm2");
-        }
-
+        },
+        
     });
 
     $('#serviceBookingForm2 input').on('keypress', function () {
@@ -288,7 +374,7 @@ $(function () {
         disableThemeButton("#submitButtonForm1");        
         enableThemeButton("#collapseButton2");
         $("#collapseButton2").click();
-        
+
     });
     //=================================================
     //Form 2 Validation and Flow Control Ends From Here
@@ -343,65 +429,118 @@ $(function () {
     
 
 
-    //=================================================
-    //Form 3 Validation and Flow Control Ends From Here
-    //=================================================    
+    //===================================================
+    //Form 4 Validation and Flow Control Starts From Here
+    //===================================================    
     $("#serviceBookingForm4").validate({
 
         rules: {
-            AddedServices: { required: "Please select any services" }
+            AddedServices: { 
+                required : true
+            },
+            TotalCost: { 
+                required: true,
+                range:[500,2147483647]
+            }
         },
 
         messages: {
-            TotalCost: { required: "Please select any services" }
+            AddedServices: {
+                required: "Please select any services" 
+            },
+            TotalCost: {
+                required: "",
+                range: "Total bill amount needs to be atleast greater than 500"
+            }
         },
-
-        success: function () {
-            enableThemeButton("#submitButtonForm4");
-        }
-
+        
     });
+    
+    $('.service-checkbox').on('click', function(){
+                
+        var name = $('#'+this.id+'name').html();
+        var price = $('#'+this.id+'price').html();
+        var serviceId = $('#'+this.id).attr('service-id');
+        var categoryId = $('#'+this.id).attr('category-id');
 
-    $('.service-checkbox').click(function(){
-
-        var elementId = this.id;
-        var name = $('#'+elementId+'name').html();
-        var price = $('#'+elementId+'price').html();
-        var serviceid = $(this.id).attr('service-id');
-        var categoryid = $(this.id).attr('category-id');
-
-        if($(this).prop("checked") == true){            
-            selectService(serviceid,categoryid,name,price);            
+        if($(this).prop("checked") == true){
+            selectService(serviceId,categoryId,name,price);        
         } else if($(this).prop("checked") == false){            
-            diselectService(serviceid,categoryid,price);
+            diselectService(serviceId,categoryId,price);
         }
 
+        //  this code is right now not working but don't delete it
+        // $('.service-diselect-button').on('click',function(){        
+        //     alert($('#'+this.id).attr(''));
+        //     var serviceId = $('#'+this.id).attr('data-serviceId');
+        //     console.log(serviceId);
+        //     var categoryId = $('#'+this.id).attr('data-categoryId');        
+        //     console.log(categoryId);
+        //     var price = $('#category'+categoryId+'service'+serviceId+'price').html();
+        //     console.log(price);
+        //     diselectService(serviceId,categoryId,price);        
+        //     $('#category'+serviceId+'service'+categoryId).click();
+        // });    
+
+        if ($("#serviceBookingForm4").valid()) {
+            enableThemeButton("#submitButtonForm4");
+        } else {
+            disableThemeButton("#submitButtonForm4");
+        }
+                        
     });
-
-    //Still in progress do not remove
-    // $('.service-diselect-button').click(function(){
-    //     var serviceid = $(this.id).attr('service-id');
-    //     var categoryid = $(this.id).attr('category-id');
-    //     diselectService(serviceid,categoryid);
-    //     alert('#category'+serviceid+'service'+categoryid);
-    //     $('#category'+serviceid+'service'+categoryid).click();
-    // });
-
+            
     $('#submitButtonForm4').on('click', function () {
 
         //Perform Ajax Call here
 
         disableThemeButton("#submitButtonForm4");
         enableThemeButton("#collapseButton4");
-        $("#collapseButton4").click();        
+        $("#collapseButton4").click();
 
-        //add ajax call for getting Dealer List               
+        //add ajax call for getting Dealer List  
+
     });
-    //===================================================
-    //Form 3 Validation and Flow Control Starts From Here
-    //===================================================
+    //=================================================
+    //Form 4 Validation and Flow Control Ends From Here
+    //=================================================
     
+
+
+    //===================================================
+    //Form 5 Validation and Flow Control Starts From Here
+    //===================================================
+    $('.dealer-checkbox').on('click', function(){
+
+        var elementId = this.id;
+        var dealerId = $('#'+elementId).attr('dealer-id');
+
+        $("dealerId").val(this.id);
+
+        enableThemeButton("#submitButtonForm5");
+        
+        $('.dealer-checkbox').each(function(){
+            if(this.id == elementId){
+                $('#'+this.id).prop("checked", true);
+            } else {
+                $('#'+this.id).prop("checked", false); 
+            }
+        });
+
+
+
+    });
+
+    $( function() {
+        $( "#PlanDateTime" ).datepicker();
+      } );
+    //===================================================
+    //Form 5 Validation and Flow Control Starts From Here
+    //===================================================
     
 
 
 });
+//========================================
+//On Document Load Function Ends From Here
+//========================================

@@ -97,6 +97,12 @@ html, body {
     background-color: var(--theme-color-primary);
     cursor: pointer;    
 }
+.hidden-input-control{
+    width: 1px;
+    height: 1px;
+    margin: 0px;
+    padding: 0px;    
+}
 /* ========================================== */
 /* miscellaneous Style Classes Ends From Here */
 /* ========================================== */
