@@ -194,12 +194,53 @@ disable-button {
     disable-button:hover {
         all: unset;
     }
-.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-    background-color: var(--theme-color-primary);
-}
 /* =========================================== */
 /* Input Control Related Styles Ends From Here */
 /* =========================================== */
+
+
+
+
+/* ============================================ */
+/* Bootstrap Styles Overriding Starts From Here */
+/* ============================================ */
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+    background-color: var(--theme-color-primary);
+}
+
+.datepicker table tr td.active.active,
+.datepicker table tr td.active{
+    background-color: var(--theme-color-primary) !important;
+    background-image: unset;
+    box-shadow: var(--theme-color-divided) 0px 2px 8px 0px;
+}
+
+.datepicker-inline{
+    padding: 16px;
+    box-shadow: var(--theme-color-divided) 0px 2px 8px 0px;
+    border-radius: 4px;  
+}
+
+.prev{    
+    color: var(--theme-color-secondary-text);
+    background-color: var(--theme-color-primary);
+    box-shadow: var(--theme-color-divided) 0px 2px 8px 0px;
+    border-radius: 4px;  
+}
+
+.next{
+    color: var(--theme-color-secondary-text);
+    background-color: var(--theme-color-primary);
+    box-shadow: var(--theme-color-divided) 0px 2px 8px 0px;
+    border-radius: 4px;  
+}
+
+.datepicker table td:hover{                        
+    border-radius: 4px;  
+}
+/* ========================================== */
+/* Bootstrap Styles Overriding Ends From Here */
+/* ========================================== */
 
 
 

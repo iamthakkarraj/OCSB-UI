@@ -8,17 +8,6 @@ $.validator.addMethod("valueNotEquals", function (value, element, arg) {
 
 
 
-//==============================
-//Date Time Picker Customization
-//=======================
-$('#datetimepicker2').datetimepicker({
-    language: 'en',
-    pick12HourFormat: true
-});
-
-
-
-
 var API_URL = "http://localhost:51859/api/"
 
 
@@ -42,14 +31,14 @@ function toggleThemeButton(id) {
 function toggleThemeSpinner(id) {
     if ($(id).hasClass("fade")) {
         $(id).addClass("show");
-        $(id).removeClass("fade");        
+        $(id).removeClass("fade");
     } else {
         $(id).addClass("fade");
-        $(id).removeClass("show");        
+        $(id).removeClass("show");
     }
 }
 
-function showToast(title,text){
+function showToast(title, text) {
     if ($('#notification-card').hasClass("fade")) {
         $('#notification-card').removeClass("fade");
         $('#notification-card').addClass("show");
@@ -92,14 +81,16 @@ function disableAllButtons() {
     disableThemeButton("#submitButtonForm3");
     disableThemeButton("#submitButtonForm4");
     disableThemeButton("#submitButtonForm5");
+    disableThemeButton("#submitButtonForm6");
     disableThemeButton("#collapseButton2");
     disableThemeButton("#collapseButton3");
     disableThemeButton("#collapseButton4");
+    disableThemeButton("#collapseButton5");
 }
 
 function init() {
     disableAllButtons();
-    hideElement("#serviceBookingForm2");    
+    hideElement("#serviceBookingForm2");
 }
 //=======================================================
 // Utility Functions For Form Flow Control Ends From Here
@@ -111,70 +102,70 @@ function init() {
 //===================================================
 // Vehicle Service Related Functions Starts From Here
 //===================================================
-function addserviceCategory(categoryId,name){
+function addserviceCategory(categoryId, name) {
     $('#servicesContainer')
-        .append('<div class="card border-0" id="serviceCategory'+categoryId+'">'
-                +'<div class="border-0" id="serviceCategoryHeading'+categoryId+'">'
-                    +'<button id="serviceCategoryName'+categoryId+'"' 
-                        + 'class="m-2 theme-button-primary"'
-                        + 'type="button" data-toggle="collapse"' 
-                        + 'data-target="#serviceCategoryCollpase'+categoryId+'"'
-                        + 'aria-expanded="true"'+
-                        + 'aria-controls="serviceCategoryCollpase'+categoryId+'">'
-                            + name
-                        + '</button>'
-                + '</div>'
-                + '<div id="serviceCategoryCollpase'+categoryId+'"' 
-                    + 'class="collapse show"'
-                    + 'aria-labelledby="serviceCategoryHeading'+categoryId+'"'
-                    + 'data-parent="#servicesContainer">'
-                        + '<div class="card-body">'
-                        + '</div>'
-                + '</div>'
+        .append('<div class="card border-0" id="serviceCategory' + categoryId + '">'
+            + '<div class="border-0" id="serviceCategoryHeading' + categoryId + '">'
+            + '<button id="serviceCategoryName' + categoryId + '"'
+            + 'class="m-2 theme-button-primary"'
+            + 'type="button" data-toggle="collapse"'
+            + 'data-target="#serviceCategoryCollpase' + categoryId + '"'
+            + 'aria-expanded="true"' +
+            + 'aria-controls="serviceCategoryCollpase' + categoryId + '">'
+            + name
+            + '</button>'
+            + '</div>'
+            + '<div id="serviceCategoryCollpase' + categoryId + '"'
+            + 'class="collapse show"'
+            + 'aria-labelledby="serviceCategoryHeading' + categoryId + '"'
+            + 'data-parent="#servicesContainer">'
+            + '<div class="card-body">'
+            + '</div>'
+            + '</div>'
             + '</div>');
 }
 
-function addService(categoryId, serviceId, name, price, description){
-    $('#serviceCategoryCollpase'+categoryId+' > div')
+function addService(categoryId, serviceId, name, price, description) {
+    $('#serviceCategoryCollpase' + categoryId + ' > div')
         .append('<div class="form-group">'
-                    + '<div id="category'+categoryId+'service'+serviceId+'description"' 
-                        + 'class="custom-control custom-checkbox" data-toggle="tooltip"'
-                        + 'data-placement="left" title="'+description+'">'
-                            + '<input type="checkbox" class="custom-control-input service-checkbox"'
-                                + 'id="category'+categoryId+'service'+serviceId+'"'
-                                + 'service-id="'+serviceId+'"' 
-                                + 'category-id="'+categoryId+'">'
-                            + '<label class="custom-control-label"'
-                                + 'id="category'+categoryId+'service'+serviceId+'name"'
-                                + 'for="category'+categoryId+'service'+serviceId+'">'+name+'</label>'
-                            + '<small id="category'+categoryId+'service'+serviceId+'price">'
-                            + ' - '+price+' INR.</small>'
-                    + '</div>'
-                + '</div>');    
+            + '<div id="category' + categoryId + 'service' + serviceId + 'description"'
+            + 'class="custom-control custom-checkbox" data-toggle="tooltip"'
+            + 'data-placement="left" title="' + description + '">'
+            + '<input type="checkbox" class="custom-control-input service-checkbox"'
+            + 'id="category' + categoryId + 'service' + serviceId + '"'
+            + 'service-id="' + serviceId + '"'
+            + 'category-id="' + categoryId + '">'
+            + '<label class="custom-control-label"'
+            + 'id="category' + categoryId + 'service' + serviceId + 'name"'
+            + 'for="category' + categoryId + 'service' + serviceId + '">' + name + '</label>'
+            + '<small id="category' + categoryId + 'service' + serviceId + 'price">'
+            + ' - ' + price + ' INR.</small>'
+            + '</div>'
+            + '</div>');
 }
 
-function selectService(serviceId,categoryId,name,price){
+function selectService(serviceId, categoryId, name, price) {
 
     $('#selectedServiceContainer')
-        .append('<tr class="rounded" id="selectedService'+serviceId+categoryId+'">'                    
-                    +'<td id="selectedServiceName'+serviceId+categoryId+'">'+name+'</td>'
-                    + '<td id="selectedServicePrice'+serviceId+categoryId+'">'+price+'</td>'
-                    + '<td>'
-                        // this button is right now not working but don't remove it
-                        // + '<button id="selectedService'+serviceId+categoryId+'"'
-                        // + ' data-serviceId="'+serviceId+'"' 
-                        // + ' data-categoryId="'+categoryId+'"'
-                        //     + ' class="service-diselect-button shadow-md px-2 rounded">'
-                        //     + '<i class="fa fa-times" aria-hidden="true"></i>'
-                        // + '</button>'
-                    + '</td>'                    
-                +'</tr>');
-    
+        .append('<tr class="rounded" id="selectedService' + serviceId + categoryId + '">'
+            + '<td id="selectedServiceName' + serviceId + categoryId + '">' + name + '</td>'
+            + '<td id="selectedServicePrice' + serviceId + categoryId + '">' + price + '</td>'
+            + '<td>'
+            // this button is right now not working but don't remove it
+            // + '<button id="selectedService'+serviceId+categoryId+'"'
+            // + ' data-serviceId="'+serviceId+'"' 
+            // + ' data-categoryId="'+categoryId+'"'
+            //     + ' class="service-diselect-button shadow-md px-2 rounded">'
+            //     + '<i class="fa fa-times" aria-hidden="true"></i>'
+            // + '</button>'
+            + '</td>'
+            + '</tr>');
+
     //Updating Cost in summary table    
     $('#serviceTotalCost')
         .html(parseInt($('#serviceTotalCost')
-                        .html()) 
-                        + parseInt(price));
+            .html())
+            + parseInt(price));
 
     //Updating Total Cost Hiddne Field 
     $('#TotalCost')
@@ -184,22 +175,22 @@ function selectService(serviceId,categoryId,name,price){
     //Updating Selected Services Hidden Field
     $('#SelectedServices')
         .val($('#SelectedServices')
-            .val()+'-'+serviceId+'-');
+            .val() + '-' + serviceId + '-');
 }
 
-function diselectService(serviceId,categoryId,price){
+function diselectService(serviceId, categoryId, price) {
 
-    $('#selectedService'+serviceId+categoryId)
-        .hide('slide', function(){
-             $('#selectedService'+serviceId+categoryId)
-                .remove(); 
-            });
-    
+    $('#selectedService' + serviceId + categoryId)
+        .hide('slide', function () {
+            $('#selectedService' + serviceId + categoryId)
+                .remove();
+        });
+
     //Updating Cost in summary table    
     $('#serviceTotalCost')
         .html(parseInt($('#serviceTotalCost')
-                        .html()) 
-                        - parseInt(price));
+            .html())
+            - parseInt(price));
 
     //Updating Total Cost Hiddne Field 
     $('#TotalCost')
@@ -208,8 +199,8 @@ function diselectService(serviceId,categoryId,price){
 
     //Updating Selected Services Hidden Field    
     $('#SelectedServices')
-        .val($('#SelectedServices').val()+''.replace('-'+serviceId+'-',''));
-}   
+        .val($('#SelectedServices').val() + ''.replace('-' + serviceId + '-', ''));
+}
 //=================================================
 // Vehicle Service Related Functions Ends From Here
 //=================================================
@@ -220,23 +211,23 @@ function diselectService(serviceId,categoryId,price){
 //==================================================
 // Vehicle Dealer Related Functions Starts From Here
 //==================================================
-function addDealer(dealerId,name,phoneNo){
+function addDealer(dealerId, name, phoneNo) {
     $('#dealerListContainer')
         .append('<tr>'
-                + '<td>'
-                    + '<div class="custom-control custom-checkbox" data-placement="left">'
-                        + '<input type="checkbox"'
-                            + 'class="custom-control-input dealer-checkbox"'
-                            + 'id="dealer1" dealer-id="1" />'
-                        + '<label class="custom-control-label" for="dealer1"></label>'
-                + '</div>'
+            + '<td>'
+            + '<div class="custom-control custom-checkbox" data-placement="left">'
+            + '<input type="checkbox"'
+            + 'class="custom-control-input dealer-checkbox"'
+            + 'id="dealer1" dealer-id="1" />'
+            + '<label class="custom-control-label" for="dealer1"></label>'
+            + '</div>'
             + '</td>'
             + '<td id="dealerName1"> Lorem Ipsum </td>'
             + '<td id="dealerPhoneNo1"> +99 9090909090 </td>'
-        + '</tr>');
+            + '</tr>');
 }
 
-function displayDealerDetails(){
+function displayDealerDetails() {
 
 }
 //================================================
@@ -257,7 +248,7 @@ $(function () {
     //=============================================
     //Intialization Functions For Form Flow Control
     //=============================================
-    //init(); 
+    init(); 
 
 
 
@@ -294,9 +285,9 @@ $(function () {
     });
 
     $('#submitButtonForm1').on('click', function () {
-        disableThemeButton("#submitButtonForm1");                
-        displayElement("#serviceBookingForm2");                                   
-        showToast("Attention","Otp has been sent successfully to your email.");
+        disableThemeButton("#submitButtonForm1");
+        displayElement("#serviceBookingForm2");
+        showToast("Attention", "Otp has been sent successfully to your email.");
         // $.ajax({
         //     url: API_URL,
         //     type: 'GET',
@@ -346,11 +337,11 @@ $(function () {
                 maxlength: "OTP must be of 5 digits."
             }
         },
-        
+
         success: function () {
             enableThemeButton("#submitButtonForm2");
         },
-        
+
     });
 
     $('#serviceBookingForm2 input').on('keypress', function () {
@@ -371,7 +362,7 @@ $(function () {
 
         //And Populate The Car Details in Form Controls
 
-        disableThemeButton("#submitButtonForm1");        
+        disableThemeButton("#submitButtonForm1");
         enableThemeButton("#collapseButton2");
         $("#collapseButton2").click();
 
@@ -419,14 +410,14 @@ $(function () {
         disableThemeButton("#submitButtonForm3");
         enableThemeButton("#collapseButton3");
         $("#collapseButton3").click();
-        
+
         //add ajax call for getting services.        
-                
+
     });
     //=================================================
     //Form 3 Validation and Flow Control Ends From Here
     //=================================================
-    
+
 
 
     //===================================================
@@ -435,38 +426,38 @@ $(function () {
     $("#serviceBookingForm4").validate({
 
         rules: {
-            AddedServices: { 
-                required : true
+            AddedServices: {
+                required: true
             },
-            TotalCost: { 
+            TotalCost: {
                 required: true,
-                range:[500,2147483647]
+                range: [500, 2147483647]
             }
         },
 
         messages: {
             AddedServices: {
-                required: "Please select any services" 
+                required: "Please select any services"
             },
             TotalCost: {
                 required: "",
                 range: "Total bill amount needs to be atleast greater than 500"
             }
         },
-        
-    });
-    
-    $('.service-checkbox').on('click', function(){
-                
-        var name = $('#'+this.id+'name').html();
-        var price = $('#'+this.id+'price').html();
-        var serviceId = $('#'+this.id).attr('service-id');
-        var categoryId = $('#'+this.id).attr('category-id');
 
-        if($(this).prop("checked") == true){
-            selectService(serviceId,categoryId,name,price);        
-        } else if($(this).prop("checked") == false){            
-            diselectService(serviceId,categoryId,price);
+    });
+
+    $('.service-checkbox').on('click', function () {
+
+        var name = $('#' + this.id + 'name').html();
+        var price = $('#' + this.id + 'price').html();
+        var serviceId = $('#' + this.id).attr('service-id');
+        var categoryId = $('#' + this.id).attr('category-id');
+
+        if ($(this).prop("checked") == true) {
+            selectService(serviceId, categoryId, name, price);
+        } else if ($(this).prop("checked") == false) {
+            diselectService(serviceId, categoryId, price);
         }
 
         //  this code is right now not working but don't delete it
@@ -487,9 +478,9 @@ $(function () {
         } else {
             disableThemeButton("#submitButtonForm4");
         }
-                        
+
     });
-            
+
     $('#submitButtonForm4').on('click', function () {
 
         //Perform Ajax Call here
@@ -504,40 +495,61 @@ $(function () {
     //=================================================
     //Form 4 Validation and Flow Control Ends From Here
     //=================================================
-    
+
 
 
     //===================================================
     //Form 5 Validation and Flow Control Starts From Here
     //===================================================
-    $('.dealer-checkbox').on('click', function(){
+    $("#myform").validate();
+
+    $('.dealer-checkbox').on('click', function () {
 
         var elementId = this.id;
-        var dealerId = $('#'+elementId).attr('dealer-id');
+        var dealerId = $('#' + elementId).attr('dealer-id');
 
-        $("dealerId").val(this.id);
+        $("#DealerId").val(dealerId);
 
-        enableThemeButton("#submitButtonForm5");
-        
-        $('.dealer-checkbox').each(function(){
-            if(this.id == elementId){
-                $('#'+this.id).prop("checked", true);
+        enableThemeButton("#submitButtonForm5")
+
+        $('.dealer-checkbox').each(function () {
+            if (this.id == elementId) {
+                $('#' + this.id).prop("checked", true);
             } else {
-                $('#'+this.id).prop("checked", false); 
+                $('#' + this.id).prop("checked", false);
             }
         });
 
-
-
     });
 
-    $( function() {
-        $( "#PlanDateTime" ).datepicker();
-      } );
+    $('#date-picker').datepicker({
+        format: "mm/dd/yyyy",
+        startDate: "d",
+        todayBtn: "linked",
+        clearBtn: true,
+    });
+    
+    $('#date-picker').on('changeDate', function () {                
+        $('#PlanDateTime').val($('#date-picker').datepicker('getFormattedDate'));
+        console.log($('#PlanDateTime').val());
+    });
+
+    $('#submitButtonForm4').on('click', function () {
+
+        if ($('#PlanDateTime').val() != null) {
+            disableThemeButton("#submitButtonForm5");
+            enableThemeButton("#collapseButton5");
+            $("#collapseButton6").click();
+        } else {
+            disableThemeButton("#submitButtonForm5");
+        }
+
+        //Perform Ajax Call here        
+    });
     //===================================================
     //Form 5 Validation and Flow Control Starts From Here
     //===================================================
-    
+
 
 
 });

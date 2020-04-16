@@ -18,6 +18,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css">
     
+    <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap-datepicker.min.css">
+
     <!-- Font-Awesome CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -794,8 +796,12 @@
                             
                                 </div>
 
-                                <div class="col-4 pr-5">                                    
-                                    <input type="datetime-local" name="PlanDateTime" class="theme-form-control" id="PlanDateTime" /> 
+                                <div class="col-4 pr-5">                                                                        
+                                    <form id="serviceBookingForm5">                                        
+                                        <input type="number" name="DealerId" id="DealerId" class="fade hidden-input-control">
+                                        <input type="hidden" name="PlanDateTime" class="" id="PlanDateTime" /> 
+                                        <div class="d-flex justify-content-center" data-provide="datepicker" id="date-picker" name="PlanDateTime"></div>
+                                    </form>
                                 </div>
 
                             </div>
@@ -805,11 +811,53 @@
                                     Next
                                 </button>
                             </div>
-                                                        
-                            <form id="serviceBookingForm5">
-                                <input type="number" name="dealerId" id="dealerId" class="fade hidden-input-control">
-                            </form>
+                                                                                    
+                        </div>
 
+                    </div>
+
+                </div>
+
+                <div class="card border-0">
+
+                    <div class="border-0 col-3 pb-3" id="frameHeading5">
+
+                        <button id="collapseButton5" class="theme-button-primary w-100 text-left pl-4" type="button"
+                            data-toggle="collapse" data-target="#frame-5" aria-expanded="true" aria-controls="frame-5">
+                            + <i class="fa fa-id-card-o" aria-hidden="true"></i> Select your dealer
+                        </button>
+
+                    </div>
+
+                    <div id="frame-5" class="collapse" aria-labelledby="frameHeading5"
+                        data-parent="#sercviceBookingAccordin">
+
+                        <div class="card-body col-12 p-0 mx-4">
+
+                            <h4 class="row p-3">
+                                Please add your location
+                            </h4>   
+
+                            <div class="row mb-4 mx-1">
+
+                                <div class="card shadow-md border-0 p-4 col-8" style="overflow: scroll; max-height: 400px;">
+                                                                
+                                </div>
+
+                                <div class="col-4 pr-5">                                                                        
+                                    <form id="serviceBookingForm6">
+                                        
+                                    </form>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <button class="theme-button-primary" type="button" id="submitButtonForm6">
+                                    Next
+                                </button>
+                            </div>
+                                                                                    
                         </div>
 
                     </div>
@@ -848,14 +896,14 @@
         Done <input type="hidden" name="Brand" id="Brand" />
         Done <input type="hidden" name="Model" id="Model" />                
         Done <input type="hidden" name="DealerId" id="DealerId" />        
-        <ipnut type="hidden" name="PlanDateTime" id="PlanDateTime" />
-        <ipnut type="hidden" name="CustomerNote" id="CustomerNote" />
+        Done <ipnut type="hidden" name="PlanDateTime" id="PlanDateTime" />
+        Tomor <input type="hidden" name="PickUpAddress" id="PickUpAddress" />
+        Tomor <input type="hidden" name="DropAddress" id="DropAddress" />
+        Tomor <ipnut type="hidden" name="CustomerNote" id="CustomerNote" />
         <input type="hidden" name="PickUpLat" id="PickUpLate" />
         <input type="hidden" name="PickUpLong" id="PickUpLong" />
         <input type="hidden" name="DropLat" id="DropLat" />
-        <input type="hidden" name="DropLong" id="DropLang" />
-        <input type="hidden" name="PickUpAddress" id="PickUpAddress" />
-        <input type="hidden" name="DropAddress" id="DropAddress" />
+        <input type="hidden" name="DropLong" id="DropLang" />        
     </form> -->
 
 
@@ -954,10 +1002,11 @@
     <!-- Jquery -->
     <script src="./assets/js/jquery-3.4.1.slim.min.js"></script>
 
-    <!-- Popper Js -->
+    <!-- Popper JS -->
     <script src="./assets/js/popper.min.js"></script>
-
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
+    <!-- Date Time Picker JS -->
+    <script src="assets/js/bootstrap-datepicker.min.js"></script>
 
     <!-- Bootstrap JS -->
     <script src="./assets/js/bootstrap.min.js"></script>
