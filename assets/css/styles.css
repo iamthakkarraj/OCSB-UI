@@ -79,24 +79,23 @@ html, body {
     margin: 32px;
 }
 
-.main-content{    
-    background-repeat: repeat;    
-}
-
 .service-diselect-button{
     color: var(--theme-color-primary);
     background-color: var(--theme-color-secondary-text);
     border-style: none;
     display: block;
 }
+
 .service-diselect-button:hover{
     cursor: pointer;    
 }
+
 .service-diselect-button:focus{
     color: var(--theme-color-secondary-text);    
     background-color: var(--theme-color-primary);
     cursor: pointer;    
 }
+
 .hidden-input-control{
     width: 1px;
     height: 1px;
@@ -146,17 +145,9 @@ textarea:hover,
 select:hover,
 input[type="text"]:hover,
 input[type="password"]:hover,
-input[type="datetime"]:hover,
-input[type="datetime-local"]:hover,
-input[type="date"]:hover,
-input[type="month"]:hover,
 input[type="time"]:hover,
-input[type="week"]:hover,
 input[type="number"]:hover,
-input[type="email"]:hover,
-input[type="search"]:hover,
-input[type="tel"]:hover,
-input[type="color"]:hover {
+input[type="email"]:hover {
     box-shadow: var(--theme-color-primary-light) 0px 2px 12px 0px;
     outline: 0 none;
 }
@@ -165,17 +156,9 @@ textarea:focus,
 select:focus,
 input[type="text"]:focus,
 input[type="password"]:focus,
-input[type="datetime"]:focus,
-input[type="datetime-local"]:focus,
-input[type="date"]:focus,
-input[type="month"]:focus,
 input[type="time"]:focus,
-input[type="week"]:focus,
 input[type="number"]:focus,
-input[type="email"]:focus,
-input[type="search"]:focus,
-input[type="tel"]:focus,
-input[type="color"]:focus {
+input[type="email"]:focus {
     border-color: var(--theme-color-primary);
     box-shadow: var(--theme-color-primary-light) 0px 2px 12px 0px;
     outline: 0 none;
@@ -221,7 +204,7 @@ disable-button {
     border-radius: 4px;  
 }
 
-.prev{    
+.prev{
     color: var(--theme-color-secondary-text);
     background-color: var(--theme-color-primary);
     box-shadow: var(--theme-color-divided) 0px 2px 8px 0px;
@@ -235,7 +218,7 @@ disable-button {
     border-radius: 4px;  
 }
 
-.datepicker table td:hover{                        
+.datepicker table td:hover{
     border-radius: 4px;  
 }
 /* ========================================== */
@@ -286,7 +269,7 @@ header {
             color: var(--theme-color-primary-light);
             box-shadow: inset 4px 4px 24px -12px rgba(0,0,0,0.75);
             text-decoration: none;
-        }    
+        }
 /* ==================================== */
 /* Header Related Styles Ends From Here */
 /* ==================================== */

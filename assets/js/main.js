@@ -8,7 +8,9 @@ $.validator.addMethod("valueNotEquals", function (value, element, arg) {
 
 
 
+//=========================================
 var API_URL = "http://localhost:51859/api/"
+//=========================================
 
 
 
@@ -105,42 +107,42 @@ function init() {
 function addserviceCategory(categoryId, name) {
     $('#servicesContainer')
         .append('<div class="card border-0" id="serviceCategory' + categoryId + '">'
-            + '<div class="border-0" id="serviceCategoryHeading' + categoryId + '">'
-            + '<button id="serviceCategoryName' + categoryId + '"'
-            + 'class="m-2 theme-button-primary"'
-            + 'type="button" data-toggle="collapse"'
-            + 'data-target="#serviceCategoryCollpase' + categoryId + '"'
-            + 'aria-expanded="true"' +
-            + 'aria-controls="serviceCategoryCollpase' + categoryId + '">'
-            + name
-            + '</button>'
-            + '</div>'
-            + '<div id="serviceCategoryCollpase' + categoryId + '"'
-            + 'class="collapse show"'
-            + 'aria-labelledby="serviceCategoryHeading' + categoryId + '"'
-            + 'data-parent="#servicesContainer">'
-            + '<div class="card-body">'
-            + '</div>'
-            + '</div>'
-            + '</div>');
+                    + '<div class="border-0" id="serviceCategoryHeading' + categoryId + '">'
+                        + '<button id="serviceCategoryName' + categoryId + '"'
+                            + 'class="m-2 theme-button-primary"'
+                            + 'type="button" data-toggle="collapse"'
+                            + 'data-target="#serviceCategoryCollpase' + categoryId + '"'
+                            + 'aria-expanded="true"' +
+                            + 'aria-controls="serviceCategoryCollpase' + categoryId + '">'
+                                + name
+                            + '</button>'
+                    + '</div>'
+                    + '<div id="serviceCategoryCollpase' + categoryId + '"'
+                        + 'class="collapse"'
+                        + 'aria-labelledby="serviceCategoryHeading' + categoryId + '"'
+                        + 'data-parent="#servicesContainer">'
+                            + '<div class="card-body"></div>'
+                    + '</div>'
+                + '</div>');
 }
 
 function addService(categoryId, serviceId, name, price, description) {
     $('#serviceCategoryCollpase' + categoryId + ' > div')
         .append('<div class="form-group">'
-            + '<div id="category' + categoryId + 'service' + serviceId + 'description"'
-            + 'class="custom-control custom-checkbox" data-toggle="tooltip"'
-            + 'data-placement="left" title="' + description + '">'
-            + '<input type="checkbox" class="custom-control-input service-checkbox"'
-            + 'id="category' + categoryId + 'service' + serviceId + '"'
-            + 'service-id="' + serviceId + '"'
-            + 'category-id="' + categoryId + '">'
-            + '<label class="custom-control-label"'
-            + 'id="category' + categoryId + 'service' + serviceId + 'name"'
-            + 'for="category' + categoryId + 'service' + serviceId + '">' + name + '</label>'
-            + '<small id="category' + categoryId + 'service' + serviceId + 'price">'
-            + ' - ' + price + ' INR.</small>'
-            + '</div>'
+                    + '<div id="category' + categoryId + 'service' + serviceId + 'description"'
+                        + 'class="custom-control custom-checkbox" data-toggle="tooltip"'
+                        + 'data-placement="left" title="' + description + '">'
+                            + '<input type="checkbox" class="custom-control-input service-checkbox"'
+                                + 'id="category' + categoryId + 'service' + serviceId + '"'
+                                + 'service-id="' + serviceId + '"'
+                                + 'category-id="' + categoryId + '">'
+                            + '<label class="custom-control-label"'
+                                + 'id="category' + categoryId + 'service' + serviceId + 'name"'
+                                + 'for="category' + categoryId + 'service' + serviceId + '">' + name + '</label>'
+                            + '<small id="category' + categoryId + 'service' + serviceId + 'price">'
+                                + ' - ' + price + ' INR.'
+                            +'</small>'
+                    + '</div>'
             + '</div>');
 }
 
@@ -186,7 +188,7 @@ function diselectService(serviceId, categoryId, price) {
                 .remove();
         });
 
-    //Updating Cost in summary table    
+    //Updating Cost in summary table
     $('#serviceTotalCost')
         .html(parseInt($('#serviceTotalCost')
             .html())
@@ -197,7 +199,7 @@ function diselectService(serviceId, categoryId, price) {
         .val($('#serviceTotalCost')
             .html());
 
-    //Updating Selected Services Hidden Field    
+    //Updating Selected Services Hidden Field
     $('#SelectedServices')
         .val($('#SelectedServices').val() + ''.replace('-' + serviceId + '-', ''));
 }
@@ -277,7 +279,6 @@ $(function () {
 
         if ($("#serviceBookingForm1").valid()) {
             enableThemeButton("#submitButtonForm1");
-
         } else {
             disableThemeButton("#submitButtonForm1");
         }
@@ -293,11 +294,17 @@ $(function () {
         //     type: 'GET',
         //     contentType: 'application/json',
         //     success: function (response) {
+
         //         if(response != null){
+
         //             toggleThemeSpinner('#themeSpinner1');
-        //             displayElement("#serviceBookingForm2");                                   
+
+        //             displayElement("#serviceBookingForm2");
+
         //             showToast("Attention","Otp has been sent successfully to your email.");
+
         //         }else{
+
         //             showToast("Error","Email Address Not Found");
         //             toggleThemeSpinner('#themeSpinner1');
         //             enableThemeButton("#submitButtonForm1");
@@ -307,7 +314,7 @@ $(function () {
         //         alert("Status: " + textStatus); alert("Error: " + errorThrown);
         //         toggleThemeSpinner("#themeSpinner1");
         //         enableThemeButton("#submitButtonForm1");
-        //     }                        
+        //     }
         // });
     });
     //=================================================
@@ -411,7 +418,7 @@ $(function () {
         enableThemeButton("#collapseButton3");
         $("#collapseButton3").click();
 
-        //add ajax call for getting services.        
+        //add ajax call for getting services.
 
     });
     //=================================================
@@ -422,7 +429,7 @@ $(function () {
 
     //===================================================
     //Form 4 Validation and Flow Control Starts From Here
-    //===================================================    
+    //===================================================
     $("#serviceBookingForm4").validate({
 
         rules: {
@@ -461,15 +468,15 @@ $(function () {
         }
 
         //  this code is right now not working but don't delete it
-        // $('.service-diselect-button').on('click',function(){        
+        // $('.service-diselect-button').on('click',function(){
         //     alert($('#'+this.id).attr(''));
         //     var serviceId = $('#'+this.id).attr('data-serviceId');
         //     console.log(serviceId);
-        //     var categoryId = $('#'+this.id).attr('data-categoryId');        
+        //     var categoryId = $('#'+this.id).attr('data-categoryId');
         //     console.log(categoryId);
         //     var price = $('#category'+categoryId+'service'+serviceId+'price').html();
         //     console.log(price);
-        //     diselectService(serviceId,categoryId,price);        
+        //     diselectService(serviceId,categoryId,price);
         //     $('#category'+serviceId+'service'+categoryId).click();
         // });    
 
@@ -489,7 +496,7 @@ $(function () {
         enableThemeButton("#collapseButton4");
         $("#collapseButton4").click();
 
-        //add ajax call for getting Dealer List  
+        //add ajax call for getting Dealer List
 
     });
     //=================================================
@@ -501,8 +508,6 @@ $(function () {
     //===================================================
     //Form 5 Validation and Flow Control Starts From Here
     //===================================================
-    $("#myform").validate();
-
     $('.dealer-checkbox').on('click', function () {
 
         var elementId = this.id;
@@ -525,11 +530,12 @@ $(function () {
     $('#date-picker').datepicker({
         format: "mm/dd/yyyy",
         startDate: "d",
+        endDate: "+14d",
         todayBtn: "linked",
         clearBtn: true,
     });
     
-    $('#date-picker').on('changeDate', function () {                
+    $('#date-picker').on('changeDate', function () {
         $('#PlanDateTime').val($('#date-picker').datepicker('getFormattedDate'));
         console.log($('#PlanDateTime').val());
     });
@@ -544,11 +550,26 @@ $(function () {
             disableThemeButton("#submitButtonForm5");
         }
 
-        //Perform Ajax Call here        
+        //Perform Ajax Call here
     });
     //===================================================
     //Form 5 Validation and Flow Control Starts From Here
     //===================================================
+
+
+
+    //===================================================
+    //Form 6 Validation and Flow Control Starts From Here
+    //===================================================
+
+
+
+
+    
+    //===================================================
+    //Form 6 Validation and Flow Control Starts From Here
+    //===================================================
+
 
 
 

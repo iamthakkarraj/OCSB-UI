@@ -21,7 +21,7 @@
     <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap-datepicker.min.css">
 
     <!-- Font-Awesome CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.css">
 
     <!-- Local CSS -->
     <link type="text/css" rel="stylesheet" href="./assets/css/styles.css" />
@@ -130,7 +130,7 @@
     <section class="main-content">
 
         <section class="container py-5">
-
+            
             <section class="page-heading bg-white rounded shadow-md">
                 <h4 class="p-4"> <span> Home / </span> Service </h4>
             </section>
@@ -139,7 +139,7 @@
 
                 <div class="card border-0">
 
-                    <div class="col-3 border-0 p-3" id="frameHeading1">
+                    <div class="col-12 col-sm-8 col-md-6 border-0 p-3" id="frameHeading1">
 
                         <button id="collapseButton1" class="theme-button-primary w-100 text-left pl-4" type="button"
                             data-toggle="collapse" data-target="#frame-1" aria-expanded="true" aria-controls="frame-1">
@@ -229,7 +229,7 @@
 
                 <div class="card border-0">
 
-                    <div class="border-0 col-3 pb-3" id="frameHeading2">
+                    <div class="border-0 col-12 col-sm-8 col-md-6 pb-3" id="frameHeading2">
 
                         <button id="collapseButton2" class="theme-button-primary w-100 text-left pl-4" type="button"
                             data-toggle="collapse" data-target="#frame-2" aria-expanded="true" aria-controls="frame-2">
@@ -305,7 +305,7 @@
 
                 <div class="card border-0">
 
-                    <div class="border-0 col-3 pb-3" id="frameHeading3">
+                    <div class="border-0 col-12 col-sm-8 col-md-6 pb-3" id="frameHeading3">
 
                         <button id="collapseButton3" class="theme-button-primary w-100 text-left pl-4" type="button"
                             data-toggle="collapse" data-target="#frame-3" aria-expanded="true" aria-controls="frame-3">
@@ -683,7 +683,7 @@
 
                 <div class="card border-0">
 
-                    <div class="border-0 col-3 pb-3" id="frameHeading4">
+                    <div class="border-0 col-12 col-sm-8 col-md-6 pb-3" id="frameHeading4">
 
                         <button id="collapseButton4" class="theme-button-primary w-100 text-left pl-4" type="button"
                             data-toggle="collapse" data-target="#frame-4" aria-expanded="true" aria-controls="frame-4">
@@ -703,7 +703,7 @@
 
                             <div class="row mb-4 mx-1">
 
-                                <div class="card shadow-md border-0 p-4 col-8" style="overflow: scroll; max-height: 400px;">
+                                <div class="card shadow-md border-0 p-4 col-12 col-md-8 col-sm-11" style="overflow: scroll; max-height: 400px;">
 
                                     <table id="dealerListContainer" class="table table-striped p-4">
 
@@ -772,11 +772,11 @@
                                                     <input type="checkbox"
                                                         class="custom-control-input dealer-checkbox"
                                                         id="dealer5" dealer-id="5">
-                                                        <label class="custom-control-label" for="dealer6"></label>
+                                                        <label class="custom-control-label" for="dealer5"></label>
                                                 </div>
                                             </td>
-                                            <td id="dealerName5"> Lorem Ipsum </td>                                    
-                                            <td id="dealerPhoneNo5"> +99 9090909090 </td>                                                                        
+                                            <td id="dealerName5"> Lorem Ipsum </td>
+                                            <td id="dealerPhoneNo5"> +99 9090909090 </td>
                                         </tr>     
 
                                         <tr>
@@ -796,7 +796,7 @@
                             
                                 </div>
 
-                                <div class="col-4 pr-5">                                                                        
+                                <div class="col-12 col-md-4 col-sm-12 pr-5">                                                                        
                                     <form id="serviceBookingForm5">                                        
                                         <input type="number" name="DealerId" id="DealerId" class="fade hidden-input-control">
                                         <input type="hidden" name="PlanDateTime" class="" id="PlanDateTime" /> 
@@ -820,11 +820,11 @@
 
                 <div class="card border-0">
 
-                    <div class="border-0 col-3 pb-3" id="frameHeading5">
+                    <div class="border-0 col-12 col-sm-8 col-md-6 pb-3" id="frameHeading5">
 
                         <button id="collapseButton5" class="theme-button-primary w-100 text-left pl-4" type="button"
                             data-toggle="collapse" data-target="#frame-5" aria-expanded="true" aria-controls="frame-5">
-                            + <i class="fa fa-id-card-o" aria-hidden="true"></i> Select your dealer
+                            + <i class="fa fa-location-arrow" aria-hidden="true"></i> Provide your location
                         </button>
 
                     </div>
@@ -835,29 +835,30 @@
                         <div class="card-body col-12 p-0 mx-4">
 
                             <h4 class="row p-3">
-                                Please add your location
+                                Please provide us you location.
                             </h4>   
 
-                            <div class="row mb-4 mx-1">
+                            <div class="row">
+                                
+                                <div class="col-12 ml-1">
 
-                                <div class="card shadow-md border-0 p-4 col-8" style="overflow: scroll; max-height: 400px;">
-                                                                
-                                </div>
-
-                                <div class="col-4 pr-5">                                                                        
-                                    <form id="serviceBookingForm6">
-                                        
+                                    <form id="serviceBookingForm6" class="row">                                        
+                                        <textarea name="PickUpAddress" id="PickUpAddress" class="rounded theme-form-control col-4 my-2 mx-2" placeholder="Address for pick up."></textarea>
+                                        <textarea name="DropAddress" id="DropAddress" class="rounded theme-form-control col-4 my-2 mx-2" placeholder="Address for car drop."></textarea>
+                                        <textarea id="CustomerNote" name="CustomerNote" class="rounded theme-form-control col-6 my-2 ml-2" placeholder="Any special instruction that your want to provide us."></textarea>
                                     </form>
-                                </div>
+
+                                    <div class="form-group mt-4">
+                                        <button class="theme-button-primary" type="button" id="submitButtonForm6">
+                                            Next
+                                        </button>
+                                    </div>
+
+                                </div>                                
 
                             </div>
+                                                        
 
-                            <div class="form-group">
-                                <button class="theme-button-primary" type="button" id="submitButtonForm6">
-                                    Next
-                                </button>
-                            </div>
-                                                                                    
                         </div>
 
                     </div>
