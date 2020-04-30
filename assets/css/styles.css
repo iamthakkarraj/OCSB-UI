@@ -102,6 +102,18 @@ html, body {
     margin: 0px;
     padding: 0px;    
 }
+
+.highlight{
+    display: inline;
+    position: absolute;
+    top: 86px;
+    color: var(--theme-color-secondary-text);
+    right: 64px;    
+    padding: 0px 8px;
+    z-index: 99;
+    border-radius: 4px;
+    background-color: var(--theme-color-primary);
+}
 /* ========================================== */
 /* miscellaneous Style Classes Ends From Here */
 /* ========================================== */
