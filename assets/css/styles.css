@@ -66,57 +66,67 @@ html, body {
     border-bottom: 4px solid var(--theme-color-accent);
 }
 
-    .page-heading h4 span {
-        opacity: 0.3;
-    }
+.page-heading h4 span {
+    opacity: 0.3;
+}
 
-#notification-card{
+#notification-card {
     z-index: 99;
-    position: fixed;            
+    position: fixed;
     bottom: 0px;
     right: 0px;
     padding: 0px;
     margin: 32px;
 }
 
-.service-diselect-button{
+.service-diselect-button {
     color: var(--theme-color-primary);
     background-color: var(--theme-color-secondary-text);
     border-style: none;
     display: block;
 }
 
-.service-diselect-button:hover{
-    cursor: pointer;    
+.service-diselect-button:hover {
+    cursor: pointer;
 }
 
-.service-diselect-button:focus{
-    color: var(--theme-color-secondary-text);    
+.service-diselect-button:focus {
+    color: var(--theme-color-secondary-text);
     background-color: var(--theme-color-primary);
-    cursor: pointer;    
+    cursor: pointer;
 }
 
-.hidden-input-control{
+.hidden-input-control {
     width: 1px;
     height: 1px;
     margin: 0px;
-    padding: 0px;    
+    padding: 0px;
 }
 
-.highlight{
+.highlight {
     display: inline;
     position: absolute;
     top: 86px;
     color: var(--theme-color-secondary-text);
-    right: 64px;    
+    right: 64px;
     padding: 0px 8px;
     z-index: 99;
     border-radius: 4px;
     background-color: var(--theme-color-primary);
 }
+
+.leaflet-locpicker-map {
+    border-radius: 8px;
+}
+
+.leaflet-locpicker-map .leaflet-container{
+    border-radius: 8px;
+    border: 4px solid var(--theme-color-primary);
+}
 /* ========================================== */
 /* miscellaneous Style Classes Ends From Here */
 /* ========================================== */
+
 
 
 
@@ -134,45 +144,34 @@ html, body {
 .theme-button-primary {
     background-color: var(--theme-color-primary);
     color: var(--theme-color-secondary-text);
+    border:1px solid var(--theme-color-secondary-text);
     border-radius: 4px;
     border-style: unset;
     padding: 8px 12px;
 }
 
-    .theme-button-primary:hover {
-        background-color: var(--theme-color-primary-dark);
-        box-shadow: inset 4px 4px 24px -12px rgba(0,0,0,0.75);
-        transition: ease-in-out 0.32s;
-        cursor: pointer;
-    }
+.theme-button-primary:hover {
+    background-color: var(--theme-color-primary-dark);
+    box-shadow: inset 4px 4px 24px -12px rgba(0, 0, 0, 0.75);
+    transition: ease-in-out 0.32s;
+    cursor: pointer;
+}
 
 .theme-form-control {
     width: 100%;
     padding: 8px;
-    border: 1px solid var(--theme-color-divided);
-    border-radius: 4px;
+    box-shadow: 0 0 10px 2px rgba(0,0,0,.1);
+    border:1px solid var(--theme-color-secondary-text);
+    border-radius: 4px;    
 }
 
-textarea:hover,
-select:hover,
-input[type="text"]:hover,
-input[type="password"]:hover,
-input[type="time"]:hover,
-input[type="number"]:hover,
-input[type="email"]:hover {
-    box-shadow: var(--theme-color-primary-light) 0px 2px 12px 0px;
+textarea:hover, select:hover, input[type="text"]:hover, input[type="password"]:hover, input[type="time"]:hover, input[type="number"]:hover, input[type="email"]:hover {    
     outline: 0 none;
 }
 
-textarea:focus,
-select:focus,
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="time"]:focus,
-input[type="number"]:focus,
-input[type="email"]:focus {
-    border-color: var(--theme-color-primary);
-    box-shadow: var(--theme-color-primary-light) 0px 2px 12px 0px;
+textarea:focus, select:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="time"]:focus, input[type="number"]:focus, input[type="email"]:focus { 
+    transition: 0.32s linear;
+    border:1px solid var(--theme-color-primary);
     outline: 0 none;
 }
 
@@ -186,9 +185,68 @@ disable-button {
     background-color: var(--theme-color-primary-light);
 }
 
-    disable-button:hover {
-        all: unset;
-    }
+disable-button:hover {
+    all: unset;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--theme-color-primary-light);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--theme-color-secondary-text);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: var(--theme-color-primary);
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px var(--theme-color-primary);
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(24px);
+    -ms-transform: translateX(24px);
+    transform: translateX(24px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
 /* =========================================== */
 /* Input Control Related Styles Ends From Here */
 /* =========================================== */
@@ -203,35 +261,39 @@ disable-button {
     background-color: var(--theme-color-primary);
 }
 
-.datepicker table tr td.active.active,
-.datepicker table tr td.active{
+.datepicker table tr td.active.active, .datepicker table tr td.active {
     background-color: var(--theme-color-primary) !important;
     background-image: unset;
     box-shadow: var(--theme-color-divided) 0px 2px 8px 0px;
 }
 
-.datepicker-inline{
+.datepicker-inline {
     padding: 16px;
     box-shadow: var(--theme-color-divided) 0px 2px 8px 0px;
-    border-radius: 4px;  
+    border-radius: 4px;
 }
 
-.prev{
+.prev {
     color: var(--theme-color-secondary-text);
     background-color: var(--theme-color-primary);
     box-shadow: var(--theme-color-divided) 0px 2px 8px 0px;
-    border-radius: 4px;  
+    border-radius: 4px;
 }
 
-.next{
+.next {
     color: var(--theme-color-secondary-text);
     background-color: var(--theme-color-primary);
     box-shadow: var(--theme-color-divided) 0px 2px 8px 0px;
-    border-radius: 4px;  
+    border-radius: 4px;
 }
 
-.datepicker table td:hover{
-    border-radius: 4px;  
+.datepicker table td:hover {
+    border-radius: 4px;
+}
+
+.disabled-date{
+    background-color: var(--theme-color-primary-text);
+    color: var(--theme-color-secondary-text);
 }
 /* ========================================== */
 /* Bootstrap Styles Overriding Ends From Here */
@@ -244,44 +306,44 @@ disable-button {
 /* Header Related Styles Starts From Here */
 /* ====================================== */
 header {
-    background-color: var(--theme-color-primary);    
+    background-color: var(--theme-color-primary);
 }
 
-    header .nav-logo {
-        width: 56px;
-        height: 56px;
-        fill: var(--theme-color-primary-light);
-    }
+header .nav-logo {
+    width: 56px;
+    height: 56px;
+    fill: var(--theme-color-primary-light);
+}
 
-    header .nav-logo-text {
-        color: var(--theme-color-primary-light);
-        font-family: 'Lobster Two', cursive;
-    }
+header .nav-logo-text {
+    color: var(--theme-color-primary-light);
+    font-family: 'Lobster Two', cursive;
+}
 
-    header nav ul .active a {
-        opacity: 0.6;
-        transition: 0.32s;
-        border-radius: 4px;
-        box-shadow: inset 4px 4px 24px -12px rgba(0,0,0,0.75);
-    }
+header nav ul .active a {
+    opacity: 0.6;
+    transition: 0.32s;
+    border-radius: 4px;
+    box-shadow: inset 4px 4px 24px -12px rgba(0, 0, 0, 0.75);
+}
 
-    header nav ul li a {
-        display: block;
-        color: var(--theme-color-primary-light);
-        font-weight: bolder;
-        font-size: 16px;
-        text-align: center;
-        text-decoration: none;
-    }
+header nav ul li a {
+    display: block;
+    color: var(--theme-color-primary-light);
+    font-weight: bolder;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+}
 
-        header nav ul li a:hover {
-            transition: 0.32s;
-            opacity: 0.6;
-            border-radius: 4px;
-            color: var(--theme-color-primary-light);
-            box-shadow: inset 4px 4px 24px -12px rgba(0,0,0,0.75);
-            text-decoration: none;
-        }
+header nav ul li a:hover {
+    transition: 0.32s;
+    opacity: 0.6;
+    border-radius: 4px;
+    color: var(--theme-color-primary-light);
+    box-shadow: inset 4px 4px 24px -12px rgba(0, 0, 0, 0.75);
+    text-decoration: none;
+}
 /* ==================================== */
 /* Header Related Styles Ends From Here */
 /* ==================================== */
@@ -302,12 +364,12 @@ header {
     background-repeat: no-repeat;
 }
 
-    #home-container > div {
-        width: 332px;
-        position: absolute;
-        right: 0px;
-        margin: 8vh 12vh;
-    }
+#home-container>div {
+    width: 332px;
+    position: absolute;
+    right: 0px;
+    margin: 8vh 12vh;
+}
 /* ======================================== */
 /* Home Page Related Styles Ends From Here */
 /* ======================================= */
@@ -324,36 +386,36 @@ footer {
     color: white;
 }
 
-    footer h4 {
-        color: var(--theme-color-primary-light);
-    }
+footer h4 {
+    color: var(--theme-color-primary-light);
+}
 
-    footer h6 {
-        color: var(--theme-color-primary-light);
-    }
+footer h6 {
+    color: var(--theme-color-primary-light);
+}
 
-    footer hr {
-        width: 280px;
-        padding: 0px;
-        border-width: 1px;
-        margin: 16px;
-        opacity: 0.4;
-        border-style: solid;
-        border-color: var(--theme-color-primary-light);
-    }
+footer hr {
+    width: 280px;
+    padding: 0px;
+    border-width: 1px;
+    margin: 16px;
+    opacity: 0.4;
+    border-style: solid;
+    border-color: var(--theme-color-primary-light);
+}
 
-    footer .footer-links {
-        font-size: 14px;
-        color: var(--theme-color-primary-light);
-        font-weight: 500;
-        text-decoration: none;
-    }
+footer .footer-links {
+    font-size: 14px;
+    color: var(--theme-color-primary-light);
+    font-weight: 500;
+    text-decoration: none;
+}
 
-        footer .footer-links:hover {
-            color: var(--theme-color-secondary-text);
-            transition: 0.32s;
-            cursor: pointer;
-        }
+footer .footer-links:hover {
+    color: var(--theme-color-secondary-text);
+    transition: 0.32s;
+    cursor: pointer;
+}
 /* =============================== */
 /* Footer Related Styles Ends Here */
 /* =============================== */

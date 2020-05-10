@@ -1,0 +1,348 @@
+{
+    "type": "FeatureCollection",
+    "query": [
+        72.5949059,
+        22.9496637
+    ],
+    "features": [
+        {
+            "id": "locality.16873273896690150",
+            "type": "Feature",
+            "place_type": [
+                "locality"
+            ],
+            "relevance": 1,
+            "properties": {},
+            "text": "Narol GIDC",
+            "place_name": "Narol GIDC, Ahmedabad, Ahmadabad, Gujarat, India",
+            "bbox": [
+                72.57174516,
+                22.92950898,
+                72.61794216,
+                22.97322999
+            ],
+            "center": [
+                72.591103,
+                22.951858
+            ],
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    72.591103,
+                    22.951858
+                ]
+            },
+            "context": [
+                {
+                    "id": "place.8395399320840170",
+                    "wikidata": "Q1070",
+                    "text": "Ahmedabad"
+                },
+                {
+                    "id": "district.4693989899026860",
+                    "wikidata": "Q401686",
+                    "text": "Ahmadabad"
+                },
+                {
+                    "id": "region.9519983017576720",
+                    "short_code": "IN-GJ",
+                    "wikidata": "Q1061",
+                    "text": "Gujarat"
+                },
+                {
+                    "id": "country.9973599353579250",
+                    "short_code": "in",
+                    "wikidata": "Q668",
+                    "text": "India"
+                }
+            ]
+        },
+        {
+            "id": "place.8395399320840170",
+            "type": "Feature",
+            "place_type": [
+                "place"
+            ],
+            "relevance": 1,
+            "properties": {
+                "wikidata": "Q1070"
+            },
+            "text": "Ahmedabad",
+            "place_name": "Ahmedabad, Gujarat, India",
+            "bbox": [
+                72.443409043163,
+                22.9236620417668,
+                72.7062523523932,
+                23.1548429058675
+            ],
+            "center": [
+                72.58,
+                23.03
+            ],
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    72.58,
+                    23.03
+                ]
+            },
+            "context": [
+                {
+                    "id": "district.4693989899026860",
+                    "wikidata": "Q401686",
+                    "text": "Ahmadabad"
+                },
+                {
+                    "id": "region.9519983017576720",
+                    "short_code": "IN-GJ",
+                    "wikidata": "Q1061",
+                    "text": "Gujarat"
+                },
+                {
+                    "id": "country.9973599353579250",
+                    "short_code": "in",
+                    "wikidata": "Q668",
+                    "text": "India"
+                }
+            ]
+        },
+        {
+            "id": "district.4693989899026860",
+            "type": "Feature",
+            "place_type": [
+                "district"
+            ],
+            "relevance": 1,
+            "properties": {
+                "wikidata": "Q401686"
+            },
+            "text": "Ahmadabad",
+            "place_name": "Ahmadabad, Gujarat, India",
+            "bbox": [
+                71.605882,
+                21.982182,
+                72.841057,
+                23.507717
+            ],
+            "center": [
+                72.58,
+                23.03
+            ],
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    72.58,
+                    23.03
+                ]
+            },
+            "context": [
+                {
+                    "id": "region.9519983017576720",
+                    "short_code": "IN-GJ",
+                    "wikidata": "Q1061",
+                    "text": "Gujarat"
+                },
+                {
+                    "id": "country.9973599353579250",
+                    "short_code": "in",
+                    "wikidata": "Q668",
+                    "text": "India"
+                }
+            ]
+        },
+        {
+            "id": "region.9519983017576720",
+            "type": "Feature",
+            "place_type": [
+                "region"
+            ],
+            "relevance": 1,
+            "properties": {
+                "short_code": "IN-GJ",
+                "wikidata": "Q1061"
+            },
+            "text": "Gujarat",
+            "place_name": "Gujarat, India",
+            "bbox": [
+                68.0435860130057,
+                20.0719590119958,
+                74.459052987409,
+                24.7083639721678
+            ],
+            "center": [
+                72.68333,
+                23.21667
+            ],
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    72.68333,
+                    23.21667
+                ]
+            },
+            "context": [
+                {
+                    "id": "country.9973599353579250",
+                    "short_code": "in",
+                    "wikidata": "Q668",
+                    "text": "India"
+                }
+            ]
+        },
+        {
+            "id": "country.9973599353579250",
+            "type": "Feature",
+            "place_type": [
+                "country"
+            ],
+            "relevance": 1,
+            "properties": {
+                "short_code": "in",
+                "wikidata": "Q668"
+            },
+            "text": "India",
+            "place_name": "India",
+            "bbox": [
+                68.0733627002922,
+                6.65298500967984,
+                97.3955619998756,
+                35.5133318496614
+            ],
+            "center": [
+                77,
+                21
+            ],
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    77,
+                    21
+                ]
+            }
+        }
+    ],
+    "attribution": "NOTICE: © 2020 Mapbox and its suppliers. All rights reserved. Use of this data is subject to the Mapbox Terms of Service (https://www.mapbox.com/about/maps/). This response and the information it contains may not be retained. POI(s) provided by Foursquare."
+}
+
+{
+    "type": "FeatureCollection",
+    "query": [
+        "bodakdev",
+        "ahmedabad",
+        "ahmedabad",
+        "gujarat",
+        "india"
+    ],
+    "features": [
+        {
+            "id": "locality.2532025394637290",
+            "type": "Feature",
+            "place_type": [
+                "locality"
+            ],
+            "relevance": 1,
+            "properties": {},
+            "text": "Bodakdev",
+            "place_name": "Bodakdev, Ahmedabad, Ahmadabad, Gujarat, India",
+            "matching_place_name": "Bodakdev, Ahmedabad, Ahmedabad, Gujarat, India",
+            "bbox": [
+                72.503307,
+                23.02436997,
+                72.54222012,
+                23.04988398
+            ],
+            "center": [
+                72.515941,
+                23.037121
+            ],
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    72.515941,
+                    23.037121
+                ]
+            },
+            "context": [
+                {
+                    "id": "place.8395399320840170",
+                    "wikidata": "Q1070",
+                    "text": "Ahmedabad"
+                },
+                {
+                    "id": "district.4693989899026860",
+                    "wikidata": "Q401686",
+                    "text": "Ahmadabad"
+                },
+                {
+                    "id": "region.9519983017576720",
+                    "short_code": "IN-GJ",
+                    "wikidata": "Q1061",
+                    "text": "Gujarat"
+                },
+                {
+                    "id": "country.9973599353579250",
+                    "short_code": "in",
+                    "wikidata": "Q668",
+                    "text": "India"
+                }
+            ]
+        },
+        {
+            "id": "poi.214748416917",
+            "type": "Feature",
+            "place_type": [
+                "poi"
+            ],
+            "relevance": 1,
+            "properties": {
+                "landmark": true,
+                "address": "",
+                "category": "department store, department, shop, home appliance"
+            },
+            "text": "Reliance Fresh",
+            "place_name": "Reliance Fresh, Ahmedabad, Gujarat, India",
+            "matching_text": "Bodakdev",
+            "matching_place_name": "Bodakdev, Ahmedabad, Gujarat, India",
+            "center": [
+                72.520636,
+                23.039714
+            ],
+            "geometry": {
+                "coordinates": [
+                    72.520636,
+                    23.039714
+                ],
+                "type": "Point"
+            },
+            "context": [
+                {
+                    "id": "locality.2532025394637290",
+                    "text": "Bodakdev"
+                },
+                {
+                    "id": "place.8395399320840170",
+                    "wikidata": "Q1070",
+                    "text": "Ahmedabad"
+                },
+                {
+                    "id": "district.4693989899026860",
+                    "wikidata": "Q401686",
+                    "text": "Ahmadabad"
+                },
+                {
+                    "id": "region.9519983017576720",
+                    "short_code": "IN-GJ",
+                    "wikidata": "Q1061",
+                    "text": "Gujarat"
+                },
+                {
+                    "id": "country.9973599353579250",
+                    "short_code": "in",
+                    "wikidata": "Q668",
+                    "text": "India"
+                }
+            ]
+        }
+    ],
+    "attribution": "NOTICE: © 2020 Mapbox and its suppliers. All rights reserved. Use of this data is subject to the Mapbox Terms of Service (https://www.mapbox.com/about/maps/). This response and the information it contains may not be retained. POI(s) provided by Foursquare."
+}

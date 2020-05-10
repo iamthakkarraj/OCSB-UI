@@ -13,15 +13,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Google Fonts CDN -->
-    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&family=Montserrat&display=swap"
+        rel="stylesheet">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css">
-    
+
     <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap-datepicker.min.css">
 
     <!-- Font-Awesome CSS -->
     <link rel="stylesheet" href="./assets/css/font-awesome.css">
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+    <script
+        src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
+        type="text/css" />
 
     <!-- Local CSS -->
     <link type="text/css" rel="stylesheet" href="./assets/css/styles.css" />
@@ -130,7 +139,7 @@
     <section class="main-content">
 
         <section class="container py-5">
-            
+
             <section class="page-heading bg-white rounded shadow-md">
                 <h4 class="p-4"> <span> Home / </span> Service </h4>
             </section>
@@ -215,7 +224,7 @@
 
                                 <div class="form-group">
                                     <button class="theme-button-primary" type="button" id="submitButtonForm2">
-                                        Submit 
+                                        Submit
                                     </button>
                                 </div>
 
@@ -283,12 +292,12 @@
 
                                 <div class="row col-6">
 
-                                    <div id="customerCarModelImage" class="shadow-md text-center mx-5"
+                                    <div id="ModelImage" class="shadow-md text-center mx-5"
                                         style="width: 200px; height: 200px;">
                                         Brand image will appear Here
                                     </div>
 
-                                    <div id="customerCarBrandImage" class="shadow-md text-center"
+                                    <div id="BrandImage" class="shadow-md text-center"
                                         style="width: 200px; height: 200px;">
                                         Model image will appear Here
                                     </div>
@@ -325,7 +334,8 @@
 
                             <div class="row mb-4 mx-1">
 
-                                <div class="card shadow-md border-0 p-4 col-6" style="overflow: scroll; max-height: 400px;">
+                                <div class="card shadow-md border-0 p-4 col-6"
+                                    style="overflow: scroll; max-height: 400px;">
 
                                     <table id="selectedServiceContainer" class="table table-striped">
                                         <tr>
@@ -343,316 +353,12 @@
                                     </table>
 
                                 </div>
-                                
+
                                 <div class="card-body px-4 col-6">
 
                                     <div class="row">
 
                                         <div class="accordion" id="servicesContainer">
-
-                                            <div class="card border-0" id="serviceCategory1">
-
-                                                <div class="border-0 bg-white" id="serviceCategoryHeading1">
-
-                                                    <button id="serviceCategoryName1" class="m-2 theme-button-primary"
-                                                        type="button" data-toggle="collapse"
-                                                        data-target="#serviceCategoryCollpase1" aria-expanded="true"
-                                                        aria-controls="serviceCategoryCollpase1">
-                                                        Category 1&nbsp;
-                                                    </button>
-
-                                                </div>
-
-                                                <div id="serviceCategoryCollpase1" class="collapse show"
-                                                    aria-labelledby="serviceCategoryHeading1"
-                                                    data-parent="#servicesContainer">
-
-                                                    <div class="card-body">
-
-                                                        <div class="form-group">
-
-                                                            <div id="category1service1description"
-                                                                class="custom-control custom-checkbox"
-                                                                data-toggle="tooltip" data-placement="left"
-                                                                title="Service Description">
-                                                                <input type="checkbox"
-                                                                    class="custom-control-input service-checkbox"
-                                                                    id="category1service1" service-id="1"
-                                                                    category-id="1">
-                                                                <label class="custom-control-label"
-                                                                    id="category1service1name"
-                                                                    for="category1service1">Service 1</label>
-                                                                <small id="category1service1price">234</small>
-                                                                <small>INR.</small>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-
-                                                            <div id="category1service2description"
-                                                                class="custom-control custom-checkbox"
-                                                                data-toggle="tooltip" data-placement="left"
-                                                                title="Service Description">
-                                                                <input type="checkbox"
-                                                                    class="custom-control-input service-checkbox"
-                                                                    id="category1service2" service-id="2"
-                                                                    category-id="1">
-                                                                <label class="custom-control-label"
-                                                                    id="category1service2name"
-                                                                    for="category1service2">Service 1</label>
-                                                                <small id="category1service2price">234</small>
-                                                                <small>INR.</small>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-
-                                                            <div id="category1service3description"
-                                                                class="custom-control custom-checkbox"
-                                                                data-toggle="tooltip" data-placement="left"
-                                                                title="Service Description">
-                                                                <input type="checkbox"
-                                                                    class="custom-control-input service-checkbox"
-                                                                    id="category1service3" service-id="3"
-                                                                    category-id="1">
-                                                                <label id="category1service3name"
-                                                                    class="custom-control-label"
-                                                                    for="category1service3">Service 1</label>
-                                                                <small id="category1service3price">234</small>
-                                                                <small>INR.</small>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-
-                                                            <div id="category1service4description"
-                                                                class="custom-control custom-checkbox"
-                                                                data-toggle="tooltip" data-placement="left"
-                                                                title="Service Description">
-                                                                <input type="checkbox"
-                                                                    class="custom-control-input service-checkbox"
-                                                                    id="category1service4" service-id="4"
-                                                                    category-id="1">
-                                                                <label id="category1service4name"
-                                                                    class="custom-control-label"
-                                                                    for="category1service4">Service 1</label>
-                                                                <small
-                                                                    id="category1service4price">234</small></small>INR.</small>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="card border-0" id="serviceCategory2">
-
-                                                <div class="border-0" id="serviceCategoryHeading2">
-
-                                                    <button id="serviceCategoryName3"
-                                                        class="m-2 theme-button-primary collapsed" type="button"
-                                                        data-toggle="collapse" data-target="#serviceCategoryCollpase2"
-                                                        aria-expanded="false" aria-controls="serviceCategoryCollpase2">
-                                                        Category 2
-                                                    </button>
-
-                                                </div>
-
-                                                <div id="serviceCategoryCollpase2" class="collapse"
-                                                    aria-labelledby="serviceCategoryHeading2"
-                                                    data-parent="#servicesContainer">
-
-                                                    <div class="card-body">
-
-                                                        <div class="form-group">
-
-                                                            <div id="category2service1description"
-                                                                class="custom-control custom-checkbox"
-                                                                data-toggle="tooltip" data-placement="left"
-                                                                title="Service Description">
-                                                                <input type="checkbox"
-                                                                    class="custom-control-input service-checkbox"
-                                                                    id="category2service1" service-id="1"
-                                                                    category-id="2">
-                                                                <label class="custom-control-label"
-                                                                    id="category2service1name"
-                                                                    for="category2service1">Service 1</label>
-                                                                <small id="category2service1price">234</small>
-                                                                <small>INR.</small>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-
-                                                            <div id="category2service2description"
-                                                                class="custom-control custom-checkbox"
-                                                                data-toggle="tooltip" data-placement="left"
-                                                                title="Service Description">
-                                                                <input type="checkbox"
-                                                                    class="custom-control-input service-checkbox"
-                                                                    id="category2service2" service-id="2"
-                                                                    category-id="2">
-                                                                <label class="custom-control-label"
-                                                                    id="category2service2name"
-                                                                    for="category2service2">Service 1</label>
-                                                                <small id="category2service2price">234</small>
-                                                                <small>INR.</small>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-
-                                                            <div id="category2service3description"
-                                                                class="custom-control custom-checkbox"
-                                                                data-toggle="tooltip" data-placement="left"
-                                                                title="Service Description">
-                                                                <input type="checkbox"
-                                                                    class="custom-control-input service-checkbox"
-                                                                    id="category2service3" service-id="3"
-                                                                    category-id="2">
-                                                                <label class="custom-control-label"
-                                                                    id="category2service3name"
-                                                                    for="category2service3">Service 1</label>
-                                                                <small id="category2service3price">234</small>
-                                                                <small>INR.</small>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-
-                                                            <div id="category2service4description"
-                                                                class="custom-control custom-checkbox"
-                                                                data-toggle="tooltip" data-placement="left"
-                                                                title="Service Description">
-                                                                <input type="checkbox"
-                                                                    class="custom-control-input service-checkbox"
-                                                                    id="category2service4" service-id="4"
-                                                                    category-id="2">
-                                                                <label class="custom-control-label"
-                                                                    id="category2service4name"
-                                                                    for="category2service4">Service 1</label>
-                                                                <small id="category2service4price">234</small>
-                                                                <small>INR.</small>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="card border-0" id="serviceCategory3">
-
-                                                <div class="border-0" id="serviceCategoryHeading3">
-
-                                                    <button id="serviceCategoryName3"
-                                                        class="m-2 theme-button-primary collapsed" type="button"
-                                                        data-toggle="collapse" data-target="#serviceCategoryCollpase3"
-                                                        aria-expanded="false" aria-controls="serviceCategoryCollpase3">
-                                                        Category 3
-                                                    </button>
-
-                                                </div>
-
-                                                <div id="serviceCategoryCollpase3" class="collapse"
-                                                    aria-labelledby="serviceCategoryHeading3"
-                                                    data-parent="#servicesContainer">
-
-                                                    <div class="card-body">
-
-                                                        <div class="form-group">
-
-                                                            <div id="category3service1description"
-                                                                class="custom-control custom-checkbox"
-                                                                data-toggle="tooltip" data-placement="left"
-                                                                title="Service Description">
-                                                                <input type="checkbox"
-                                                                    class="custom-control-input service-checkbox"
-                                                                    id="category3service1" service-id="1"
-                                                                    category-id="3">
-                                                                <label class="custom-control-label"
-                                                                    id="category3service1name"
-                                                                    for="category3service1">Service 1</label>
-                                                                <small id="category3service1price">234</small>
-                                                                <small>INR.</small>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-
-                                                            <div id="category3service2description"
-                                                                class="custom-control custom-checkbox"
-                                                                data-toggle="tooltip" data-placement="left"
-                                                                title="Service Description">
-                                                                <input type="checkbox"
-                                                                    class="custom-control-input service-checkbox"
-                                                                    id="category3service2" service-id="2"
-                                                                    category-id="3">
-                                                                <label class="custom-control-label"
-                                                                    id="category3service2name"
-                                                                    for="category3service2">Service 1</label>
-                                                                <small id="category3service2price">234</small>
-                                                                <small>INR.</small>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-
-                                                            <div id="category3service3description"
-                                                                class="custom-control custom-checkbox"
-                                                                data-toggle="tooltip" data-placement="left"
-                                                                title="Service Description">
-                                                                <input type="checkbox"
-                                                                    class="custom-control-input service-checkbox"
-                                                                    id="category3service3" service-id="3"
-                                                                    category-id="3">
-                                                                <label class="custom-control-label"
-                                                                    id="category3service3name"
-                                                                    for="category3service3">Service 1</label>
-                                                                <small id="category3service3price">234</small>
-                                                                <small>INR.</small>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
-
-                                                            <div id="category3service4description"
-                                                                class="custom-control custom-checkbox"
-                                                                data-toggle="tooltip" data-placement="left"
-                                                                title="Service Description">
-                                                                <input type="checkbox"
-                                                                    class="custom-control-input service-checkbox"
-                                                                    id="category3service4" service-id="4"
-                                                                    category-id="3">
-                                                                <label class="custom-control-label"
-                                                                    id="category3service4name"
-                                                                    for="category3service4">Service 1</label>
-                                                                <small id="category3service4price">234</small>
-                                                                <small>INR.</small>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
 
                                         </div>
 
@@ -661,15 +367,17 @@
                                 </div>
 
                                 <form id="serviceBookingForm4">
-                                    
-                                    <input type="text" class="fade hidden-input-control" name="SelectedServices" id="SelectedServices" />
-                                    <input type="number" class="fade hidden-input-control" name="TotalCost" id="TotalCost" />
+
+                                    <input type="text" class="fade hidden-input-control" name="SelectedServices"
+                                        id="SelectedServices" />
+                                    <input type="number" class="fade hidden-input-control" name="TotalCost"
+                                        id="TotalCost" />
 
                                     <div class="form-group">
                                         <button class="theme-button-primary" type="button" id="submitButtonForm4">
                                             Next
                                         </button>
-                                    </div>                                    
+                                    </div>
 
                                 </form>
 
@@ -699,119 +407,37 @@
 
                             <h4 class="row p-3">
                                 Please choose your date and select the dealer
-                            </h4>   
+                            </h4>
 
                             <div class="row mb-4 mx-1">
 
-                                <div class="card shadow-md border-0 p-4 col-12 col-md-8 col-sm-11" style="overflow: scroll; max-height: 400px;">
+                                <div class="card shadow-md border-0 p-4 col-12 col-md-8 col-sm-11"
+                                    style="overflow: scroll; max-height: 400px;">
 
                                     <table id="dealerListContainer" class="table table-striped p-4">
 
-                                        <tr>
-                                            <th> </th>
-                                            <th> Name </th>                                    
-                                            <th> Phone No. </th>                                    
-                                        </tr>
-
-                                        <tr>
-                                            <td> 
-                                                <div class="custom-control custom-checkbox" data-placement="left">
-                                                    <input type="checkbox"
-                                                        class="custom-control-input dealer-checkbox"
-                                                        id="dealer1" dealer-id="1" />
-                                                    <label class="custom-control-label" for="dealer1"></label>
-                                                </div>
-                                            </td>
-                                            <td id="dealerName1"> Lorem Ipsum </td>                                    
-                                            <td id="dealerPhoneNo1"> +99 9090909090 </td>                                                   
-                                        </tr>
-
-                                        <tr>
-                                            <td> 
-                                                <div class="custom-control custom-checkbox" data-placement="left">
-                                                    <input type="checkbox"
-                                                        class="custom-control-input dealer-checkbox"
-                                                        id="dealer2" dealer-id="2">
-                                                    <label class="custom-control-label" for="dealer2"></label>
-                                                </div>
-                                            </td>
-                                            <td id="dealerName2"> Lorem Ipsum </td>                                    
-                                            <td id="dealerPhoneNo2"> +99 9090909090 </td>                                    
-                                        </tr>
-
-                                        <tr>
-                                            <td> 
-                                                <div class="custom-control custom-checkbox"
-                                                    data-toggle="tooltip" data-placement="left">
-                                                    <input type="checkbox"
-                                                        class="custom-control-input dealer-checkbox"
-                                                        id="dealer3" dealer-id="3">
-                                                    <label class="custom-control-label" for="dealer3"></label>
-                                                </div>
-                                            </td>
-                                            <td id="dealerName3"> Lorem Ipsum </td>                                    
-                                            <td id="dealerPhoneNo3"> +99 9090909090 </td>                                    
-                                        </tr>             
-
-                                        <tr>
-                                            <td> 
-                                                <div class="custom-control custom-checkbox"data-placement="left">
-                                                    <input type="checkbox"
-                                                        class="custom-control-input dealer-checkbox"
-                                                        id="dealer4" dealer-id="4">
-                                                        <label class="custom-control-label" for="dealer4"></label>
-                                                </div>
-                                            </td>
-                                            <td id="dealerName4"> Lorem Ipsum </td>                                    
-                                            <td id="dealerPhoneNo4"> +99 9090909090 </td>
-                                        </tr>   
-
-                                        <tr>
-                                            <td> 
-                                                <div class="custom-control custom-checkbox"data-placement="left">
-                                                    <input type="checkbox"
-                                                        class="custom-control-input dealer-checkbox"
-                                                        id="dealer5" dealer-id="5">
-                                                        <label class="custom-control-label" for="dealer5"></label>
-                                                </div>
-                                            </td>
-                                            <td id="dealerName5"> Lorem Ipsum </td>
-                                            <td id="dealerPhoneNo5"> +99 9090909090 </td>
-                                        </tr>     
-
-                                        <tr>
-                                            <td> 
-                                                <div class="custom-control custom-checkbox"data-placement="left">
-                                                    <input type="checkbox"
-                                                        class="custom-control-input dealer-checkbox"
-                                                        id="dealer6" dealer-id="6">
-                                                        <label class="custom-control-label" for="dealer6"></label>
-                                                </div>
-                                            </td>
-                                            <td id="dealerName6"> Lorem Ipsum </td>                                    
-                                            <td id="dealerPhoneNo6"> +99 9090909090 </td>                                                                        
-                                        </tr>        
-                                        
                                     </table>
-                            
+
                                 </div>
 
-                                <div class="col-12 col-md-4 col-sm-12 pr-5">                                                                        
-                                    <form id="serviceBookingForm5">                                        
-                                        <input type="number" name="DealerId" id="DealerId" class="fade hidden-input-control">
-                                        <input type="hidden" name="PlanDateTime" class="" id="PlanDateTime" /> 
-                                        <div class="d-flex justify-content-center" data-provide="datepicker" id="date-picker" name="PlanDateTime"></div>
+                                <div class="col-12 col-md-4 col-sm-12 pr-5">
+                                    <form id="serviceBookingForm5">
+                                        <input type="number" name="DealerId" id="DealerId"
+                                            class="fade hidden-input-control">
+                                        <input type="hidden" name="PlanDateTime" class="" id="PlanDateTime" />
+                                        <div class="d-flex justify-content-center" data-provide="datepicker"
+                                            id="date-picker" name="PlanDateTime"></div>
                                     </form>
                                 </div>
 
                             </div>
-
+                            
                             <div class="form-group">
                                 <button class="theme-button-primary" type="button" id="submitButtonForm5">
                                     Next
                                 </button>
                             </div>
-                                                                                    
+
                         </div>
 
                     </div>
@@ -836,28 +462,116 @@
 
                             <h4 class="row p-3">
                                 Please provide us you location.
-                            </h4>   
+                            </h4>
 
                             <div class="row">
-                                
+
                                 <div class="col-12 ml-1">
 
-                                    <form id="serviceBookingForm6" class="row">                                        
-                                        <textarea name="PickUpAddress" id="PickUpAddress" class="rounded theme-form-control col-4 my-2 mx-2" placeholder="Address for pick up."></textarea>
-                                        <textarea name="DropAddress" id="DropAddress" class="rounded theme-form-control col-4 my-2 mx-2" placeholder="Address for car drop."></textarea>
-                                        <textarea id="CustomerNote" name="CustomerNote" class="rounded theme-form-control col-6 my-2 ml-2" placeholder="Any special instruction that your want to provide us."></textarea>
+                                    <form id="serviceBookingForm6">
+
+                                        <div class="col-4 p-0 d-flex flex-column">
+
+                                            <div class="form-group">
+                                                <textarea id="CustomerNote" name="CustomerNote"
+                                                    class="rounded theme-form-control"
+                                                    placeholder="Any special instruction that your want to provide us."></textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="text" class="rounded theme-form-control"
+                                                    name="ContactPerson" id="ContactPerson"
+                                                    placeholder="Contact person name">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="number" class="roudned theme-form-control"
+                                                    placeholder="Contact number" name="ContactNo" id="ContactNo">
+                                            </div>
+
+                                            <div class="my-3">
+                                                <label class="switch">
+                                                    <input type="checkbox" id="PickUpDropToggle" data-toggle="collapse"
+                                                        data-target="#PickupDropDetails" aria-expanded="false"
+                                                        aria-controls="PickupDropDetails">
+                                                    <span class="slider round"></span>
+                                                </label>
+                                                <span>Include Pickup/Drop Service</span>
+                                            </div>
+
+                                        </div>
+
+                                        <div id="PickupDropDetails" class="collapse">
+
+                                            <div class="d-flex justify-content-start">
+
+                                                <div class="col-4 p-0 d-flex flex-column justify-content-center">
+
+                                                    <p class="text-warning">* Pickup/Drop service will charge extra 500
+                                                        Rs.</p>
+
+                                                    <input type="text" name="PickUpAddress" id="PickUpAddress"
+                                                        class="rounded theme-form-control mb-2">
+
+                                                    <button class="theme-button-primary" type="button"
+                                                        aria-expanded="false" data-target="#DropAddressContainer"
+                                                        data-toggle="collapse" aria-controls="DropAddressContainer"
+                                                        id="AddressConfirm">
+                                                        Confirm
+                                                    </button>
+
+                                                    <div class="collapse" id="DropAddressContainer">
+
+                                                        <div class="mt-3 mb-2">
+                                                            <label class="switch">
+                                                                <input type="checkbox" id="AddressToggle">
+                                                                <span class="slider round"></span>
+                                                            </label>
+                                                            <span>Same as above</span>
+                                                        </div>
+
+                                                        <input type="text" name="DropAddress" id="DropAddress"
+                                                            placeholder="Drop Location"
+                                                            class="rounded theme-form-control">
+
+                                                    </div>
+
+                                                    <input type="text" class="fade hidden-input-control d-inline"
+                                                        id="PickUpCoord" name="PickUpCoord">
+                                                    <input type="text" class="fade hidden-input-control d-inline"
+                                                        id="DropCoord" name="DropCoord">
+
+                                                </div>
+
+                                                <div class="d-flex flex-column rounded col-6">
+
+                                                    <div class="d-flex justify-content-between">
+                                                        <div id="GeoCoder" class="mb-3"></div>
+                                                        <span class="mt-2 text-warning">*Enter the name of your
+                                                            area</span>
+                                                    </div>
+
+                                                    <div id='Map' class="rounded shadow-md border"
+                                                        style='width: 100%;height: 300px;'></div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
                                     </form>
 
                                     <div class="form-group mt-4">
-                                        <button class="theme-button-primary" type="button" id="submitButtonForm6">
+                                        <button class="theme-button-primary" type="button" id="SubmitButtonForm6">
                                             Book your appointment
                                         </button>
                                     </div>
 
-                                </div>                                
+                                </div>
 
                             </div>
-                                                        
+
 
                         </div>
 
@@ -892,14 +606,16 @@
     <!-- ================== -->
     <!-- <form>
         Done <input type="hidden" name="Email" id="Email" />
-        Done <input type="hidden" name="Otp" id="Email" />                
-        Done <input type="hidden" name="LicenseNumber" id="LicenseNumber" />
-        Done <input type="hidden" name="Brand" id="Brand" />
-        Done <input type="hidden" name="Model" id="Model" />                
+        Done <input type="hidden" name="Otp" id="Otp" />                
+        Done <input type="hidden" name="LicensePlateNumber" id="LicensePlateNumber" />
+        Done <input type="hidden" name="BrandName" id="BrandName" />
+        Done <input type="hidden" name="ModelName" id="ModelName" />                
         Done <input type="hidden" name="DealerId" id="DealerId" />        
         Done <ipnut type="hidden" name="PlanDateTime" id="PlanDateTime" />
         Done <input type="hidden" name="PickUpAddress" id="PickUpAddress" />
-        Done <input type="hidden" name="DropAddress" id="DropAddress" />
+        Done <input type="hidden" name="DropAddress" id="DropAddress" />        
+        Done <ipnut type="hidden" name="ContactPerson" id="ContactPerson" />
+        Done <ipnut type="hidden" name="ContactNo" id="ContactNo" />
         Done <ipnut type="hidden" name="CustomerNote" id="CustomerNote" />
         Pending <input type="hidden" name="PickUpLat" id="PickUpLate" />
         Pending <input type="hidden" name="PickUpLong" id="PickUpLong" />
@@ -1005,18 +721,18 @@
 
     <!-- Popper JS -->
     <script src="./assets/js/popper.min.js"></script>
-    
-    <!-- Date Time Picker JS -->
-    <script src="./assets/js/bootstrap-datepicker.min.js"></script>
 
     <!-- Bootstrap JS -->
     <script src="./assets/js/bootstrap.min.js"></script>
-    
+
+    <!-- Date Time Picker JS -->
+    <script src="./assets/js/bootstrap-datepicker.min.js"></script>
+
     <!-- Jquery Validate -->
     <script src="./assets/js/jquery.validate.min.js"></script>
-    
+
     <!-- Local JS -->
-    <script src="./assets/js/main.js"></script>
+    <script type="module" src="./assets/js/app/main.js"></script>
     <!-- =============================== -->
     <!-- Script Embedding Ends From Here -->
     <!-- =============================== -->
