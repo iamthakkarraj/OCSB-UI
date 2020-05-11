@@ -409,29 +409,33 @@
                                 Please choose your date and select the dealer
                             </h4>
 
-                            <div class="row mb-4 mx-1">
+                            <div class="row mb-4 m-0 p-0">
 
-                                <div class="card shadow-md border-0 p-4 col-12 col-md-8 col-sm-11"
+                                <div id="dealerListContainer" class="card m-0 p-0 shadow-md border-0 col-3"
                                     style="overflow: scroll; max-height: 400px;">
 
-                                    <table id="dealerListContainer" class="table table-striped p-4">
-
-                                    </table>
+                                    <div class="p-2">
+                                        <i class="fa fa-wrench mx-2" aria-hidden="true"></i> Dealer List
+                                    </div>
 
                                 </div>
 
-                                <div class="col-12 col-md-4 col-sm-12 pr-5">
+                                <div id='DealerMap' class="rounded col-5 p-0 shadow-md border"
+                                    style='width: 100%;height: 400px;'></div>
+
+                                <div class="col-3 p-0 d-flex ml-5 flex-column justify-content-center">
                                     <form id="serviceBookingForm5">
+                                        <div class="" data-provide="datepicker" id="date-picker" name="PlanDateTime">
+                                        </div>
                                         <input type="number" name="DealerId" id="DealerId"
                                             class="fade hidden-input-control">
                                         <input type="hidden" name="PlanDateTime" class="" id="PlanDateTime" />
-                                        <div class="d-flex justify-content-center" data-provide="datepicker"
-                                            id="date-picker" name="PlanDateTime"></div>
                                     </form>
                                 </div>
 
                             </div>
-                            
+
+
                             <div class="form-group">
                                 <button class="theme-button-primary" type="button" id="submitButtonForm5">
                                     Next
@@ -516,7 +520,7 @@
                                                     <button class="theme-button-primary" type="button"
                                                         aria-expanded="false" data-target="#DropAddressContainer"
                                                         data-toggle="collapse" aria-controls="DropAddressContainer"
-                                                        id="AddressConfirm">
+                                                        id="PickUpAddressConfirm">
                                                         Confirm
                                                     </button>
 
@@ -604,6 +608,92 @@
     <!-- ================== -->
     <!-- Hidden Form Fields -->
     <!-- ================== -->
+    <!-- Modal -->
+
+    <button id="DisplaySummaryButton" type="button" class="btn btn-primary hidden-input-control fade"
+        data-toggle="modal" data-target="#Summary">
+        Launch demo modal
+    </button>
+
+    <div class="modal bd-example-modal-lg border-0 shadow-md fade" id="Summary" tabindex="-1" role="dialog"
+        aria-labelledby="SummaryTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="SummaryTitle">Your Appointment summary</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body px-4 py-2">
+
+                    <p class="pt-3 text-warning">*Please Check All Details Before Confirming The Appointment</p>
+
+                    <dl class="m-0">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <dt><i class="mr-2 fa fa-envelope-o" aria-hidden="true"></i>
+                                    Your Email:</dt>
+                                <dd id="S_Email">anjalimbudhrani@gmail.com</dd>
+
+                                <dt><i class="mr-2 fa fa-id-card" aria-hidden="true"></i>
+                                    License Plate Number:</dt>
+                                <dd id="S_LicensePlateNumber">GJ27ABVP007</dd>
+
+                                <dt><i class="mr-2 fa fa-car" aria-hidden="true"></i>
+                                    Brand Name:</dt>
+                                <dd id="S_BranName">Hyundai</dd>
+
+                                <dt><i class="mr-2 fa fa-car" aria-hidden="true"></i>
+                                    Model Name:</dt>
+                                <dd id="S_ModelName">i20</dd>
+
+                                <dt><i class="mr-2 fa fa-user" aria-hidden="true"></i>
+                                    Contact Person:</dt>
+                                <dd id="S_ContactPerson">Anjali Budhrani</dd>
+
+                                <dt><i class="mr-2 fa fa-sticky-note-o" aria-hidden="true"></i>
+                                    Customer Note:</dt>
+                                <dd id="S_CustomerNote">Engine Noice, Oil Leakage, Average Problem</dd>
+
+                            </div>
+                            <div>
+                                <dt><i class="mr-2 fa fa-calendar" aria-hidden="true"></i>
+                                    Plan Date Time:</dt>
+                                <dd id="S_PlanDateTime">20-11-2020</dd>
+
+                                <dt><i class="fa fa-inr" aria-hidden="true"></i>
+                                    Total Cost:</dt>
+                                <dd id="S_TotalCost">2034.00</dd>
+
+                                <dt><i class="mr-2 fa fa-location-arrow" aria-hidden="true"></i>
+                                    Pick Up Address:</dt>
+                                <dd id="S_PickUpAddress">Nikol, Ahmedabad, Gujarat 382405</dd>
+
+                                <dt><i class="mr-2 fa fa-location-arrow" aria-hidden="true"></i>
+                                    Drop Address:</dt>
+                                <dd id="S_DropAddress">Nikol, Ahmedabad, Gujarat 382405</dd>
+
+                                <dt><i class="mr-2 fa fa-phone" aria-hidden="true"></i>
+                                    Contact Number:</dt>
+                                <dd id="S_ContactNo">9726080715</dd>
+
+                                <dt><i class="mr-2 fa fa-wrench" aria-hidden="true"></i>
+                                    Delaer Name:</dt>
+                                <dd id="S_DealerName">Marcus Svensson</dd>
+
+                            </div>
+                        </div>
+                    </dl>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="theme-button-disabled" data-dismiss="modal">Close</button>
+                    <button type="button" class="theme-button-primary">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- <form>
         Done <input type="hidden" name="Email" id="Email" />
         Done <input type="hidden" name="Otp" id="Otp" />                

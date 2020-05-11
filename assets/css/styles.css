@@ -123,6 +123,14 @@ html, body {
     border-radius: 8px;
     border: 4px solid var(--theme-color-primary);
 }
+
+.dealer-item:hover{
+    background-color: #d8d8d8;
+}
+
+dt i{
+    color: var(--theme-color-primary);
+}
 /* ========================================== */
 /* miscellaneous Style Classes Ends From Here */
 /* ========================================== */

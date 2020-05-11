@@ -3,6 +3,7 @@ export var DealerList;
 export var ServiceList;
 export var ServiceGroupList;
 export var VehicleList;
+export var SelectedServicesList = [];
 export var MapBoxAccessToken = 'pk.eyJ1IjoiaWFtdGhha2thcnJhai0iLCJhIjoiY2s5emFnY25kMDR5eTNtcG1tZjNjZHkzNyJ9.ynumrtl6jxSlADaCZjKPoQ';
 
 mapboxgl.accessToken = MapBoxAccessToken;
@@ -30,14 +31,45 @@ export var Map =
         maxBounds: Bounds
     });
 
-// export var DealerListMap =
-//     new mapboxgl.Map({
-//         container: 'DealerMap',
-//         style: 'mapbox://styles/mapbox/streets-v11',
-//         center: [72.4396547, 23.0204978],
-//         zoom: 9,
-//         maxBounds: Bounds
-//     });
+export var DealerListMap =
+    new mapboxgl.Map({
+        container: 'DealerMap',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-122.414, 37.776],
+        zoom: 2,
+    });
+
+export var DealerPopUp = new mapboxgl.Popup({
+    closeButton: false
+});
+
+export var geojson = {
+    type: 'FeatureCollection',
+    features: [{
+        type: 'Feature',
+        geometry: {
+            type: 'Point',
+            coordinates: [-77.032, 38.913]
+        },
+        properties: {
+            title: 'Dealer 1 ',
+            phoneNo: '9726080715',
+            description: 'Washington, D.C.'
+        }
+    },
+    {
+        type: 'Feature',
+        geometry: {
+            type: 'Point',
+            coordinates: [-122.414, 37.776]
+        },
+        properties: {
+            title: 'Delaer 2',
+            phoneNo: '9726080715',
+            description: 'Washington, D.C.'
+        }
+    }]
+};
 
 export var GeoCoder = new MapboxGeocoder({
     accessToken: mapboxgl.accessToken,

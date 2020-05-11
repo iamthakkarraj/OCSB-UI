@@ -167,6 +167,20 @@ export function getDealerList() {
                 DealerList = response;
 
                 for (let i = 0; i < response.length; i++) {
+                    console.log(response[i]);
+
+                    new mapboxgl.Marker({
+                        draggable: false,
+                        color: 'orange'
+                    }).setLngLat([response[i].Long, response[i].Lat]).setPopup(new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            ' <span> <i class="fa fa-wrench mx-2" aria-hidden="true"></i>'
+                            + response[i].Name + '<span><br>'
+                            + '<span> <i class="fa fa-phone mx-2" aria-hidden="true"></i>'
+                            + response[i].ContactNo + '<span><br>'
+                            + '<span> <i class="fa fa-location-arrow mx-2" aria-hidden="true"></i>'
+                            + response[i].Address + '<span>')).addTo(DealerListMap);
+
                     addDealer(response[i].DealerId,
                         response[i].Name,
                         response[i].ContactNo);
@@ -249,7 +263,7 @@ export function reverseGeoCode(marker, query, addressId, coordId) {
         contentType: "application/json;charset=utf-8",
         success: function (response) {
             $(addressId).val(query);
-            setMarker(marker, response.features[0].center[0], response.features[0].center[1],addressId,coordId);
+            setMarker(marker, response.features[0].center[0], response.features[0].center[1], addressId, coordId);
         },
         error: function () {
             showToast('Error', 'Could not recieve your address please type manually');
@@ -273,11 +287,11 @@ export function currentLocationError() {
     showToast('Error', 'Could not recieve your address please type manually');
 }
 
-function onDragEnd() {    
-    if (PickUpAddressConfirmed) {               
-        forwardGeoCode(DropMarker.getLngLat().lng, DropMarker.getLngLat().lat,"#DropAddress","#DropCoord");
-    } else {                
-        forwardGeoCode(PickUpMarker.getLngLat().lng, PickUpMarker.getLngLat().lat,"#PickUpAddress","#PickUpCoord");
+function onDragEnd() {
+    if (PickUpAddressConfirmed) {
+        forwardGeoCode(DropMarker.getLngLat().lng, DropMarker.getLngLat().lat, "#DropAddress", "#DropCoord");
+    } else {
+        forwardGeoCode(PickUpMarker.getLngLat().lng, PickUpMarker.getLngLat().lat, "#PickUpAddress", "#PickUpCoord");
     }
 }
 

@@ -195,7 +195,23 @@ $(function () {
 
     //===================================================
     //Form 5 Validation and Flow Control Starts From Here
-    //===================================================    
+    //===================================================
+    $(document).on('mouseover', '.dealer-item', function () {
+        var dealerId = $(this).children(':first').children(':first').attr('dealer-id')
+        let response = DealerList.filter(item => item.DealerId == dealerId)
+        console.log(response[0]);
+        DealerPopUp
+            .setLngLat([response[0].Long, response[0].Lat])
+            .setHTML(
+                ' <span> <i class="fa fa-wrench mx-2" aria-hidden="true"></i>'
+                + response[0].Name + '<span><br>'
+                + '<span> <i class="fa fa-phone mx-2" aria-hidden="true"></i>'
+                + response[0].ContactNo + '<span><br>'
+                + '<span> <i class="fa fa-location-arrow mx-2" aria-hidden="true"></i>'
+                + response[0].Address + '<span>').addTo(DealerListMap);
+        DealerListMap.flyTo({ center: [response[0].Long, response[0].Lat] });
+    });
+
     $(document).on('click', '.dealer-checkbox', function () {
         //get all data
         var elementId = this.id;
@@ -240,7 +256,7 @@ $(function () {
     //===================================================
     //Form 6 Validation and Flow Control Starts From Here
     //===================================================
-    var form6validator = $("#serviceBookingForm6").validate({
+    $("#serviceBookingForm6").validate({
         rules: {
             ContactNo: {
                 required: true,
@@ -271,22 +287,6 @@ $(function () {
         }
     });
 
-    $(document).on('click', '#SubmitButtonForm6', function () {
-        if($('#serviceBookingForm6').valid()){
-            if (PickUpDrop) {
-                if($('#PickUpAddress').val() != '' && $('#DropAddress').val() != ''){
-                    alert('Submit'); 
-                }else{
-                    showToast('Error','Please provide pick up and drop locations');
-                }
-            } else {
-                alert('Submit');
-            }
-        }else{
-            showToast('Error','Please fill in all details.');
-        }        
-    });
-
     $(document).on('change', '#PickUpDropToggle', function () {
         if (PickUpDrop) {
             PickUpDrop = false;
@@ -306,20 +306,23 @@ $(function () {
     });
 
     $(document).on('click', '#PickUpAddressConfirm', function () {
+        console.log('Im Clicked');
         if ($('#PickUpAddress').attr('disabled') == 'disabled') {
             PickUpAddressConfirmed = false;
             $('#PickUpAddress').attr('disabled', false)
+            console.log('true');
             $('#PickUpAddressConfirm').html('Confirm');
         } else {
             PickUpAddressConfirmed = true;
             PickUpMarker.setDraggable(false);
+            console.log('true');
             $('#PickUpAddressConfirm').html('Change');
             $('#PickUpAddress').attr('disabled', true)
         }
     });
 
     $(document).on('input', '#PickUpAddress', function () {
-        if ($('#DropAddress').attr('disabled') == 'disabled'){
+        if ($('#DropAddress').attr('disabled') == 'disabled') {
             $('#DropAddress').val($('#PickUpAddress').val());
         }
     });
@@ -332,6 +335,24 @@ $(function () {
         }
     });
 
+    $(document).on('click', '#SubmitButtonForm6', function () {
+        $('#DisplaySummaryButton').click(); 
+        if ($('#serviceBookingForm6').valid()) {
+            if (PickUpDrop) {
+                if ($('#PickUpAddress').val() != '' && $('#DropAddress').val() != '') {
+                    showSummary();                    
+                } else {
+                    showToast('Error', 'Please provide pick up and drop locations');
+                }
+            } else {
+                alert('Submit');
+            }
+        } else {
+            showToast('Error', 'Please fill in all details.');
+        }
+    });
+
+    
 
     //TODO
     // Add function to get user locations validate the     
