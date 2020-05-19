@@ -6,9 +6,12 @@ Object.entries(functions).forEach(([name, exported]) => window[name] = exported)
 
 export function sendOtp() {
     $.ajax({
-        url: API_URL + 'Authentication/VerifyEmail/?Email=' + $('#Email').val(),
+        url: API_URL + 'Authentication/SendOTP/?email=' + $('#Email').val(),
         type: 'GET',
         contentType: "application/json;charset=utf-8",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
+        },
         success: function (response) {
             if (response != null) {
                 if (response == "s_1111") {
@@ -33,16 +36,18 @@ export function sendOtp() {
 
 export function verifyOtp() {
     $.ajax({
-        url: API_URL + 'Authentication/VerifyOtp/?Email=' + $('#Email').val() + '&Otp=' + $('#Otp').val(),
+        url: API_URL + 'Authentication/VerifyOtp/?email=' + $('#Email').val() + '&otp=' + $('#Otp').val(),
         type: 'GET',
         contentType: "application/json;charset=utf-8",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
+        },
         success: function (response) {
             if (response != null) {
                 if (response == "s_1112") {
                     showToast("Attention", "Your otp is Valid, select your vehicle!");
-                    enableThemeButton("#collapseButton2");
-                    $("#collapseButton2").click();
-                    getVehicleList();
+                    enableCollapseButton("#collapseButton2");
+                    getCustomer();                    
                 }
                 else if (response == "e_1112") {
                     showToast("Error", "Your otp has been expired!");
@@ -69,27 +74,56 @@ export function verifyOtp() {
     });
 }
 
-export function getVehicleList() {
+export function getCustomer() {
     $.ajax({
-        url: API_URL + 'Authentication/GetVehicleList/?EmailId=' + $('#Email').val(),
-        type: "GET",
+        url: API_URL + 'Customer/?email=' + $('#Email').val(),        
+        type: 'GET',
         contentType: "application/json;charset=utf-8",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
+        },
         success: function (response) {
             if (response != null) {
-                VehicleList = response;
+                Customer = response;      
+                getVehicleList();                        
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            showToast("Error", "Unable to get your details right now.");
+            enableThemeButton("#submitButtonForm2");
+        }
+
+    });
+}
+
+export function getVehicleList() {
+    
+    $.ajax({
+        url: API_URL + 'Vehicle/' + Customer.CustomerId,
+        type: "GET",
+        contentType: "application/json;charset=utf-8",
+        beforeSend: function (xhr) {            
+            xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
+        },
+        success: function (response) {            
+            if (response != null) {                   
                 if (response.length > 0 && response.length != 0) {
-                    $('#LicensePlateNumber').html('');
-                    var options = '<option value="default">---Select Vehicle---</option>';
+                    VehicleList = response;
+                    $("#collapseButton2").click();  
                     for (let i = 0; i < response.length; i++) {
-                        options += '<option value="' + response[i].LicenseNumber + '">' + response[i].LicenseNumber + '</option>';
+                        addVehicleCard(response[i].VehicleId,
+                            response[i].LicensePlateNumber,
+                            response[i].BrandName,
+                            response[i].BrandImagePath,
+                            response[i].ModelName,
+                            "null");
                     }
-                    $('#LicensePlateNumber').append(options);
                 }
                 else {
                     showToast("Error", "No vehicles are registered on this email");
                 }
             } else {
-                showToast("Error", "It seems like our server is offline please try again later");
+                showToast("Error", "Unable to get your vehicles right now.");
             }
         },
         error: function (errormessage) {
@@ -101,10 +135,13 @@ export function getVehicleList() {
 export function getServiceList() {
     $.ajax({
         //Use This Commented Line While testing with database
-        //url: API_URL + '/api/Appointment/GetServiceList/?LicensePlateNumber='+$('#LicensePlateNumber').val(),
-        url: API_URL + 'Appointment/GetServiceList/?LicensePlateNumber=DD03SG6677',
+        //url: API_URL + '/api/Appointment/GetServiceList/?LicensePlateNumber='+$('#LicensePlateNumber').val(),        
+        url: API_URL + 'Service/1',
         type: 'GET',
         contentType: 'application/json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
+        },
         success: function (response) {
             if (response != null) {
                 ServiceList = response;
@@ -113,12 +150,11 @@ export function getServiceList() {
                         response[i].ServiceId,
                         response[i].Name,
                         response[i].Cost,
-                        'Lorem Ipsum');
+                        'Lorem Ipsum'); //TODO Here add service Description
                 }
 
-                enableThemeButton("#collapseButton3");
-                $("#collapseButton3").click();
-                showToast("Title", "Your message");
+                enableCollapseButton("#collapseButton3");
+                $("#collapseButton3").click();                
 
             } else {
                 showToast("Error", "It seems like our server is offline please try again later");
@@ -134,9 +170,12 @@ export function getServiceList() {
 
 export function getServiceGroupList() {
     $.ajax({
-        url: API_URL + 'Appointment/GetServicesGroupList',
+        url: API_URL + 'Service/Group/',
         type: 'GET',
         contentType: 'application/json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
+        },
         success: function (response) {
             if (response != null) {
                 ServiceGroupList = response
@@ -158,17 +197,19 @@ export function getServiceGroupList() {
 
 export function getDealerList() {
     $.ajax({
-        url: API_URL + 'Appointment/GetDealer',
+        url: API_URL + 'Dealer/',
         type: 'GET',
         contentType: 'application/json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
+        },
         success: function (response) {
             if (response != null) {
 
                 DealerList = response;
 
                 for (let i = 0; i < response.length; i++) {
-                    console.log(response[i]);
-
+                    
                     new mapboxgl.Marker({
                         draggable: false,
                         color: 'orange'
@@ -185,10 +226,8 @@ export function getDealerList() {
                         response[i].Name,
                         response[i].ContactNo);
                 }
-
-                enableThemeButton("#collapseButton4");
+                enableCollapseButton("#collapseButton4");
                 $("#collapseButton4").click();
-
             } else {
                 enableThemeButton("#submitButtonForm4");
             }
@@ -205,38 +244,35 @@ export function getHolidayList() {
         url: API_URL + 'Appointment/GetHolidaysByDealerId/?DealerId=' + $('#DealerId').val(),
         type: 'GET',
         contentType: 'application/json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
+        },
         success: function (response) {
             if (response != null && response.length > 0) {
-
                 var dateList = [];
-
                 for (let i = 0; i < response.length; i++) {
                     dateList.push(new Date(response[i]).toLocaleDateString());
                 }
-
                 console.log(dateList);
-
                 $('#date-picker').datepicker({
                     format: "mm/dd/yyyy",
-                    startDate: "d",
+                    startDate: "+2d",
                     endDate: "+14d",
+                    daysOfWeekDisabled: [0,6],
                     datesDisabled: dateList,
                     todayBtn: "linked",
                     clearBtn: true,
                 });
-
                 $('.disabled-date').attr('title', ' <i class="fa fa-calendar-times-o" aria-hidden="true"></i> PublicHoliday');
                 $('.disabled-date').attr('data-toggle', 'tooltip');
                 $('.disabled-date').attr('data-placement', 'left');
                 $('.disabled-date').attr('data-html', 'true');
-
             } else {
 
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             showToast("Error", "It seems like our server is offline please try again later");
-            enableThemeButton("#submitButtonForm[FormNo-1]");
         }
     });
 }
@@ -296,14 +332,10 @@ function onDragEnd() {
 }
 
 export function setMarker(marker, long, lat, addressId, coordId) {
-
     marker.setLngLat([long, lat]).addTo(Map);
     marker.on('dragend', onDragEnd);
-
     $(coordId).val(long + '-' + lat);
-
     Map.flyTo({ center: [long, lat] });
-
     forwardGeoCode(long, lat, addressId, coordId);
 
 }

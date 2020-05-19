@@ -19,6 +19,32 @@ $(function () {
 
 
 
+    
+    $(document).on('click', '.collapse-button-enabled', function(){
+
+        let elementId = '#'+this.id;
+        let dataTartgetId = $(elementId).attr('data-target');        
+        let visiableFrames = $('.form-frame');        
+        
+        if($(dataTartgetId).hasClass('fade')){            
+            $(dataTartgetId).removeClass('fade');
+            $(dataTartgetId).addClass('show');
+            //$(dataTartgetId).switchClass( 'fade', 'show', 320 ,'easeInOutQuad');
+            //disableCollapseButton(elementId);            
+        }
+
+        for(let i=0; i<visiableFrames.length; i++){            
+            if($('#'+visiableFrames[i].id).hasClass('show') && '#'+visiableFrames[i].id != dataTartgetId){                                
+                $('#'+visiableFrames[i].id).removeClass('show')
+                $('#'+visiableFrames[i].id).addClass('fade');                
+                enableCollapseButton($('#'+visiableFrames[i].id).attr('data-control'));
+            }
+        }
+                
+    });
+    
+
+
 
     //===================================================
     //Form 1 Validation and Flow Control Starts From Here
@@ -96,30 +122,37 @@ $(function () {
     //=================================================
 
 
+    
 
 
     //===================================================
     //Form 3 Validation and Flow Control Starts From Here
     //===================================================
-    $("#serviceBookingForm3").validate({
-        rules: {
-            LicensePlateNumber: {
-                valueNotEquals: "default"
+    $(document).on('click', '.vehicle-card', function(){
+                
+        let elements = $('.vehicle-card');
+
+        for(let i=0; i<elements.length; i++){            
+            if($(elements[i]).hasClass('selected-vehicle-card')){                
+                $(elements[i]).removeClass('selected-vehicle-card');
+                $(elements[i]).addClass('not-selected-vehicle-card');
             }
-        },
-        messages: {
-            LicensePlateNumber: {
-                valueNotEquals: "Please select your car"
-            }
-        },
-        success: function () {
-            enableThemeButton("#submitButtonForm3");
         }
+
+        if($(this).hasClass('not-selected-vehicle-card')){
+            $(this).removeClass('not-selected-vehicle-card');
+            $(this).addClass('selected-vehicle-card');       
+            
+        }
+                
+        $("#VehicleId").val($(this).attr('data-provide'));
+        enableThemeButton('#submitButtonForm3');
+                        
     });
 
+    
     $(document).on('change', '#serviceBookingForm3 select', function () {
-        if ($("#serviceBookingForm3").valid()) {
-            updateVehicleDetails($('#LicensePlateNumber').val());
+        if ($("#serviceBookingForm3").valid()) {            
             enableThemeButton("#submitButtonForm3");
         } else {
             disableThemeButton("#submitButtonForm3");
@@ -186,6 +219,8 @@ $(function () {
 
     $(document).on('click', '#submitButtonForm4', function () {
         getDealerList();
+        $('.mapboxgl-canvas').css('width', '100%');
+        $('.mapboxgl-canvas').css('height', '100%');
     });
     //=================================================
     //Form 4 Validation and Flow Control Ends From Here
@@ -198,8 +233,7 @@ $(function () {
     //===================================================
     $(document).on('mouseover', '.dealer-item', function () {
         var dealerId = $(this).children(':first').children(':first').attr('dealer-id')
-        let response = DealerList.filter(item => item.DealerId == dealerId)
-        console.log(response[0]);
+        let response = DealerList.filter(item => item.DealerId == dealerId)    
         DealerPopUp
             .setLngLat([response[0].Long, response[0].Lat])
             .setHTML(
@@ -240,7 +274,7 @@ $(function () {
     $(document).on('click', '#submitButtonForm5', function () {
         if ($('#PlanDateTime').val() != null) {
             disableThemeButton("#submitButtonForm5");
-            enableThemeButton("#collapseButton5");
+            enableCollapseButton("#collapseButton5");
             $("#collapseButton5").click();
             getLocation();
         } else {
@@ -306,16 +340,14 @@ $(function () {
     });
 
     $(document).on('click', '#PickUpAddressConfirm', function () {
-        console.log('Im Clicked');
         if ($('#PickUpAddress').attr('disabled') == 'disabled') {
             PickUpAddressConfirmed = false;
-            $('#PickUpAddress').attr('disabled', false)
-            console.log('true');
+            $('#PickUpAddress').attr('disabled', false)            
+            PickUpMarker.setDraggable(true);
             $('#PickUpAddressConfirm').html('Confirm');
         } else {
             PickUpAddressConfirmed = true;
-            PickUpMarker.setDraggable(false);
-            console.log('true');
+            PickUpMarker.setDraggable(false);            
             $('#PickUpAddressConfirm').html('Change');
             $('#PickUpAddress').attr('disabled', true)
         }
@@ -353,7 +385,6 @@ $(function () {
     });
 
     
-
     //TODO
     // Add function to get user locations validate the     
     //data and add ajax call to post the appointment    

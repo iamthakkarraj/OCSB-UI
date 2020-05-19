@@ -1,8 +1,9 @@
-export var API_URL = "http://localhost:51859/api/"
+export var API_URL = "https://localhost:44364/api/"
 export var DealerList;
 export var ServiceList;
 export var ServiceGroupList;
 export var VehicleList;
+export var Customer;
 export var SelectedServicesList = [];
 export var MapBoxAccessToken = 'pk.eyJ1IjoiaWFtdGhha2thcnJhai0iLCJhIjoiY2s5emFnY25kMDR5eTNtcG1tZjNjZHkzNyJ9.ynumrtl6jxSlADaCZjKPoQ';
 
@@ -35,8 +36,9 @@ export var DealerListMap =
     new mapboxgl.Map({
         container: 'DealerMap',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [-122.414, 37.776],
+        center: [72.4396547, 23.0204978],
         zoom: 2,
+        maxBounds: Bounds,        
     });
 
 export var DealerPopUp = new mapboxgl.Popup({

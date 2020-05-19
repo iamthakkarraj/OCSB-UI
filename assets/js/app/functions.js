@@ -42,6 +42,22 @@ export function enableThemeButton(id) {
     }
 }
 
+export function enableCollapseButton(id) {
+    if ($(id).hasClass("collapse-button-disabled")) {
+        $(id).removeClass("collapse-button-disabled");
+        $(id).addClass("collapse-button-enabled");
+        $(id).removeAttr('disabled');
+    }
+}
+
+export function disableCollapseButton(id) {
+    if ($(id).hasClass("collapse-button-enabled")) {
+        $(id).removeClass("collapse-button-enabled");
+        $(id).addClass("collapse-button-disabled");
+        $(id).attr('disabled', 'true');
+    }
+}
+
 export function displayElement(id) {
     $(id).show();
 }
@@ -57,15 +73,22 @@ export function disableAllButtons() {
     disableThemeButton("#submitButtonForm4");
     disableThemeButton("#submitButtonForm5");
     disableThemeButton("#submitButtonForm6");
-    disableThemeButton("#collapseButton2");
-    disableThemeButton("#collapseButton3");
-    disableThemeButton("#collapseButton4");
-    disableThemeButton("#collapseButton5");
+    disableCollapseButton("#collapseButton2");
+    disableCollapseButton("#collapseButton3");
+    disableCollapseButton("#collapseButton4");
+    disableCollapseButton("#collapseButton5");
 }
 
 export function init() {
-    //disableAllButtons();
-    hideElement("#serviceBookingForm2");
+    disableAllButtons();
+    $('#date-picker').datepicker({
+        format: "mm/dd/yyyy",
+        startDate: "d",
+        endDate: "+14d",
+        //datesDisabled: dateList,
+        todayBtn: "linked",
+        clearBtn: true,
+    });    
     $('.mapboxgl-canvas').css('width', '100%');
     $('.mapboxgl-canvas').css('height', '100%');
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
@@ -74,6 +97,39 @@ export function init() {
     $.validator.addMethod("valueNotEquals", function (value, element, arg) {
         return arg !== value;
     }, "Value must not equal arg.");
+}
+
+export function addVehicleCard(vehicleId,licensePlateNumber,brandName,brandImage,modelName,modelImage) {
+    $('#VehicleListContainer')
+        .append('<div data-provide="'+vehicleId+'" class="vehicle-card not-selected-vehicle-card card shadow-md mb-3 border-0 pb-2 px-3 pt-4">'
+            + '<div class="form-group d-flex">'
+            + '<lable class="col-6 d-flex flex-column justify-content-center">License Plate</lable>'
+            + '<input id = "LicensePlateNumber" name = "LicensePlateNumber" type = "text"'
+            + 'disabled value = "'+licensePlateNumber+'"class= "form-control col-6" />'
+            + '</div>'
+            + '<div class="d-flex mb-3">'
+            + '<div class="col-6">'
+            + '<dl>'
+            + '<dt>Brand Name</dt>'
+            + '<dd>'+brandName+'</dd>'
+            + '</dl>'
+            + '<div class="d-flex justify-content-center bg-white border rounded">'
+            + '<img id="BrandImage"'
+            + 'src="'+brandImage+'" />'
+            + '</div>'
+            + '</div>'
+            + '<div class="col-6">'
+            + '<dl>'
+            + '<dt>Model Name</dt>'
+            + '<dd>'+modelName+'</dd>'
+            + '</dl>'
+            + '<div class="d-flex justify-content-center bg-white border rounded">'
+            + '<img id="ModelImage"'
+            + 'src="'+modelImage+'" />'
+            + '</div>'
+            + '</div>'
+            + '</div>'
+            + '</div >')
 }
 
 export function updateVehicleDetails(licensePlateNumber) {
@@ -92,10 +148,11 @@ export function updateVehicleDetails(licensePlateNumber) {
 
 export function addserviceCategory(categoryId, name) {
     $('#servicesContainer')
-        .append('<div class="card border-0" id="serviceCategory' + categoryId + '">'
+        .append('<div class="card border-0 col-12" id="serviceCategory' + categoryId + '">'
             + '<div class="border-0" id="serviceCategoryHeading' + categoryId + '">'
             + '<button id="serviceCategoryName' + categoryId + '"'
             + 'class="m-2 theme-button-primary"'
+            + 'style="width:100%;"'
             + 'type="button" data-toggle="collapse"'
             + 'data-target="#serviceCategoryCollpase' + categoryId + '"'
             + 'aria-expanded="true"' +
@@ -106,17 +163,16 @@ export function addserviceCategory(categoryId, name) {
             + '<div id="serviceCategoryCollpase' + categoryId + '"'
             + 'class="collapse"'
             + 'aria-labelledby="serviceCategoryHeading' + categoryId + '"'
-            + 'data-parent="#servicesContainer">'
-            + '<div class="card-body"></div>'
+            + 'data-parent="#servicesContainer">'            
             + '</div>'
             + '</div>');
 }
 
 export function addService(categoryId, serviceId, name, price, description) {
-    $('#serviceCategoryCollpase' + categoryId + ' > div')
-        .append('<div class="form-group">'
+    $('#serviceCategoryCollpase' + categoryId)
+        .append('<div class="form-group m-0">'
             + '<div id="category' + categoryId + 'service' + serviceId + 'description"'
-            + 'class="custom-control custom-checkbox" data-toggle="tooltip"'
+            + 'class="ml-4 custom-control custom-checkbox" data-toggle="tooltip"'
             + 'data-placement="left" title="' + description + '">'
             + '<input type="checkbox" class="custom-control-input service-checkbox"'
             + 'id="category' + categoryId + 'service' + serviceId + '"'
@@ -125,7 +181,7 @@ export function addService(categoryId, serviceId, name, price, description) {
             + '<label class="custom-control-label"'
             + 'id="category' + categoryId + 'service' + serviceId + 'name"'
             + 'for="category' + categoryId + 'service' + serviceId + '">' + name + '</label>'
-            + '<small id="category' + categoryId + 'service' + serviceId + 'price">' + price + '</small>'
+            + '<small id="category' + categoryId + 'service' + serviceId + 'price">' + price + '<i class="fa fa-inr" aria-hidden="true"></i> </small>'
             + '</div>'
             + '</div>');
 }
@@ -213,26 +269,26 @@ export function highlighPreferredDealer(id) {
     //TODO Implement this fucntion
 }
 
-export function parseServices(){
-    var selectedServices = $('#SelectedServices').val();        
-    var start = 0;        
-    for(let i=0; i<=selectedServices.length; i++){        
-        if(selectedServices.charAt(i) == '-' || i == selectedServices.length){
+export function parseServices() {
+    var selectedServices = $('#SelectedServices').val();
+    var start = 0;
+    for (let i = 0; i <= selectedServices.length; i++) {
+        if (selectedServices.charAt(i) == '-' || i == selectedServices.length) {
             SelectedServicesList.push(parseInt(selectedServices.substring(start, i), 10));
-            start=i+1;
-        }        
-    }    
+            start = i + 1;
+        }
+    }
 }
 
-export function showSummary(){
+export function showSummary() {
     parseServices();
-    $('#S_Email').val($('#Email').val());
-    $('#S_LicensePlateNumber').val($('#LicensePlateNumber').val());
-    $('#S_ContactNo').val($('#ContactNo').val());
-    $('#S_ContactPerson').val($('#ContactPerson').val());
-    $('#S_PickUpAddress').val($('#PickUpAddress').val());
-    $('#S_DropAddress').val($('#DropAddress').val());
-    $('#S_CustomerNote').val($('#CustomerNote').val());
-    $('#S_PlanDateTime').val($('#PlanDateTime').val());
-    $('#S_TotalCost').val($('#TotalCost').val());
+    $('#S_Email').html($('#Email').val());
+    $('#S_LicensePlateNumber').html($('#LicensePlateNumber').val());
+    $('#S_ContactNo').html($('#ContactNo').val());
+    $('#S_ContactPerson').html($('#ContactPerson').val());
+    $('#S_PickUpAddress').html($('#PickUpAddress').val());
+    $('#S_DropAddress').html($('#DropAddress').val());
+    $('#S_CustomerNote').html($('#CustomerNote').val());
+    $('#S_PlanDateTime').html($('#PlanDateTime').val());
+    $('#S_TotalCost').html($('#TotalCost').val());
 }

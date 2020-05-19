@@ -1,26 +1,24 @@
 :root {
-    --theme-color-primary: #FFC107;
-    --theme-color-primary-dark: #FFA000;
-    --theme-color-primary-light: #FFECB3;
-    --theme-color-accent: #FFC107;
+    --theme-color-primary: #607d8b;
+    --theme-color-primary-dark: #455a64;
+    --theme-color-primary-light: #cfd8dc;
+    --theme-color-accent: #607d8b;
     --theme-color-primary-text: #212121;
     --theme-color-secondary-text: #ffffff;
-    --theme-color-divided: #BDBDBD;
-    --theme-color-error: #F44336;
-    --theme-color-success: ##4CAF50;
+    --theme-color-divided: #cfd8dc;
+    --theme-color-error: #f44336;
+    --theme-color-success: #4caf50;
 }
 
-html, body {
+html,
+body {
     margin: 0px;
     padding: 0px;
 }
 
 * {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Merriweather", serif;
 }
-
-
-
 
 /* ============================================= */
 /* miscellaneous Style Classes Starts From Here */
@@ -46,7 +44,7 @@ html, body {
 }
 
 .theme-bg-primary-dark {
-    background-color: var(--theme-color-primary-dark)
+    background-color: var(--theme-color-primary-dark);
 }
 
 .theme-bg-color-divided {
@@ -54,11 +52,11 @@ html, body {
 }
 
 .theme-text-primary {
-    color: var(--theme-color-primary-text)
+    color: var(--theme-color-primary-text);
 }
 
 .theme-text-secondary {
-    color: var(--theme-color-secondary-text)
+    color: var(--theme-color-secondary-text);
 }
 
 .page-heading h4 {
@@ -119,43 +117,134 @@ html, body {
     border-radius: 8px;
 }
 
-.leaflet-locpicker-map .leaflet-container{
+.leaflet-locpicker-map .leaflet-container {
     border-radius: 8px;
     border: 4px solid var(--theme-color-primary);
 }
 
-.dealer-item:hover{
+.dealer-item:hover {
     background-color: #d8d8d8;
 }
 
-dt i{
+dt i {
     color: var(--theme-color-primary);
+}
+
+.form-title {
+    font-size: 18px;
+    margin-bottom: 16px;
+}
+
+.form-frame {
+    height: 500px;
+    max-height: 500px;
+}
+
+#BrandImage,
+#ModelImage {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    zoom: 2;
+}
+
+.vehicle-card {
+    cursor: pointer;
+    user-select: none;
+}
+
+.selected-vehicle-card {
+    background-color: var(--theme-color-primary);
+    color: var(--theme-color-secondary-text);
+}
+
+.not-selected-vehicle-card {
+    background-color: var(--theme-color-secondary-text);
+    color: #212529;
+}
+
+#selectedServiceContainer,
+#selectedServiceSummary,
+#date-picker,
+#dealerListContainer {
+    font-size: 14px;
+}
+
+#servicesContainer {
+    max-height: 320px;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--theme-color-primary-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--theme-color-primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--theme-color-primary-dark);
 }
 /* ========================================== */
 /* miscellaneous Style Classes Ends From Here */
 /* ========================================== */
 
-
-
-
 /* ============================================= */
 /* Input Control Related Styles Starts From Here */
 /* ============================================= */
+.collapse-button-enabled {
+    clip-path: polygon(85% 0%, 100% 50%, 85% 100%, 0% 100%, 15% 50%, 0% 0%);
+    background-color: var(--theme-color-primary);
+    color: var(--theme-color-secondary-text);
+    border-style: unset;
+    text-align: center;
+    width: 300px;
+    font-size: 14px;
+    vertical-align: middle;
+    padding: 10px 50px !important;
+}
+
+.collapse-button-disabled {
+    clip-path: polygon(85% 0%, 100% 50%, 85% 100%, 0% 100%, 15% 50%, 0% 0%);
+    background-color: var(--theme-color-primary-light);
+    color: var(--theme-color-secondary-text);
+    border-style: unset;
+    text-align: center;
+    width: 300px;
+    font-size: 14px;
+    vertical-align: middle;
+    padding: 10px 50px !important;
+}
+
+.collapse-button-enabled:hover {
+    background-color: var(--theme-color-primary-dark);
+    transition: ease-in-out 0.32s;
+    cursor: pointer;
+}
+
 .theme-button-disabled {
     background-color: var(--theme-color-divided);
     color: var(--theme-color-secondary-text);
     border-radius: 4px;
     border-style: unset;
+    font-size: 14px;
     padding: 8px 12px;
+    height: 100%;    
 }
 
 .theme-button-primary {
+    height: 100%;    
     background-color: var(--theme-color-primary);
     color: var(--theme-color-secondary-text);
-    border:1px solid var(--theme-color-secondary-text);
     border-radius: 4px;
     border-style: unset;
-    padding: 8px 12px;
+    font-size: 14px;
+    padding: 10px 12px;
 }
 
 .theme-button-primary:hover {
@@ -166,20 +255,32 @@ dt i{
 }
 
 .theme-form-control {
-    width: 100%;
+    width: 100%;    
     padding: 8px;
-    box-shadow: 0 0 10px 2px rgba(0,0,0,.1);
-    border:1px solid var(--theme-color-secondary-text);
-    border-radius: 4px;    
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--theme-color-secondary-text);
+    border-radius: 4px;
 }
 
-textarea:hover, select:hover, input[type="text"]:hover, input[type="password"]:hover, input[type="time"]:hover, input[type="number"]:hover, input[type="email"]:hover {    
+textarea:hover,
+select:hover,
+input[type="text"]:hover,
+input[type="password"]:hover,
+input[type="time"]:hover,
+input[type="number"]:hover,
+input[type="email"]:hover {
     outline: 0 none;
 }
 
-textarea:focus, select:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="time"]:focus, input[type="number"]:focus, input[type="email"]:focus { 
+textarea:focus,
+select:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="time"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus {
     transition: 0.32s linear;
-    border:1px solid var(--theme-color-primary);
+    border: 1px solid var(--theme-color-primary);
     outline: 0 none;
 }
 
@@ -218,8 +319,8 @@ disable-button:hover {
     right: 0;
     bottom: 0;
     background-color: var(--theme-color-primary-light);
-    -webkit-transition: .4s;
-    transition: .4s;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
 }
 
 .slider:before {
@@ -230,19 +331,19 @@ disable-button:hover {
     left: 4px;
     bottom: 4px;
     background-color: var(--theme-color-secondary-text);
-    -webkit-transition: .4s;
-    transition: .4s;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
 }
 
-input:checked+.slider {
+input:checked + .slider {
     background-color: var(--theme-color-primary);
 }
 
-input:focus+.slider {
+input:focus + .slider {
     box-shadow: 0 0 1px var(--theme-color-primary);
 }
 
-input:checked+.slider:before {
+input:checked + .slider:before {
     -webkit-transform: translateX(24px);
     -ms-transform: translateX(24px);
     transform: translateX(24px);
@@ -259,17 +360,15 @@ input:checked+.slider:before {
 /* Input Control Related Styles Ends From Here */
 /* =========================================== */
 
-
-
-
 /* ============================================ */
 /* Bootstrap Styles Overriding Starts From Here */
 /* ============================================ */
-.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
     background-color: var(--theme-color-primary);
 }
 
-.datepicker table tr td.active.active, .datepicker table tr td.active {
+.datepicker table tr td.active.active,
+.datepicker table tr td.active {
     background-color: var(--theme-color-primary) !important;
     background-image: unset;
     box-shadow: var(--theme-color-divided) 0px 2px 8px 0px;
@@ -299,16 +398,13 @@ input:checked+.slider:before {
     border-radius: 4px;
 }
 
-.disabled-date{
+.disabled-date {
     background-color: var(--theme-color-primary-text);
     color: var(--theme-color-secondary-text);
 }
 /* ========================================== */
 /* Bootstrap Styles Overriding Ends From Here */
 /* ========================================== */
-
-
-
 
 /* ====================================== */
 /* Header Related Styles Starts From Here */
@@ -324,8 +420,8 @@ header .nav-logo {
 }
 
 header .nav-logo-text {
+    font-size: 12px;
     color: var(--theme-color-primary-light);
-    font-family: 'Lobster Two', cursive;
 }
 
 header nav ul .active a {
@@ -339,7 +435,7 @@ header nav ul li a {
     display: block;
     color: var(--theme-color-primary-light);
     font-weight: bolder;
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
     text-decoration: none;
 }
@@ -356,9 +452,6 @@ header nav ul li a:hover {
 /* Header Related Styles Ends From Here */
 /* ==================================== */
 
-
-
-
 /* ========================================= */
 /* Home Page Related Styles Starts From Here */
 /* ========================================= */
@@ -372,7 +465,7 @@ header nav ul li a:hover {
     background-repeat: no-repeat;
 }
 
-#home-container>div {
+#home-container > div {
     width: 332px;
     position: absolute;
     right: 0px;
@@ -381,9 +474,6 @@ header nav ul li a:hover {
 /* ======================================== */
 /* Home Page Related Styles Ends From Here */
 /* ======================================= */
-
-
-
 
 /* ====================================== */
 /* Footer Related Styles Starts From Here */
