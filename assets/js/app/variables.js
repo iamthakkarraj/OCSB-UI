@@ -19,18 +19,17 @@ export var Bounds = [
     [NorthBound, EastBound]
 ];
 
-export var PickUpDrop = false;
+export var PickUp = false;
+export var Drop = false;
 
-export var PickUpAddressConfirmed = false;
-
-export var Map =
-    new mapboxgl.Map({
-        container: 'Map',
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [72.4396547, 23.0204978],
-        zoom: 9,
-        maxBounds: Bounds
-    });
+// export var Map =
+//     new mapboxgl.Map({
+//         container: 'Map',
+//         style: 'mapbox://styles/mapbox/streets-v11',
+//         center: [72.4396547, 23.0204978],
+//         zoom: 9,
+//         maxBounds: Bounds
+//     });
 
 export var DealerListMap =
     new mapboxgl.Map({

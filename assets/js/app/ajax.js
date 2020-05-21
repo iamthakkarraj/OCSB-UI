@@ -45,9 +45,8 @@ export function verifyOtp() {
         success: function (response) {
             if (response != null) {
                 if (response == "s_1112") {
-                    showToast("Attention", "Your otp is Valid, select your vehicle!");
-                    enableCollapseButton("#collapseButton2");
-                    getCustomer();                    
+                    showToast("Attention", "Your otp is Valid");
+                    getCustomer();
                 }
                 else if (response == "e_1112") {
                     showToast("Error", "Your otp has been expired!");
@@ -76,7 +75,7 @@ export function verifyOtp() {
 
 export function getCustomer() {
     $.ajax({
-        url: API_URL + 'Customer/?email=' + $('#Email').val(),        
+        url: API_URL + 'Customer/?email=' + $('#Email').val(),
         type: 'GET',
         contentType: "application/json;charset=utf-8",
         beforeSend: function (xhr) {
@@ -84,8 +83,8 @@ export function getCustomer() {
         },
         success: function (response) {
             if (response != null) {
-                Customer = response;      
-                getVehicleList();                        
+                Customer = response;
+                getVehicleList();
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -97,19 +96,20 @@ export function getCustomer() {
 }
 
 export function getVehicleList() {
-    
     $.ajax({
         url: API_URL + 'Vehicle/' + Customer.CustomerId,
         type: "GET",
         contentType: "application/json;charset=utf-8",
-        beforeSend: function (xhr) {            
+        beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
         },
-        success: function (response) {            
-            if (response != null) {                   
+        success: function (response) {
+            if (response != null) {
                 if (response.length > 0 && response.length != 0) {
                     VehicleList = response;
-                    $("#collapseButton2").click();  
+                    disableFrame1();
+                    enableCollapseButton("#collapseButton2");
+                    $("#collapseButton2").click();
                     for (let i = 0; i < response.length; i++) {
                         addVehicleCard(response[i].VehicleId,
                             response[i].LicensePlateNumber,
@@ -134,9 +134,7 @@ export function getVehicleList() {
 
 export function getServiceList() {
     $.ajax({
-        //Use This Commented Line While testing with database
-        //url: API_URL + '/api/Appointment/GetServiceList/?LicensePlateNumber='+$('#LicensePlateNumber').val(),        
-        url: API_URL + 'Service/1',
+        url: API_URL + 'Service/' + VehicleList.filter(item => item.VehicleId == $('#VehicleId').val())[0].FuelTypeId,
         type: 'GET',
         contentType: 'application/json',
         beforeSend: function (xhr) {
@@ -152,10 +150,9 @@ export function getServiceList() {
                         response[i].Cost,
                         'Lorem Ipsum'); //TODO Here add service Description
                 }
-
                 enableCollapseButton("#collapseButton3");
-                $("#collapseButton3").click();                
-
+                $("#collapseButton3").click();
+                enableThemeButton("#submitButtonForm3");
             } else {
                 showToast("Error", "It seems like our server is offline please try again later");
                 enableThemeButton("#submitButtonForm3");
@@ -205,11 +202,16 @@ export function getDealerList() {
         },
         success: function (response) {
             if (response != null) {
-
                 DealerList = response;
 
+                var PreferredDealer = response.filter(x => x.DealerId == Customer.PreferredDealerId);
+                if (PreferredDealer.length != 0) {
+                    addPreferredDealer(PreferredDealer[0].DealerId,
+                        PreferredDealer[0].Name,
+                        PreferredDealer[0].ContactNo);
+                }
+
                 for (let i = 0; i < response.length; i++) {
-                    
                     new mapboxgl.Marker({
                         draggable: false,
                         color: 'orange'
@@ -222,10 +224,21 @@ export function getDealerList() {
                             + '<span> <i class="fa fa-location-arrow mx-2" aria-hidden="true"></i>'
                             + response[i].Address + '<span>')).addTo(DealerListMap);
 
-                    addDealer(response[i].DealerId,
-                        response[i].Name,
-                        response[i].ContactNo);
+                    if (PreferredDealer.length != 0) {
+                        if (response[i].DealerId == Customer.PreferredDealerId) {
+                            //do nothing
+                        } else {
+                            addDealer(response[i].DealerId,
+                                response[i].Name,
+                                response[i].ContactNo);
+                        }
+                    }else{
+                        addDealer(response[i].DealerId,
+                            response[i].Name,
+                            response[i].ContactNo);
+                    }
                 }
+                $('#dealer'+Customer.PreferredDealerId).click();
                 enableCollapseButton("#collapseButton4");
                 $("#collapseButton4").click();
             } else {
@@ -241,7 +254,7 @@ export function getDealerList() {
 
 export function getHolidayList() {
     $.ajax({
-        url: API_URL + 'Appointment/GetHolidaysByDealerId/?DealerId=' + $('#DealerId').val(),
+        url: API_URL + 'Dealer/Holiday/' + $('#DealerId').val(),
         type: 'GET',
         contentType: 'application/json',
         beforeSend: function (xhr) {
@@ -255,10 +268,10 @@ export function getHolidayList() {
                 }
                 console.log(dateList);
                 $('#date-picker').datepicker({
+                    daysOfWeekDisabled: [0, 6],
                     format: "mm/dd/yyyy",
                     startDate: "+2d",
                     endDate: "+14d",
-                    daysOfWeekDisabled: [0,6],
                     datesDisabled: dateList,
                     todayBtn: "linked",
                     clearBtn: true,

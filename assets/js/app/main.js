@@ -6,45 +6,33 @@ Object.entries(variables).forEach(([name, exported]) => window[name] = exported)
 Object.entries(functions).forEach(([name, exported]) => window[name] = exported);
 Object.entries(ajax).forEach(([name, exported]) => window[name] = exported);
 
-
 $(function () {
-
-
-
 
     //=============================================
     //Intialization Functions For Form Flow Control
     //=============================================
     init();
 
+    $(document).on('click', '.collapse-button-enabled', function () {
 
+        let elementId = '#' + this.id;
+        let dataTartgetId = $(elementId).attr('data-target');
+        let visiableFrames = $('.form-frame');
 
-    
-    $(document).on('click', '.collapse-button-enabled', function(){
-
-        let elementId = '#'+this.id;
-        let dataTartgetId = $(elementId).attr('data-target');        
-        let visiableFrames = $('.form-frame');        
-        
-        if($(dataTartgetId).hasClass('fade')){            
+        if ($(dataTartgetId).hasClass('fade')) {
             $(dataTartgetId).removeClass('fade');
             $(dataTartgetId).addClass('show');
-            //$(dataTartgetId).switchClass( 'fade', 'show', 320 ,'easeInOutQuad');
-            //disableCollapseButton(elementId);            
         }
 
-        for(let i=0; i<visiableFrames.length; i++){            
-            if($('#'+visiableFrames[i].id).hasClass('show') && '#'+visiableFrames[i].id != dataTartgetId){                                
-                $('#'+visiableFrames[i].id).removeClass('show')
-                $('#'+visiableFrames[i].id).addClass('fade');                
-                enableCollapseButton($('#'+visiableFrames[i].id).attr('data-control'));
+        for (let i = 0; i < visiableFrames.length; i++) {
+            if ($('#' + visiableFrames[i].id).hasClass('show') && '#' + visiableFrames[i].id != dataTartgetId) {
+                $('#' + visiableFrames[i].id).removeClass('show')
+                $('#' + visiableFrames[i].id).addClass('fade');
+                enableCollapseButton($('#' + visiableFrames[i].id).attr('data-control'));
             }
         }
-                
+
     });
-    
-
-
 
     //===================================================
     //Form 1 Validation and Flow Control Starts From Here
@@ -65,7 +53,7 @@ $(function () {
         }
     });
 
-    $(document).on('keyup keypress blur change', '#serviceBookingForm1 input', function () {
+    $(document).on('keyup keypress change', '#serviceBookingForm1 input', function () {
         if ($("#serviceBookingForm1").valid()) {
             enableThemeButton("#submitButtonForm1");
         } else {
@@ -97,8 +85,8 @@ $(function () {
         messages: {
             Otp: {
                 required: "Please enter the OTP.",
-                minlength: "OTP must be of 5 digits.",
-                maxlength: "OTP must be of 5 digits."
+                minlength: "OTP must be of 4 digits.",
+                maxlength: "OTP must be of 4 digits."
             }
         },
         success: function () {
@@ -106,7 +94,7 @@ $(function () {
         },
     });
 
-    $(document).on('keyup keypress blur change', '#serviceBookingForm2 input', function () {
+    $(document).on('keyup keypress change', '#serviceBookingForm2 input', function () {
         if ($("#serviceBookingForm2").valid()) {
             enableThemeButton("#submitButtonForm2");
         } else {
@@ -122,37 +110,32 @@ $(function () {
     //=================================================
 
 
-    
+
 
 
     //===================================================
     //Form 3 Validation and Flow Control Starts From Here
     //===================================================
-    $(document).on('click', '.vehicle-card', function(){
-                
+    $(document).on('click', '.vehicle-card', function () {
         let elements = $('.vehicle-card');
-
-        for(let i=0; i<elements.length; i++){            
-            if($(elements[i]).hasClass('selected-vehicle-card')){                
+        for (let i = 0; i < elements.length; i++) {
+            if ($(elements[i]).hasClass('selected-vehicle-card')) {
                 $(elements[i]).removeClass('selected-vehicle-card');
                 $(elements[i]).addClass('not-selected-vehicle-card');
             }
         }
-
-        if($(this).hasClass('not-selected-vehicle-card')){
+        if ($(this).hasClass('not-selected-vehicle-card')) {
             $(this).removeClass('not-selected-vehicle-card');
-            $(this).addClass('selected-vehicle-card');       
-            
+            $(this).addClass('selected-vehicle-card');
+
         }
-                
         $("#VehicleId").val($(this).attr('data-provide'));
         enableThemeButton('#submitButtonForm3');
-                        
     });
 
-    
+
     $(document).on('change', '#serviceBookingForm3 select', function () {
-        if ($("#serviceBookingForm3").valid()) {            
+        if ($("#serviceBookingForm3").valid()) {
             enableThemeButton("#submitButtonForm3");
         } else {
             disableThemeButton("#submitButtonForm3");
@@ -161,7 +144,12 @@ $(function () {
 
     $(document).on('click', '#submitButtonForm3', function () {
         disableThemeButton("#submitButtonForm3");
-        getServiceGroupList();
+        if (ServiceList == null) {
+            getServiceGroupList();
+        } else {
+            enableThemeButton("#submitButtonForm3");
+            $('#collapseButton3').click();
+        }
     });
     //=================================================
     //Form 3 Validation and Flow Control Ends From Here
@@ -218,7 +206,9 @@ $(function () {
     });
 
     $(document).on('click', '#submitButtonForm4', function () {
-        getDealerList();
+        if (DealerList == null) {
+            getDealerList();
+        }
         $('.mapboxgl-canvas').css('width', '100%');
         $('.mapboxgl-canvas').css('height', '100%');
     });
@@ -233,7 +223,7 @@ $(function () {
     //===================================================
     $(document).on('mouseover', '.dealer-item', function () {
         var dealerId = $(this).children(':first').children(':first').attr('dealer-id')
-        let response = DealerList.filter(item => item.DealerId == dealerId)    
+        let response = DealerList.filter(item => item.DealerId == dealerId)
         DealerPopUp
             .setLngLat([response[0].Long, response[0].Lat])
             .setHTML(
@@ -272,12 +262,13 @@ $(function () {
     });
 
     $(document).on('click', '#submitButtonForm5', function () {
-        if ($('#PlanDateTime').val() != null) {
-            disableThemeButton("#submitButtonForm5");
+        disableThemeButton("#submitButtonForm5");
+        if ($('#PlanDateTime').val().length == 0) {
+            enableThemeButton("#submitButtonForm5");            
+            showToast('Error','Select a valid date for your appointment');
+        } else {
             enableCollapseButton("#collapseButton5");
             $("#collapseButton5").click();
-            getLocation();
-        } else {
             disableThemeButton("#submitButtonForm5");
         }
     });
@@ -313,7 +304,7 @@ $(function () {
         },
     });
 
-    $(document).on('input', '#serviceBookingForm6', function () {
+    $(document).on('keypress keyup input', '#serviceBookingForm6 input', function () {
         if ($("#serviceBookingForm6").valid()) {
             enableThemeButton("#submitButtonForm6");
         } else {
@@ -321,41 +312,19 @@ $(function () {
         }
     });
 
-    $(document).on('change', '#PickUpDropToggle', function () {
-        if (PickUpDrop) {
-            PickUpDrop = false;
+    $(document).on('change', '#PickUpToggle', function () {
+        if (PickUp) {
+            PickUp = false;
         } else {
-            ajax.getLocation();
-            PickUpDrop = true;
+            PickUp = true;
         }
     });
 
-    $(document).on('change', '#AddressToggle', function () {
-        if ($('#DropAddress').attr('disabled') == "disabled") {
-            $('#DropAddress').attr('disabled', false);
+    $(document).on('change', '#DropToggle', function () {
+        if (Drop) {
+            Drop = false;
         } else {
-            $('#DropAddress').val($('#PickUpAddress').val());
-            $('#DropAddress').attr('disabled', true);
-        }
-    });
-
-    $(document).on('click', '#PickUpAddressConfirm', function () {
-        if ($('#PickUpAddress').attr('disabled') == 'disabled') {
-            PickUpAddressConfirmed = false;
-            $('#PickUpAddress').attr('disabled', false)            
-            PickUpMarker.setDraggable(true);
-            $('#PickUpAddressConfirm').html('Confirm');
-        } else {
-            PickUpAddressConfirmed = true;
-            PickUpMarker.setDraggable(false);            
-            $('#PickUpAddressConfirm').html('Change');
-            $('#PickUpAddress').attr('disabled', true)
-        }
-    });
-
-    $(document).on('input', '#PickUpAddress', function () {
-        if ($('#DropAddress').attr('disabled') == 'disabled') {
-            $('#DropAddress').val($('#PickUpAddress').val());
+            Drop = true;
         }
     });
 
@@ -367,24 +336,29 @@ $(function () {
         }
     });
 
-    $(document).on('click', '#SubmitButtonForm6', function () {
-        $('#DisplaySummaryButton').click(); 
+    $(document).on('click', '#submitButtonForm6', function () {
         if ($('#serviceBookingForm6').valid()) {
-            if (PickUpDrop) {
-                if ($('#PickUpAddress').val() != '' && $('#DropAddress').val() != '') {
-                    showSummary();                    
-                } else {
-                    showToast('Error', 'Please provide pick up and drop locations');
-                }
+            console.log('Form is valid');
+            if (PickUp && $('#PickUpAddress').length > 5) {
+                console.log('Pickup Added'+$('#PickUpAddress').length);
+                showToast('Error', 'Please enter a valid pick up address');
             } else {
-                alert('Submit');
+                console.log('Pickup Added'+$('#PickUpAddress').length);
+                if (Drop && $('#DropAddress').length > 5) {
+                    console.log('Drop Added'+$('#DropAddress').length);
+                    showToast('Error', 'Please enter a valid drop address');
+                } else {
+                    console.log('Drop Added'+$('#DropAddress').length);
+                    showSummary();
+                    $('#DisplaySummaryButton').click();
+                }                
             }
         } else {
             showToast('Error', 'Please fill in all details.');
-        }
+        }        
     });
 
-    
+
     //TODO
     // Add function to get user locations validate the     
     //data and add ajax call to post the appointment    

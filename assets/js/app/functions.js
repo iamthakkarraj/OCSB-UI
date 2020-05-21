@@ -14,15 +14,10 @@ export function toggleThemeButton(id) {
 }
 
 export function showToast(title, text) {
-    if ($('#notification-card').hasClass("fade")) {
-        $('#notification-card').removeClass("fade");
-        $('#notification-card').addClass("show");
-        $('#notification-title').html(title);
-        $('#notification-text').html(text);
-        setTimeout(() => {
-            $('#notification-card').removeClass("show");
-            $('#notification-card').addClass("fade");
-        }, 3000);
+    if (title == "Error") {
+        toastr.error(text);
+    } else {
+        toastr.success(text)
     }
 }
 
@@ -79,71 +74,54 @@ export function disableAllButtons() {
     disableCollapseButton("#collapseButton5");
 }
 
+export function disableFrame1() {
+    $("#Email").attr("disabled", true);
+    $("#Otp").attr("disabled", true);
+    disableThemeButton("#submitButtonForm1");
+    disableThemeButton("#submitButtonForm2");
+}
+
 export function init() {
     disableAllButtons();
     $('#date-picker').datepicker({
+        daysOfWeekDisabled: [0, 6],
         format: "mm/dd/yyyy",
-        startDate: "d",
+        startDate: "+2d",
         endDate: "+14d",
-        //datesDisabled: dateList,
+        daysOfWeekDisabled: [0, 6],
         todayBtn: "linked",
         clearBtn: true,
-    });    
+    });
+
+    $([document.documentElement, document.body]).animate({
+        scrollTop: $(".page-heading").offset().top - 20
+    }, 600);
+
     $('.mapboxgl-canvas').css('width', '100%');
     $('.mapboxgl-canvas').css('height', '100%');
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
-    Map.addControl(NavigationControl, 'bottom-right');
-    GeoCoder.addTo('#GeoCoder');
+    //Map.addControl(NavigationControl, 'bottom-right');
+    //GeoCoder.addTo('#GeoCoder');
     $.validator.addMethod("valueNotEquals", function (value, element, arg) {
         return arg !== value;
     }, "Value must not equal arg.");
 }
 
-export function addVehicleCard(vehicleId,licensePlateNumber,brandName,brandImage,modelName,modelImage) {
+export function addVehicleCard(vehicleId, licensePlateNumber, brandName, brandImage, modelName, modelImage) {
     $('#VehicleListContainer')
-        .append('<div data-provide="'+vehicleId+'" class="vehicle-card not-selected-vehicle-card card shadow-md mb-3 border-0 pb-2 px-3 pt-4">'
-            + '<div class="form-group d-flex">'
-            + '<lable class="col-6 d-flex flex-column justify-content-center">License Plate</lable>'
-            + '<input id = "LicensePlateNumber" name = "LicensePlateNumber" type = "text"'
-            + 'disabled value = "'+licensePlateNumber+'"class= "form-control col-6" />'
-            + '</div>'
-            + '<div class="d-flex mb-3">'
-            + '<div class="col-6">'
-            + '<dl>'
+        .append('<div data-provide="' + vehicleId + '" class="vehicle-card not-selected-vehicle-card card shadow-md mb-3 border-0 p-3">'
+            + '<div class="d-flex justify-content-between">'
+            + '<dl class="m-0">'
             + '<dt>Brand Name</dt>'
-            + '<dd>'+brandName+'</dd>'
-            + '</dl>'
-            + '<div class="d-flex justify-content-center bg-white border rounded">'
-            + '<img id="BrandImage"'
-            + 'src="'+brandImage+'" />'
-            + '</div>'
-            + '</div>'
-            + '<div class="col-6">'
-            + '<dl>'
+            + '<dd class="m-0">' + brandName + '</dd>'
             + '<dt>Model Name</dt>'
-            + '<dd>'+modelName+'</dd>'
+            + '<dd class="m-0">' + modelName + '</dd>'
+            + '<dt>LicensePlateNumber</dt>'
+            + '<dd class="m-0">' + licensePlateNumber + '</dd>'
             + '</dl>'
-            + '<div class="d-flex justify-content-center bg-white border rounded">'
-            + '<img id="ModelImage"'
-            + 'src="'+modelImage+'" />'
-            + '</div>'
-            + '</div>'
-            + '</div>'
-            + '</div >')
-}
-
-export function updateVehicleDetails(licensePlateNumber) {
-    for (var i = 0; i < VehicleList.length; i++) {
-        if (VehicleList[i].LicenseNumber == licensePlateNumber) {
-            $('#BrandName').val(VehicleList[i].BrandName);
-            $('#ModelName').val(VehicleList[i].ModelName);
-            $('#BrandImage').attr('src', VehicleList[i].BrandImagePath);
-            break;
-        }
-        else {
-            continue;
-        }
-    }
+            + '<img id="BrandImage"'
+            + 'src="' + brandImage + '" />'
+            + '</div>');
 }
 
 export function addserviceCategory(categoryId, name) {
@@ -163,7 +141,7 @@ export function addserviceCategory(categoryId, name) {
             + '<div id="serviceCategoryCollpase' + categoryId + '"'
             + 'class="collapse"'
             + 'aria-labelledby="serviceCategoryHeading' + categoryId + '"'
-            + 'data-parent="#servicesContainer">'            
+            + 'data-parent="#servicesContainer">'
             + '</div>'
             + '</div>');
 }
@@ -217,7 +195,7 @@ export function selectService(serviceId, categoryId, name, price) {
     //Updating Selected Services Hidden Field
     $('#SelectedServices')
         .val($('#SelectedServices')
-            .val() + '-' + serviceId + '-');
+            .val() + '-' + serviceId);
 }
 
 export function diselectService(serviceId, categoryId, price) {
@@ -243,11 +221,10 @@ export function diselectService(serviceId, categoryId, price) {
     $('#SelectedServices')
         .val($('#SelectedServices')
             .val() + ''
-                .replace('-' + serviceId + '-', ''));
+                .replace('-' + serviceId, ''));
 }
 
 export function addDealer(dealerId, name, phoneNo) {
-
     $('#dealerListContainer').append(
         '<div class="p-2 dealer-item">'
         + '<div class="custom-control custom-checkbox" data-placement="left">'
@@ -258,19 +235,26 @@ export function addDealer(dealerId, name, phoneNo) {
         + '</div>'
         + '</div>'
     )
-
 }
 
-export function displayDealerDetails() {
-    //TODO Implement this fucntion
-}
-
-export function highlighPreferredDealer(id) {
-    //TODO Implement this fucntion
+export function addPreferredDealer(dealerId, name, phoneNo) {
+    $('#dealerListContainer').append(
+        '<div class="p-2 dealer-item">'
+        + '<div class="custom-control custom-checkbox" data-placement="left">'
+        + '<input type="checkbox"'
+        + 'class="custom-control-input dealer-checkbox"'
+        + 'aria-describedby="PreferredLabel"'
+        + 'id="dealer' + dealerId + '" dealer-id="' + dealerId + '" />'
+        + '<label class="custom-control-label" for="dealer' + dealerId + '">' + name + '</label> <br>'
+        + '<small id="PreferredLabel" class="theme-bg-primary text-light px-2 rounded">Your Preferred</small>'
+        + '</div>'
+        + '</div>'
+    )
 }
 
 export function parseServices() {
     var selectedServices = $('#SelectedServices').val();
+    selectedServices = selectedServices.substring(1, selectedServices.length);
     var start = 0;
     for (let i = 0; i <= selectedServices.length; i++) {
         if (selectedServices.charAt(i) == '-' || i == selectedServices.length) {
@@ -283,12 +267,31 @@ export function parseServices() {
 export function showSummary() {
     parseServices();
     $('#S_Email').html($('#Email').val());
-    $('#S_LicensePlateNumber').html($('#LicensePlateNumber').val());
+    $('#S_LicensePlateNumber').html(VehicleList.filter(item => item.vehicleId == $('#vehicleId').val())[0].LicensePlateNumber);
     $('#S_ContactNo').html($('#ContactNo').val());
     $('#S_ContactPerson').html($('#ContactPerson').val());
-    $('#S_PickUpAddress').html($('#PickUpAddress').val());
-    $('#S_DropAddress').html($('#DropAddress').val());
     $('#S_CustomerNote').html($('#CustomerNote').val());
     $('#S_PlanDateTime').html($('#PlanDateTime').val());
-    $('#S_TotalCost').html($('#TotalCost').val());
+    $('#S_TotalCost').html('<i class="fa fa-inr" aria-hidden="true"></i> &nbsp;' + $('#TotalCost').val());
+    $('#S_DealerName').html(DealerList.filter(item => item.DealerId == $('#DealerId').val())[0].Name)
+    $('#servicesContainerSummary').html('<dl><dt><i class="fa fa-cogs" aria-hidden="true"></i> Selected Services </dt> <hr>');
+    for (let i = 0; i < SelectedServicesList.length; i++) {
+        $('#servicesContainerSummary').append(
+            '<dt>' + ServiceList.filter(item => item.ServiceId == SelectedServicesList[i])[0].Name + '</dt>'
+            + '<dd>' + ServiceList.filter(item => item.ServiceId == SelectedServicesList[i])[0].Cost + ' <i class="fa fa-inr" aria-hidden="true"></i> </dd>'
+        );
+    }
+    if (PickUp) {
+        $('#AddressSummary').append(
+            '<dt> <i class="fa fa-location-arrow" aria-hidden="true"></i> Pick Up Address </dt>'
+            + '<dd>' + $('#PickUpAddress').val() + '</dd>'
+        )
+    }
+    if (Drop) {
+        $('#AddressSummary').append(
+            '<dt> <i class="fa fa-location-arrow" aria-hidden="true"></i> Drop Address </dt>'
+            + '<dd>' + $('#DropAddress').val() + '</dd>'
+        )
+    }
+    $('#servicesContainerSummary').append('</dl>');
 }

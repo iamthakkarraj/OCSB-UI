@@ -39,6 +39,11 @@ body {
     background-color: var(--theme-color-primary);
 }
 
+.preferred-dealer{
+    background-color: var(--theme-color-primary);
+    border-radius: 4px;    
+}
+
 .theme-bg-primary-light {
     background-color: var(--theme-color-primary-light);
 }
@@ -59,12 +64,12 @@ body {
     color: var(--theme-color-secondary-text);
 }
 
-.page-heading h4 {
+.page-heading h5 {
     color: var(--theme-color-primary-text);
     border-bottom: 4px solid var(--theme-color-accent);
 }
 
-.page-heading h4 span {
+.page-heading h5 span {
     opacity: 0.3;
 }
 
@@ -135,17 +140,13 @@ dt i {
     margin-bottom: 16px;
 }
 
-.form-frame {
-    height: 500px;
-    max-height: 500px;
-}
-
 #BrandImage,
 #ModelImage {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-    zoom: 2;
+    width: 50%;
+    height: 50%;
+    max-width: 230px;
+    max-height: 126px;
+    object-fit: contain;    
 }
 
 .vehicle-card {
@@ -163,10 +164,7 @@ dt i {
     color: #212529;
 }
 
-#selectedServiceContainer,
-#selectedServiceSummary,
-#date-picker,
-#dealerListContainer {
+.form-frame {
     font-size: 14px;
 }
 
@@ -203,10 +201,10 @@ dt i {
     color: var(--theme-color-secondary-text);
     border-style: unset;
     text-align: center;
-    width: 300px;
+    width: 200px;    
     font-size: 14px;
     vertical-align: middle;
-    padding: 10px 50px !important;
+    padding: 4px 0px;
 }
 
 .collapse-button-disabled {
@@ -215,10 +213,10 @@ dt i {
     color: var(--theme-color-secondary-text);
     border-style: unset;
     text-align: center;
-    width: 300px;
+    width: 200px;    
     font-size: 14px;
     vertical-align: middle;
-    padding: 10px 50px !important;
+    padding: 4px 0px;
 }
 
 .collapse-button-enabled:hover {
@@ -232,18 +230,19 @@ dt i {
     color: var(--theme-color-secondary-text);
     border-radius: 4px;
     border-style: unset;
-    font-size: 14px;
+    font-size: 12px;
     padding: 8px 12px;
     height: 100%;    
 }
 
 .theme-button-primary {
     height: 100%;    
+    font-size: 12px;
     background-color: var(--theme-color-primary);
     color: var(--theme-color-secondary-text);
     border-radius: 4px;
     border-style: unset;
-    font-size: 14px;
+    font-size: 12px;
     padding: 10px 12px;
 }
 
@@ -370,14 +369,12 @@ input:checked + .slider:before {
 .datepicker table tr td.active.active,
 .datepicker table tr td.active {
     background-color: var(--theme-color-primary) !important;
-    background-image: unset;
+    background-image: unset;    
     box-shadow: var(--theme-color-divided) 0px 2px 8px 0px;
 }
 
 .datepicker-inline {
-    padding: 16px;
-    box-shadow: var(--theme-color-divided) 0px 2px 8px 0px;
-    border-radius: 4px;
+    padding: 16px;    
 }
 
 .prev {
