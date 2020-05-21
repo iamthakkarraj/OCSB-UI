@@ -148,7 +148,7 @@ export function getServiceList() {
                         response[i].ServiceId,
                         response[i].Name,
                         response[i].Cost,
-                        'Lorem Ipsum'); //TODO Here add service Description
+                        response[i].ServiceDetailModels[0].Description);
                 }
                 enableCollapseButton("#collapseButton3");
                 $("#collapseButton3").click();

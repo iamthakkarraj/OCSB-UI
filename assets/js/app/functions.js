@@ -165,10 +165,15 @@ export function addService(categoryId, serviceId, name, price, description) {
 }
 
 export function selectService(serviceId, categoryId, name, price) {
-
+    let vat = parseInt(ServiceList[serviceId].ServiceDetailModels[0].VAT) + parseInt(ServiceList[serviceId].ServiceDetailModels[1].VAT);
     $('#selectedServiceContainer')
         .append('<tr class="rounded" id="selectedService' + serviceId + categoryId + '">'
-            + '<td id="selectedServiceName' + serviceId + categoryId + '">' + name + '</td>'
+            + '<td id="selectedServiceName' + serviceId + categoryId + '">' 
+            + name + '<br> <small>' 
+            + '<em> VAT : </em> '+ vat + '<i class="fa fa-inr" aria-hidden="true"></i>'
+            + '<em> Duration : <em>' + ServiceList[0].Duration + 'hrs.'
+            +'</small>'
+            + '</td>'
             + '<td id="selectedServicePrice' + serviceId + categoryId + '">' + price + '</td>'
             + '<td>'
             + '<button id="selectedService' + serviceId + categoryId + '"'
