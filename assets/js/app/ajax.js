@@ -252,9 +252,9 @@ export function getDealerList() {
     });
 }
 
-export function getHolidayList() {
+export function getDisabledDates() {
     $.ajax({
-        url: API_URL + 'Dealer/Holiday/' + $('#DealerId').val(),
+        url: API_URL + 'Dealer/GetAvalibility?dealerId='+$('#DealerId').val()+'&serviceDuration='+calculateDuration(),
         type: 'GET',
         contentType: 'application/json',
         beforeSend: function (xhr) {
@@ -276,7 +276,7 @@ export function getHolidayList() {
                     todayBtn: "linked",
                     clearBtn: true,
                 });
-                $('.disabled-date').attr('title', ' <i class="fa fa-calendar-times-o" aria-hidden="true"></i> PublicHoliday');
+                $('.disabled-date').attr('title', ' <i class="fa fa-calendar-times-o" aria-hidden="true"></i> Dealer not available');
                 $('.disabled-date').attr('data-toggle', 'tooltip');
                 $('.disabled-date').attr('data-placement', 'left');
                 $('.disabled-date').attr('data-html', 'true');

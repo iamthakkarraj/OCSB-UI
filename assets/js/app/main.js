@@ -239,10 +239,11 @@ $(function () {
     $(document).on('click', '.dealer-checkbox', function () {
         //get all data
         var elementId = this.id;
+        parseServices();        
         var dealerId = $('#' + elementId).attr('dealer-id');
         //set hidden fields
         $("#DealerId").val(dealerId);
-        getHolidayList();
+        getDisabledDates();
         enableThemeButton("#submitButtonForm5")
         $('.dealer-checkbox').each(function () {
             if (this.id == elementId) {
@@ -255,7 +256,7 @@ $(function () {
 
     $(document).on('changeDate', '#date-picker', function () {
         $('#PlanDateTime').val($('#date-picker').datepicker('getFormattedDate'));
-        $('.disabled-date').attr('title', ' <i class="fa fa-calendar-times-o" aria-hidden="true"></i> PublicHoliday');
+        $('.disabled-date').attr('title', ' <i class="fa fa-calendar-times-o" aria-hidden="true"></i> Dealer not available');
         $('.disabled-date').attr('data-toggle', 'tooltip');
         $('.disabled-date').attr('data-placement', 'left');
         $('.disabled-date').attr('data-html', 'true');

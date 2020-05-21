@@ -264,6 +264,15 @@ export function parseServices() {
     }
 }
 
+export function calculateDuration(){    
+    parseServices();
+    let TotalDuration = 0;
+    for(let i=0;i<SelectedServicesList.length;i++){
+        TotalDuration = TotalDuration + ServiceList.filter(item => item.ServiceId == SelectedServicesList[i])[0].Duration;
+    }
+    return TotalDuration;
+}
+
 export function showSummary() {
     parseServices();
     $('#S_Email').html($('#Email').val());
