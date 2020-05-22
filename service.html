@@ -155,18 +155,21 @@
                                         placeholder="Your email" />
                                 </div>
                                 <div class="form-group">
-                                    <button class="theme-button-disabled" type="button" id="submitButtonForm1"> Send
+                                    <button class="theme-button-disabled w-100" type="button" id="submitButtonForm1"> Send
                                         OTP &nbsp; <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
                                     </button>
                                 </div>
                             </form>
-                            <form id="serviceBookingForm2" class="collapse">
-                                <div class="form-group">
-                                    <input name="Otp" class="theme-form-control" placeholder="Enter OTP" title="OTP"
-                                        type="number" pattern="\d*" maxlength="5" minlength="5" id="Otp" required />
+                            <form id="serviceBookingForm2" class="show collapse">
+                                <div class="form-group d-flex justify-content-center">
+                                    <div id="OtpDivOuter">
+                                        <div id="OtpDivInner">
+                                            <input type="text" name="Otp" title="OTP" pattern="\d*" maxlength="4" minlength="4" id="Otp" required />
+                                        </div>
+                                    </div>                                    
                                 </div>
                                 <div class="form-group">
-                                    <button class="theme-button-disabled" type="button" id="submitButtonForm2">Verify
+                                    <button class="theme-button-disabled w-100" type="button" id="submitButtonForm2">Verify
                                         OTP &nbsp; <i class="fa fa-key" aria-hidden="true"></i>
                                     </button>
                                 </div>
@@ -309,7 +312,7 @@
                                                     placeholder="Any special instruction that your want to provide us."></textarea>
                                             </div>
                                             <div class="form-group collapse" id="PickUpDetails">
-                                                <input type="number" class="roudned theme-form-control"
+                                                <input type="text" class="roudned theme-form-control"
                                                     placeholder="Pick Up Address" id="PickUpAddress"
                                                     name="PickUpAddress">
                                             </div>

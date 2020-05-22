@@ -12,6 +12,30 @@ $(function () {
     //Intialization Functions For Form Flow Control
     //=============================================
     init();
+    
+    $(document).on('keydown keyup', '#Otp', function () {
+        if (obj.value.length > 3) {
+            setCaretPosition(obj, 3);
+        }
+    });
+
+    function setCaretPosition(elem, caretPos) {
+        if(elem != null) {
+            if(elem.createTextRange) {
+                var range = elem.createTextRange();
+                range.move('character', caretPos);
+                range.select();
+            }
+            else {
+                if(elem.selectionStart) {
+                    elem.focus();
+                    elem.setSelectionRange(caretPos, caretPos);
+                }
+                else
+                    elem.focus();
+            }
+        }
+    }
 
     $(document).on('click', '.collapse-button-enabled', function () {
 
@@ -239,7 +263,7 @@ $(function () {
     $(document).on('click', '.dealer-checkbox', function () {
         //get all data
         var elementId = this.id;
-        parseServices();        
+        parseServices();
         var dealerId = $('#' + elementId).attr('dealer-id');
         //set hidden fields
         $("#DealerId").val(dealerId);
@@ -265,8 +289,8 @@ $(function () {
     $(document).on('click', '#submitButtonForm5', function () {
         disableThemeButton("#submitButtonForm5");
         if ($('#PlanDateTime').val().length == 0) {
-            enableThemeButton("#submitButtonForm5");            
-            showToast('Error','Select a valid date for your appointment');
+            enableThemeButton("#submitButtonForm5");
+            showToast('Error', 'Select a valid date for your appointment');
         } else {
             enableCollapseButton("#collapseButton5");
             $("#collapseButton5").click();
@@ -341,22 +365,22 @@ $(function () {
         if ($('#serviceBookingForm6').valid()) {
             console.log('Form is valid');
             if (PickUp && $('#PickUpAddress').length > 5) {
-                console.log('Pickup Added'+$('#PickUpAddress').length);
+                console.log('Pickup Added' + $('#PickUpAddress').length);
                 showToast('Error', 'Please enter a valid pick up address');
             } else {
-                console.log('Pickup Added'+$('#PickUpAddress').length);
+                console.log('Pickup Added' + $('#PickUpAddress').length);
                 if (Drop && $('#DropAddress').length > 5) {
-                    console.log('Drop Added'+$('#DropAddress').length);
+                    console.log('Drop Added' + $('#DropAddress').length);
                     showToast('Error', 'Please enter a valid drop address');
                 } else {
-                    console.log('Drop Added'+$('#DropAddress').length);
+                    console.log('Drop Added' + $('#DropAddress').length);
                     showSummary();
                     $('#DisplaySummaryButton').click();
-                }                
+                }
             }
         } else {
             showToast('Error', 'Please fill in all details.');
-        }        
+        }
     });
 
 
