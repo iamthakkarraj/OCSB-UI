@@ -133,7 +133,7 @@ export function getVehicleList() {
 }
 
 export function getServiceList() {
-    $.ajax({        
+    $.ajax({
         url: API_URL + 'Service/' + VehicleList.filter(item => item.VehicleId == $('#VehicleId').val())[0].FuelTypeId,
         type: 'GET',
         contentType: 'application/json',
@@ -290,15 +290,42 @@ export function getDisabledDates() {
     });
 }
 
-export function AddAppointment() {
+export function addAppointment() {
+    var Appointment = {
+        PlanDateTime: $('#PlanDateTime').val(),
+        LicensePlateNumber: VehicleList.filter(item => item.vehicleId == $('#vehicleId').val())[0].LicensePlateNumber,
+        CustomerName: Customer.CustomerName,       
+        ContactPersonName: $('#ContactPerson').val(),
+        ContactNumber: $('#ContactNo').val(),
+        VehicleId: $('#VehicleId').val(),
+        DealerId: $('#DealerId').val(),
+        CustomerEmail: $('#Email').val(),
+        CustomerNote: $('#CustomerNote').val(),
+        PickUpAddress: $('#PickUpAddress').val(),
+        DropAddress: $('#DropAddress').val(),        
+        SelectedServices: SelectedServicesList
+    };
+    
     $.ajax({
         url: API_URL + 'Appointment/Add/',
         type: 'POST',
-        data: 'null', //TODO create appointment Object
+        data: JSON.stringify(Appointment),
         contentType: 'application/json',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
         },
+        dataType: "json",
+        success: function (response) {
+            if (response != null) {
+                showToast("Attention", "Your Appointment is Booked Successfully!An Email is sent with Appointment Details!");
+                displayElement("#successForm");
+            } else {
+                showToast("Error", "Validation failed for Booking Appointment!Check all Booking Details Properly!");
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            showToast("Error", "It seems like our server is offline please try again later");
+        }
     });
 }
 
@@ -324,7 +351,7 @@ export function reverseGeoCode(marker, query, map, dragEnd, addressId, coordId) 
         contentType: "application/json;charset=utf-8",
         success: function (response) {
             $(addressId).val(query);
-            setMarker(marker, response.features[0].center[0], response.features[0].center[1], map , dragEnd ,addressId, coordId);
+            setMarker(marker, response.features[0].center[0], response.features[0].center[1], map, dragEnd, addressId, coordId);
         },
         error: function () {
             showToast('Error', 'Could not recieve your address please type manually');
@@ -349,11 +376,11 @@ export function getLocationForDrop() {
 }
 
 export function currentLocationSuccessForPickUp(position) {
-    setMarker(PickUpMarker, position.coords.longitude, position.coords.latitude,PickUpMap, DragEndForPickUp , "#PickUpAddress", "#PickUpCoord");
+    setMarker(PickUpMarker, position.coords.longitude, position.coords.latitude, PickUpMap, DragEndForPickUp, "#PickUpAddress", "#PickUpCoord");
 }
 
 export function currentLocationSuccessForDrop(position) {
-    setMarker(DropMarker, position.coords.longitude, position.coords.latitude, DropMap, DragEndForDrop ,"#DropAddress", "#DropCoord");
+    setMarker(DropMarker, position.coords.longitude, position.coords.latitude, DropMap, DragEndForDrop, "#DropAddress", "#DropCoord");
 }
 
 export function currentLocationError() {
@@ -361,14 +388,14 @@ export function currentLocationError() {
 }
 
 export var DragEndForPickUp = function onDragEndForPickUp() {
-    forwardGeoCode(PickUpMarker.getLngLat().lng, PickUpMarker.getLngLat().lat, "#PickUpAddress", "#PickUpCoord");    
+    forwardGeoCode(PickUpMarker.getLngLat().lng, PickUpMarker.getLngLat().lat, "#PickUpAddress", "#PickUpCoord");
 }
 
 export var DragEndForDrop = function onDragEndForDrop() {
     forwardGeoCode(DropMarker.getLngLat().lng, DropMarker.getLngLat().lat, "#DropAddress", "#DropCoord");
 }
 
-export function setMarker(marker, long, lat, map, dragEnd , addressId, coordId) {
+export function setMarker(marker, long, lat, map, dragEnd, addressId, coordId) {
     marker.setLngLat([long, lat]).addTo(map);
     marker.on('dragend', dragEnd);
     $(coordId).val(long + '-' + lat);

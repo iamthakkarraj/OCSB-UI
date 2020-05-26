@@ -412,4 +412,14 @@ $(function () {
     //Form 6 Validation and Flow Control Starts From Here
     //===================================================
 
+    //===================================================
+    //Form 7 Validation and Flow Control Starts From Here
+    //===================================================
+    $(document).on('click', '#submitButtonForm7', function () {
+        addAppointment();
+    });
+    //===================================================
+    //Form 7 Validation and Flow Control Ends From Here
+    //===================================================
+
 });
