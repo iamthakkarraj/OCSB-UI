@@ -12,30 +12,14 @@ $(function () {
     //Intialization Functions For Form Flow Control
     //=============================================
     init();
-    
-    $(document).on('keydown keyup', '#Otp', function () {
-        if (obj.value.length > 3) {
-            setCaretPosition(obj, 3);
+
+    $("form").keypress(function (e) {
+        //Enter key
+        if (e.which == 13) {
+            return false;
         }
     });
 
-    function setCaretPosition(elem, caretPos) {
-        if(elem != null) {
-            if(elem.createTextRange) {
-                var range = elem.createTextRange();
-                range.move('character', caretPos);
-                range.select();
-            }
-            else {
-                if(elem.selectionStart) {
-                    elem.focus();
-                    elem.setSelectionRange(caretPos, caretPos);
-                }
-                else
-                    elem.focus();
-            }
-        }
-    }
 
     $(document).on('click', '.collapse-button-enabled', function () {
 
@@ -86,14 +70,12 @@ $(function () {
     });
 
     $(document).on('click', '#submitButtonForm1', function () {
+        disableThemeButton("#submitButtonForm1");
         sendOtp();
     });
     //=================================================
     //Form 1 Validation and Flow Control Ends From Here
     //=================================================
-
-
-
 
     //===================================================
     //Form 2 Validation and Flow Control Starts From Here
@@ -118,6 +100,30 @@ $(function () {
         },
     });
 
+    $(document).on('keydown keyup', '#Otp', function () {
+        if (obj.value.length > 3) {
+            setCaretPosition(obj, 3);
+        }
+    });
+
+    function setCaretPosition(elem, caretPos) {
+        if (elem != null) {
+            if (elem.createTextRange) {
+                var range = elem.createTextRange();
+                range.move('character', caretPos);
+                range.select();
+            }
+            else {
+                if (elem.selectionStart) {
+                    elem.focus();
+                    elem.setSelectionRange(caretPos, caretPos);
+                }
+                else
+                    elem.focus();
+            }
+        }
+    }
+
     $(document).on('keyup keypress change', '#serviceBookingForm2 input', function () {
         if ($("#serviceBookingForm2").valid()) {
             enableThemeButton("#submitButtonForm2");
@@ -127,15 +133,12 @@ $(function () {
     });
 
     $(document).on('click', '#submitButtonForm2', function () {
+        disableThemeButton("#submitButtonForm2");
         verifyOtp();
     });
     //=================================================
     //Form 2 Validation and Flow Control Ends From Here
     //=================================================
-
-
-
-
 
     //===================================================
     //Form 3 Validation and Flow Control Starts From Here
@@ -156,19 +159,11 @@ $(function () {
         $("#VehicleId").val($(this).attr('data-provide'));
         enableThemeButton('#submitButtonForm3');
     });
-
-
-    $(document).on('change', '#serviceBookingForm3 select', function () {
-        if ($("#serviceBookingForm3").valid()) {
-            enableThemeButton("#submitButtonForm3");
-        } else {
-            disableThemeButton("#submitButtonForm3");
-        }
-    });
-
+    
     $(document).on('click', '#submitButtonForm3', function () {
         disableThemeButton("#submitButtonForm3");
         if (ServiceList == null) {
+            enableThemeButton("#submitButtonForm3");
             getServiceGroupList();
         } else {
             enableThemeButton("#submitButtonForm3");
@@ -178,8 +173,6 @@ $(function () {
     //=================================================
     //Form 3 Validation and Flow Control Ends From Here
     //=================================================
-
-
 
     //===================================================
     //Form 4 Validation and Flow Control Starts From Here
@@ -229,6 +222,37 @@ $(function () {
 
     });
 
+    $(document).on('keyup', '#serviceSearch', function () {
+        $('#searchResults').html('');
+        if ($('#serviceSearch').val().trim().length > 0) {
+            $('#servicesContainer').addClass('d-none');
+            $('#searchResults').removeClass('d-none');
+        } else {
+            $('#servicesContainer').removeClass('d-none');
+            $('#searchResults').addClass('d-none');
+        }
+        for (let i = 0; i < ServiceList.length; i++) {
+            if (ServiceList[i].Name.toLowerCase().includes($('#serviceSearch').val().toLowerCase())) {
+                $('#searchResults')
+                    .append('<div class="form-group m-0 d-flex justify-content-between">'
+                        + '<div id="searcQuerycategory' + ServiceList[i].ServiceGroupServiceGroupId + 'service' + ServiceList[i].ServiceGroupServiceGroupId + 'description"'
+                        + 'class="custom-control custom-checkbox" data-toggle="tooltip"'
+                        + 'data-placement="left" title="' + ServiceList[i].ServiceDetailModels[0].Description + '">'
+                        + '<input type="checkbox" class="custom-control-input service-checkbox"'
+                        + 'onClick="$(\'#category' + ServiceList[i].ServiceGroupServiceGroupId + 'service' + ServiceList[i].ServiceId + '\').click();" '
+                        + 'id="searcQuerycategory' + ServiceList[i].ServiceGroupServiceGroupId + 'service' + ServiceList[i].ServiceId + '"/>'
+                        + '<label class="custom-control-label"'
+                        + 'id="searcQuerycategory' + ServiceList[i].ServiceGroupServiceGroupId + 'service' + ServiceList[i].ServiceId + 'name"'
+                        + 'for="searcQuerycategory' + ServiceList[i].ServiceGroupServiceGroupId + 'service' + ServiceList[i].ServiceId + '">' + ServiceList[i].Name + '</label>'
+                        + '</div>'
+                        + '<small >' + ServiceList[i].Cost + '<i class="fa fa-inr" aria-hidden="true"></i> </small>'
+                        + '</div>');
+            } else {
+
+            }
+        }
+    });
+
     $(document).on('click', '#submitButtonForm4', function () {
         if (DealerList == null) {
             getDealerList();
@@ -239,8 +263,6 @@ $(function () {
     //=================================================
     //Form 4 Validation and Flow Control Ends From Here
     //=================================================
-
-
 
     //===================================================
     //Form 5 Validation and Flow Control Starts From Here
@@ -301,8 +323,6 @@ $(function () {
     //Form 5 Validation and Flow Control Starts From Here
     //===================================================
 
-
-
     //===================================================
     //Form 6 Validation and Flow Control Starts From Here
     //===================================================
@@ -341,6 +361,8 @@ $(function () {
         if (PickUp) {
             PickUp = false;
         } else {
+            getLocationForPickUp();
+            $('#DisplayPickUpMap').click();
             PickUp = true;
         }
     });
@@ -349,27 +371,31 @@ $(function () {
         if (Drop) {
             Drop = false;
         } else {
+            getLocationForDrop();
+            $('#DisplayDropMap').click();
             Drop = true;
         }
     });
 
-    $(document).on('change', '.mapboxgl-ctrl-geocoder input', function (e) {
-        if (PickUpAddressConfirmed) {
-            reverseGeoCode(variables.DropMarker, $('.mapboxgl-ctrl-geocoder input').val(), '#DropAddress', '#DropCoord');
-        } else {
-            reverseGeoCode(variables.PickUpMarker, $('.mapboxgl-ctrl-geocoder input').val(), '#PickUpAddress', '#PickUpCoord');
-        }
+    var geoCoders = $('.mapboxgl-ctrl-geocoder input');
+
+    geoCoders[0].addEventListener('change', function () {
+        reverseGeoCode(PickUpMarker, $('.mapboxgl-ctrl-geocoder input').val(), PickUpMap, DragEndForPickUp, '#PickUpAddress', '#PickUpCoord');
+    });
+
+    geoCoders[0].addEventListener('change', function () {
+        reverseGeoCode(DropMarker, $('.mapboxgl-ctrl-geocoder input').val(), DropMap, DragEndForDrop, '#DropAddress', '#DropCoord');
     });
 
     $(document).on('click', '#submitButtonForm6', function () {
         if ($('#serviceBookingForm6').valid()) {
             console.log('Form is valid');
-            if (PickUp && $('#PickUpAddress').length > 5) {
+            if (PickUp && $('#PickUpAddress').val().length > 5) {
                 console.log('Pickup Added' + $('#PickUpAddress').length);
                 showToast('Error', 'Please enter a valid pick up address');
             } else {
                 console.log('Pickup Added' + $('#PickUpAddress').length);
-                if (Drop && $('#DropAddress').length > 5) {
+                if (Drop && $('#DropAddress').val().length > 5) {
                     console.log('Drop Added' + $('#DropAddress').length);
                     showToast('Error', 'Please enter a valid drop address');
                 } else {
@@ -382,26 +408,6 @@ $(function () {
             showToast('Error', 'Please fill in all details.');
         }
     });
-
-
-    //TODO
-    // Add function to get user locations validate the     
-    //data and add ajax call to post the appointment    
-    //User following Data ids to get all the form data
-
-    //#Email  
-    //#Otp
-    //#LicensePlateNumber
-    //#SelectedServices
-    //#TotalCost
-    //#BrandName
-    //#ModelName
-    //#DealerId
-    //#PlanDateTime
-    //#PickUpAddress
-    //#DropAddress
-    //#CustomerNote
-
     //===================================================
     //Form 6 Validation and Flow Control Starts From Here
     //===================================================

@@ -14,11 +14,11 @@ export function sendOtp() {
         },
         success: function (response) {
             if (response != null) {
-                if (response == "s_1111") {
+                if (response == "s_1111") { //TODO replace with text
                     showToast("Attention", "Otp has been sent successfully to your email.Otp is valid for next 5 mins!");
                     displayElement("#serviceBookingForm2");
                 }
-                else if (response == "e_1111") {
+                else if (response == "e_1111") { //TODO replace with text
                     showToast("Error", "Entered Email is not Registered!");
                     enableThemeButton("#submitButtonForm1");
                 }
@@ -44,19 +44,19 @@ export function verifyOtp() {
         },
         success: function (response) {
             if (response != null) {
-                if (response == "s_1112") {
+                if (response == "s_1112") { //TODO replace with Text
                     showToast("Attention", "Your otp is Valid");
                     getCustomer();
                 }
-                else if (response == "e_1112") {
+                else if (response == "e_1112") { //TODO replace with text
                     showToast("Error", "Your otp has been expired!");
                     enableThemeButton("#submitButtonForm2");
                 }
-                else if (response == "e_1113") {
+                else if (response == "e_1113") { //TODO replace with text
                     showToast("Error", "Otp is not Valid!");
                     enableThemeButton("#submitButtonForm2");
                 }
-                else if (response == "e_1114") {
+                else if (response == "e_1114") { //TODO replace with text
                     showToast("Error", "Entered Email is not Registered!");
                     enableThemeButton("#submitButtonForm2");
                 }
@@ -133,7 +133,7 @@ export function getVehicleList() {
 }
 
 export function getServiceList() {
-    $.ajax({
+    $.ajax({        
         url: API_URL + 'Service/' + VehicleList.filter(item => item.VehicleId == $('#VehicleId').val())[0].FuelTypeId,
         type: 'GET',
         contentType: 'application/json',
@@ -232,13 +232,13 @@ export function getDealerList() {
                                 response[i].Name,
                                 response[i].ContactNo);
                         }
-                    }else{
+                    } else {
                         addDealer(response[i].DealerId,
                             response[i].Name,
                             response[i].ContactNo);
                     }
                 }
-                $('#dealer'+Customer.PreferredDealerId).click();
+                $('#dealer' + Customer.PreferredDealerId).click();
                 enableCollapseButton("#collapseButton4");
                 $("#collapseButton4").click();
             } else {
@@ -254,7 +254,7 @@ export function getDealerList() {
 
 export function getDisabledDates() {
     $.ajax({
-        url: API_URL + 'Dealer/GetAvalibility?dealerId='+$('#DealerId').val()+'&serviceDuration='+calculateDuration(),
+        url: API_URL + 'Dealer/GetAvalibility?dealerId=' + $('#DealerId').val() + '&serviceDuration=' + calculateDuration(),
         type: 'GET',
         contentType: 'application/json',
         beforeSend: function (xhr) {
@@ -290,6 +290,18 @@ export function getDisabledDates() {
     });
 }
 
+export function AddAppointment() {
+    $.ajax({
+        url: API_URL + 'Appointment/Add/',
+        type: 'POST',
+        data: 'null', //TODO create appointment Object
+        contentType: 'application/json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
+        },
+    });
+}
+
 export function forwardGeoCode(long, lat, addressId, coordId) {
     $.ajax({
         url: 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + long + ',' + lat + '.json?&access_token=' + MapBoxAccessToken,
@@ -305,14 +317,14 @@ export function forwardGeoCode(long, lat, addressId, coordId) {
     });
 }
 
-export function reverseGeoCode(marker, query, addressId, coordId) {
+export function reverseGeoCode(marker, query, map, dragEnd, addressId, coordId) {
     $.ajax({
         url: 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + query + '.json?bbox=' + SouthBound + ',' + WestBound + ',' + NorthBound + ',' + EastBound + '&access_token=' + MapBoxAccessToken,
         type: 'GET',
         contentType: "application/json;charset=utf-8",
         success: function (response) {
             $(addressId).val(query);
-            setMarker(marker, response.features[0].center[0], response.features[0].center[1], addressId, coordId);
+            setMarker(marker, response.features[0].center[0], response.features[0].center[1], map , dragEnd ,addressId, coordId);
         },
         error: function () {
             showToast('Error', 'Could not recieve your address please type manually');
@@ -320,60 +332,46 @@ export function reverseGeoCode(marker, query, addressId, coordId) {
     });
 }
 
-export function getLocation() {
+export function getLocationForPickUp() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(currentLocationSuccess, currentLocationError);
+        navigator.geolocation.getCurrentPosition(currentLocationSuccessForPickUp, currentLocationError);
     } else {
         showToast("Error", "Geolocation is not supported by this browser.");
     }
 }
 
-export function currentLocationSuccess(position) {
-    setMarker(PickUpMarker, position.coords.longitude, position.coords.latitude, "#PickUpAddress", "#PickUpCoord");
+export function getLocationForDrop() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(currentLocationSuccessForDrop, currentLocationError);
+    } else {
+        showToast("Error", "Geolocation is not supported by this browser.");
+    }
+}
+
+export function currentLocationSuccessForPickUp(position) {
+    setMarker(PickUpMarker, position.coords.longitude, position.coords.latitude,PickUpMap, DragEndForPickUp , "#PickUpAddress", "#PickUpCoord");
+}
+
+export function currentLocationSuccessForDrop(position) {
+    setMarker(DropMarker, position.coords.longitude, position.coords.latitude, DropMap, DragEndForDrop ,"#DropAddress", "#DropCoord");
 }
 
 export function currentLocationError() {
     showToast('Error', 'Could not recieve your address please type manually');
 }
 
-function onDragEnd() {
-    if (PickUpAddressConfirmed) {
-        forwardGeoCode(DropMarker.getLngLat().lng, DropMarker.getLngLat().lat, "#DropAddress", "#DropCoord");
-    } else {
-        forwardGeoCode(PickUpMarker.getLngLat().lng, PickUpMarker.getLngLat().lat, "#PickUpAddress", "#PickUpCoord");
-    }
+export var DragEndForPickUp = function onDragEndForPickUp() {
+    forwardGeoCode(PickUpMarker.getLngLat().lng, PickUpMarker.getLngLat().lat, "#PickUpAddress", "#PickUpCoord");    
 }
 
-export function setMarker(marker, long, lat, addressId, coordId) {
-    marker.setLngLat([long, lat]).addTo(Map);
-    marker.on('dragend', onDragEnd);
+export var DragEndForDrop = function onDragEndForDrop() {
+    forwardGeoCode(DropMarker.getLngLat().lng, DropMarker.getLngLat().lat, "#DropAddress", "#DropCoord");
+}
+
+export function setMarker(marker, long, lat, map, dragEnd , addressId, coordId) {
+    marker.setLngLat([long, lat]).addTo(map);
+    marker.on('dragend', dragEnd);
     $(coordId).val(long + '-' + lat);
-    Map.flyTo({ center: [long, lat] });
+    map.flyTo({ center: [long, lat] });
     forwardGeoCode(long, lat, addressId, coordId);
-
 }
-
-//========================================
-//Template structure for all Ajax calls
-//========================================
-// $.ajax({
-//     url: API_URL,
-//     type: 'GET',
-//     contentType: 'application/json',
-//     success: function (response) {
-//         if(response != null){
-//             toggleThemeSpinner('#themeSpinner[FormNo]'); Spinner is not in use currently 
-//             displayElement("#serviceBookingForm[FormNo]");
-//             showToast("Title","Your message");
-//         }else{
-//             showToast("Error","Error Message");
-//             toggleThemeSpinner('#themeSpinner[FormNo]'); Spinner is not in use currently 
-//             enableThemeButton("#submitButtonForm[FormNo-1]");
-//         }
-//     },
-//     error: function(XMLHttpRequest, textStatus, errorThrown){
-//         alert("Status: " + textStatus); alert("Error: " + errorThrown);
-//         toggleThemeSpinner("#themeSpinner[FormNo]"); Spinner is not in use currently 
-//         enableThemeButton("#submitButtonForm[FormNo-1]");
-//     }
-// });

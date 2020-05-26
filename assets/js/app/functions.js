@@ -92,16 +92,12 @@ export function init() {
         todayBtn: "linked",
         clearBtn: true,
     });
-
     $([document.documentElement, document.body]).animate({
         scrollTop: $(".page-heading").offset().top - 20
     }, 600);
-
     $('.mapboxgl-canvas').css('width', '100%');
     $('.mapboxgl-canvas').css('height', '100%');
-    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
-    //Map.addControl(NavigationControl, 'bottom-right');
-    //GeoCoder.addTo('#GeoCoder');
+    $("body").tooltip({ selector: '[data-toggle=tooltip]' });    
     $.validator.addMethod("valueNotEquals", function (value, element, arg) {
         return arg !== value;
     }, "Value must not equal arg.");
@@ -129,7 +125,7 @@ export function addserviceCategory(categoryId, name) {
         .append('<div class="card border-0 col-12" id="serviceCategory' + categoryId + '">'
             + '<div class="border-0" id="serviceCategoryHeading' + categoryId + '">'
             + '<button id="serviceCategoryName' + categoryId + '"'
-            + 'class="m-2 theme-button-primary"'
+            + 'class="my-2 theme-button-primary"'
             + 'style="width:100%;"'
             + 'type="button" data-toggle="collapse"'
             + 'data-target="#serviceCategoryCollpase' + categoryId + '"'
@@ -148,19 +144,19 @@ export function addserviceCategory(categoryId, name) {
 
 export function addService(categoryId, serviceId, name, price, description) {
     $('#serviceCategoryCollpase' + categoryId)
-        .append('<div class="form-group m-0">'
-            + '<div id="category' + categoryId + 'service' + serviceId + 'description"'
-            + 'class="ml-4 custom-control custom-checkbox" data-toggle="tooltip"'
-            + 'data-placement="left" title="' + description + '">'
-            + '<input type="checkbox" class="custom-control-input service-checkbox"'
-            + 'id="category' + categoryId + 'service' + serviceId + '"'
-            + 'service-id="' + serviceId + '"'
-            + 'category-id="' + categoryId + '">'
-            + '<label class="custom-control-label"'
-            + 'id="category' + categoryId + 'service' + serviceId + 'name"'
-            + 'for="category' + categoryId + 'service' + serviceId + '">' + name + '</label>'
-            + '<small id="category' + categoryId + 'service' + serviceId + 'price">' + price + '<i class="fa fa-inr" aria-hidden="true"></i> </small>'
-            + '</div>'
+        .append('<div class="form-group m-0 d-flex justify-content-between">'            
+                    + '<div id="category' + categoryId + 'service' + serviceId + 'description"'
+                        + 'class="custom-control custom-checkbox" data-toggle="tooltip"'
+                        + 'data-placement="left" title="' + description + '">'
+                            + '<input type="checkbox" class="custom-control-input service-checkbox"'
+                                + 'id="category' + categoryId + 'service' + serviceId + '"'
+                                + 'service-id="' + serviceId + '"'
+                                + 'category-id="' + categoryId + '">'
+                            + '<label class="custom-control-label"'
+                                + 'id="category' + categoryId + 'service' + serviceId + 'name"'
+                                + 'for="category' + categoryId + 'service' + serviceId + '">' + name + '</label>'                            
+                    + '</div>'
+                    + '<small id="category' + categoryId + 'service' + serviceId + 'price">' + price + '<i class="fa fa-inr" aria-hidden="true"></i> </small>'
             + '</div>');
 }
 
@@ -229,6 +225,10 @@ export function diselectService(serviceId, categoryId, price) {
                 .replace('-' + serviceId, ''));
 }
 
+export function serviceQuery(service){
+    return (service.Name.search($('#ServiceSearch').val()) > 0) ;
+}
+
 export function addDealer(dealerId, name, phoneNo) {
     $('#dealerListContainer').append(
         '<div class="p-2 dealer-item">'
@@ -258,19 +258,20 @@ export function addPreferredDealer(dealerId, name, phoneNo) {
 }
 
 export function parseServices() {
-    var selectedServices = $('#SelectedServices').val();
-    selectedServices = selectedServices.substring(1, selectedServices.length);
-    var start = 0;
-    for (let i = 0; i <= selectedServices.length; i++) {
-        if (selectedServices.charAt(i) == '-' || i == selectedServices.length) {
-            SelectedServicesList.push(parseInt(selectedServices.substring(start, i), 10));
-            start = i + 1;
+    if(SelectedServicesList.length == 0){
+        var selectedServices = $('#SelectedServices').val();
+        selectedServices = selectedServices.substring(1, selectedServices.length);
+        var start = 0;
+        for (let i = 0; i <= selectedServices.length; i++) {
+            if (selectedServices.charAt(i) == '-' || i == selectedServices.length) {
+                SelectedServicesList.push(parseInt(selectedServices.substring(start, i), 10));
+                start = i + 1;
+            }
         }
     }
 }
 
-export function calculateDuration(){    
-    parseServices();
+export function calculateDuration(){
     let TotalDuration = 0;
     for(let i=0;i<SelectedServicesList.length;i++){
         TotalDuration = TotalDuration + ServiceList.filter(item => item.ServiceId == SelectedServicesList[i])[0].Duration;
@@ -308,4 +309,14 @@ export function showSummary() {
         )
     }
     $('#servicesContainerSummary').append('</dl>');
+}
+
+export function changeColorTheme(primary,primaryDark,primaryLight,primaryText,secondaryText){
+    var html = document.getElementsByTagName('html')[0];
+    html.style.setProperty("--theme-color-primary", primary); 
+    html.style.setProperty("--theme-color-primary-dark", primaryDark); 
+    html.style.setProperty("--theme-color-primary-light", primaryLight); 
+    html.style.setProperty("--theme-color-accent", primary); 
+    html.style.setProperty("--theme-color-primary-text", primaryText); 
+    html.style.setProperty("--theme-color-secondary-text", secondaryText); 
 }

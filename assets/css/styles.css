@@ -1,10 +1,12 @@
 :root {
+    
     --theme-color-primary: #607d8b;
     --theme-color-primary-dark: #455a64;
     --theme-color-primary-light: #cfd8dc;
     --theme-color-accent: #607d8b;
     --theme-color-primary-text: #212121;
     --theme-color-secondary-text: #ffffff;
+
     --theme-color-divided: #cfd8dc;
     --theme-color-error: #f44336;
     --theme-color-success: #4caf50;

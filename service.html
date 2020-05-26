@@ -155,21 +155,24 @@
                                         placeholder="Your email" />
                                 </div>
                                 <div class="form-group">
-                                    <button class="theme-button-disabled w-100" type="button" id="submitButtonForm1"> Send
+                                    <button class="theme-button-disabled w-100" type="button" id="submitButtonForm1">
+                                        Send
                                         OTP &nbsp; <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
                                     </button>
                                 </div>
                             </form>
-                            <form id="serviceBookingForm2" class="show collapse">
+                            <form id="serviceBookingForm2" class="collapse">
                                 <div class="form-group d-flex justify-content-center">
                                     <div id="OtpDivOuter">
                                         <div id="OtpDivInner">
-                                            <input type="text" name="Otp" title="OTP" pattern="\d*" maxlength="4" minlength="4" id="Otp" required />
+                                            <input type="text" name="Otp" title="OTP" pattern="\d*" maxlength="4"
+                                                minlength="4" id="Otp" required />
                                         </div>
-                                    </div>                                    
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <button class="theme-button-disabled w-100" type="button" id="submitButtonForm2">Verify
+                                    <button class="theme-button-disabled w-100" type="button"
+                                        id="submitButtonForm2">Verify
                                         OTP &nbsp; <i class="fa fa-key" aria-hidden="true"></i>
                                     </button>
                                 </div>
@@ -189,8 +192,10 @@
                             style="overflow-y:scroll;max-height:320px">
                         </div>
                         <div class="row mr-3">
-                            <button class="ml-auto px-5 mr-5 theme-button-primary" type="button" id="submitButtonForm3">
-                                Next >
+                            <button class="ml-auto px-5 mr-5 theme-button-disabled" type="button"
+                                id="submitButtonForm3">
+                                Next <i class="fa fa-chevron-right" aria-hidden="true"></i>
+
                             </button>
                         </div>
                     </div>
@@ -207,8 +212,21 @@
                             Select services from the drop down
                         </h4>
                         <div class="d-flex justify-content-center">
-                            <div class="accordion col-5" id="servicesContainer">
+
+                            <div class="accordion col-5">
+                                <div class="d-flex justify-content-end">
+                                    <span style="vertical-align: middle;" class="col-5 my-2 ml-5 d-flex flex-column justify-content-center">Search your service :</span> 
+                                    <input type="text" name="ServiceSearch" placeholder="search" id="serviceSearch"
+                                        class="theme-form-control mr-2 my-2 col-6">
+                                </div>
+                                <div id="searchResults" class="d-none">
+
+                                </div>
+                                <div id="servicesContainer">
+
+                                </div>
                             </div>
+
                             <div class="col-6">
                                 <div class="card shadow-md border-0"
                                     style="overflow-y: scroll; height: 320px; max-height: 320px;">
@@ -238,9 +256,10 @@
                                     <input type="number" class="fade hidden-input-control" name="TotalCost"
                                         id="TotalCost" />
                                     <div class="row mx-0">
-                                        <button class="ml-auto px-5 theme-button-primary" type="button"
+                                        <button class="ml-auto px-5 theme-button-disabled" type="button"
                                             id="submitButtonForm4">
-                                            Next >
+                                            Next <i class="fa fa-chevron-right" aria-hidden="true"></i>
+
                                         </button>
                                     </div>
                                 </form>
@@ -278,8 +297,10 @@
                             <input type="hidden" name="PlanDateTime" class="" id="PlanDateTime" />
                         </form>
                         <div class="row mr-5">
-                            <button class="ml-auto px-5 mx-5 theme-button-primary" type="button" id="submitButtonForm5">
-                                Next >
+                            <button class="ml-auto px-5 mx-5 theme-button-disabled" type="button"
+                                id="submitButtonForm5">
+                                Next <i class="fa fa-chevron-right" aria-hidden="true"></i>
+
                             </button>
                         </div>
                     </div>
@@ -295,7 +316,7 @@
                         <div class="d-flex justify-content-center">
                             <div class="col-12 p-0">
                                 <div class="d-flex  justify-content-center">
-                                    <div class="d-flex justify-content-center col-3 flex-column">
+                                    <div class="d-flex justify-content-center col-4 flex-column">
                                         <form id="serviceBookingForm6">
                                             <div class="form-group">
                                                 <input type="text" class="rounded theme-form-control"
@@ -315,10 +336,16 @@
                                                 <input type="text" class="roudned theme-form-control"
                                                     placeholder="Pick Up Address" id="PickUpAddress"
                                                     name="PickUpAddress">
+                                                <span onclick="$('#DisplayPickUpMap').click();" title="edit"
+                                                    class="rounded shadow-md px-2 bg-white"> <i
+                                                        class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                             </div>
                                             <div class="form-group collapse" id="DropDetails">
                                                 <input type="text" class="roudned theme-form-control"
                                                     placeholder="Drop Address" name="DropAddress" id="DropAddress">
+                                                <span onclick="$('#DisplayDropMap').click();" title="edit"
+                                                    class="rounded shadow-md px-2 bg-white"> <i
+                                                        class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                             </div>
                                         </form>
                                         <div>
@@ -329,6 +356,8 @@
                                                 <span class="slider round"></span>
                                             </label>
                                             <span>Include car pickup service.</span>
+
+                                            <br>
                                             <label class="switch">
                                                 <input type="checkbox" id="DropToggle" data-toggle="collapse"
                                                     data-target="#DropDetails" aria-expanded="false"
@@ -336,11 +365,17 @@
                                                 <span class="slider round"></span>
                                             </label>
                                             <span>Include car drop service.</span>
+
+                                            </span>
                                         </div>
                                         <button class="mt-2 px-5 theme-button-primary" type="button"
                                             id="submitButtonForm6">
                                             Book your appointment
                                         </button>
+                                        <input type="text" class="fade hidden-input-control d-inline" id="PickUpCoord"
+                                            name="PickUpCoord">
+                                        <input type="text" class="fade hidden-input-control d-inline" id="DropCoord"
+                                            name="DropCoord">
                                     </div>
                                 </div>
                             </div>
@@ -361,6 +396,84 @@
     <!-- =========================== -->
     <!-- Main Content Ends From Here -->
     <!-- =========================== -->
+
+    <!-- Button trigger modal -->
+    <button type="button" id="DisplayPickUpMap" class="btn btn-primary hidden-input-control fade" data-toggle="modal"
+        data-target="#PickUpMapModal">
+    </button>
+
+    <!-- Modal -->
+    <div class="modal mx-auto modal-lg fade" id="PickUpMapModal" tabindex="-1" role="dialog"
+        aria-labelledby="PickUpMapModalHeader" aria-hidden="true">
+        <div class="modal-lg modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="PickUpMapModalHeader">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="theme-text-primary"></p>* Pickup/Drop service will charge extra 500 Rs.</p>
+                    <div class="d-flex flex-column rounded col-12">
+
+                        <div class="d-flex justify-content-between">
+                            <div id="PickUpGeoCoder" class="mb-3"></div>
+                            <span class="mt-2 theme-text-primary">*Enter the name of your area</span>
+                        </div>
+
+                        <div id='PickUpMap' class="rounded shadow-md border" style='width: 100%;height: 300px;'></div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="$('#DisplayPickUpMap').click()" class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
+                    <button type="button" onclick="$('#DisplayPickUpMap').click()" class="btn btn-primary">Save
+                        changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Button trigger modal -->
+    <button type="button" id="DisplayDropMap" class="btn btn-primary hidden-input-control fade" data-toggle="modal"
+        data-target="#DropMapModal">
+    </button>
+
+    <!-- Modal -->
+    <div class="modal mx-auto modal-lg fade" id="DropMapModal" tabindex="-1" role="dialog"
+        aria-labelledby="DropMapModalHeader" aria-hidden="true">
+        <div class="modal-lg modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="DropMapModalHeader">Add Drop Location</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="theme-text-primary"></p>* Pickup/Drop service will charge extra 500 Rs.</p>
+                    <div class="d-flex flex-column rounded col-12">
+
+                        <div class="d-flex justify-content-between">
+                            <div id="DropGeoCoder" class="mb-3"></div>
+                            <span class="mt-2 theme-text-primary">*Enter the name of your area</span>
+                        </div>
+
+                        <div id='DropMap' class="rounded shadow-md border" style='width: 100%;height: 300px;'></div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="$('#DisplayDropMap').click()" class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
+                    <button type="button" onclick="$('#DisplayDropMap').click()" class="btn btn-primary">Save
+                        changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal Button -->
     <button id="DisplaySummaryButton" type="button" class="btn btn-primary hidden-input-control fade"
@@ -414,8 +527,9 @@
                                 <div id="AddressSummary">
 
                                 </div>
-                            </div>                            
-                            <div id="servicesContainerSummary" class="col-4" style="max-height:250px;overflow-y: scroll;">
+                            </div>
+                            <div id="servicesContainerSummary" class="col-4"
+                                style="max-height:250px;overflow-y: scroll;">
                                 <dl>
                                     <dt>Service 1 </dt>
                                     <dd>Service 1 ~ 100INR</dd>
@@ -515,7 +629,7 @@
     <!-- Date Time Picker JS -->
     <script src="./assets/js/bootstrap-datepicker.min.js"></script>
     <!-- Jquery Validate -->
-    <script src="./assets/js/jquery.validate.min.js"></script>    
+    <script src="./assets/js/jquery.validate.min.js"></script>
     <!-- Map Box JS -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
     <script
