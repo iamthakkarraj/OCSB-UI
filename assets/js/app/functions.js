@@ -231,7 +231,7 @@ export function diselectService(serviceId, categoryId, price) {
     //Updating Selected Services Hidden Field
     $('#SelectedServices')
         .val($('#SelectedServices')
-            .val() + ''
+            .val()
                 .replace('-' + serviceId, ''));
 }
 
@@ -268,10 +268,10 @@ export function addPreferredDealer(dealerId, name, phoneNo) {
 }
 
 export function parseServices() {
-    SelectedServicesList = []
-    var selectedServices = $('#SelectedServices').val();
+    SelectedServicesList = [];
+    let selectedServices = $('#SelectedServices').val();
     selectedServices = selectedServices.substring(1, selectedServices.length);
-    var start = 0;
+    let start = 0;
     for (let i = 0; i <= selectedServices.length; i++) {
         if (selectedServices.charAt(i) == '-' || i == selectedServices.length) {
             SelectedServicesList.push(parseInt(selectedServices.substring(start, i), 10));
@@ -323,7 +323,7 @@ export function showSummary() {
 }
 
 export function changeColorTheme(primary, primaryDark, primaryLight, primaryText, secondaryText) {
-    var html = document.getElementsByTagName('html')[0];
+    let html = document.getElementsByTagName('html')[0];
     html.style.setProperty("--theme-color-primary", primary);
     html.style.setProperty("--theme-color-primary-dark", primaryDark);
     html.style.setProperty("--theme-color-primary-light", primaryLight);

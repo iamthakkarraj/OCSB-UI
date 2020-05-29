@@ -266,7 +266,7 @@ $(function () {
         if (DealerList == null) {
             getDealerList();
         } else {
-            if($('#dealerId').val().length != 0){
+            if($('#DealerId').val().length != 0){
                 getDisabledDates();
             }
             enableThemeButton('#submitButtonForm4');
