@@ -141,6 +141,7 @@ export function getServiceList() {
             xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
         },
         success: function (response) {
+            enableThemeButton("#submitButtonForm3");
             if (response != null) {
                 ServiceList = response;
                 for (let i = 0; i < response.length; i++) {
@@ -152,13 +153,12 @@ export function getServiceList() {
                 }
                 enableCollapseButton("#collapseButton3");
                 $("#collapseButton3").click();
-                enableThemeButton("#submitButtonForm3");
             } else {
                 showToast("Error", "It seems like our server is offline please try again later");
-                enableThemeButton("#submitButtonForm3");
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
+            enableThemeButton("#submitButtonForm3");
             showToast("Error", "It seems like our server is offline please try again later");
             enableThemeButton("#submitButtonForm3");
         }
@@ -182,7 +182,6 @@ export function getServiceGroupList() {
                 getServiceList();
             } else {
                 showToast("Error", "It seems like our server is offline please try again later");
-                enableThemeButton("#submitButtonForm3");
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -201,16 +200,15 @@ export function getDealerList() {
             xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
         },
         success: function (response) {
+            enableThemeButton('#submitButtonForm4');
             if (response != null) {
                 DealerList = response;
-
                 var PreferredDealer = response.filter(x => x.DealerId == Customer.PreferredDealerId);
                 if (PreferredDealer.length != 0) {
                     addPreferredDealer(PreferredDealer[0].DealerId,
                         PreferredDealer[0].Name,
                         PreferredDealer[0].ContactNo);
                 }
-
                 for (let i = 0; i < response.length; i++) {
                     new mapboxgl.Marker({
                         draggable: false,
@@ -223,7 +221,6 @@ export function getDealerList() {
                             + response[i].ContactNo + '<span><br>'
                             + '<span> <i class="fa fa-location-arrow mx-2" aria-hidden="true"></i>'
                             + response[i].Address + '<span>')).addTo(DealerListMap);
-
                     if (PreferredDealer.length != 0) {
                         if (response[i].DealerId == Customer.PreferredDealerId) {
                             //do nothing
@@ -241,13 +238,11 @@ export function getDealerList() {
                 $('#dealer' + Customer.PreferredDealerId).click();
                 enableCollapseButton("#collapseButton4");
                 $("#collapseButton4").click();
-            } else {
-                enableThemeButton("#submitButtonForm4");
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
+            enableThemeButton('#submitButtonForm4');
             showToast("Error", "It seems like our server is offline please try again later");
-            enableThemeButton("#submitButtonForm4");
         }
     });
 }
@@ -265,21 +260,8 @@ export function getDisabledDates() {
                 var dateList = [];
                 for (let i = 0; i < response.length; i++) {
                     dateList.push(new Date(response[i]).toLocaleDateString());
-                }
-                console.log(dateList);
-                $('#date-picker').datepicker({
-                    daysOfWeekDisabled: [0, 6],
-                    format: "mm/dd/yyyy",
-                    startDate: "+2d",
-                    endDate: "+14d",
-                    datesDisabled: dateList,
-                    todayBtn: "linked",
-                    clearBtn: true,
-                });
-                $('.disabled-date').attr('title', ' <i class="fa fa-calendar-times-o" aria-hidden="true"></i> Dealer not available');
-                $('.disabled-date').attr('data-toggle', 'tooltip');
-                $('.disabled-date').attr('data-placement', 'left');
-                $('.disabled-date').attr('data-html', 'true');
+                }                
+                $('#date-picker').datepicker('setDatesDisabled', dateList);                
             } else {
 
             }
@@ -294,7 +276,7 @@ export function addAppointment() {
     var Appointment = {
         PlanDateTime: $('#PlanDateTime').val(),
         LicensePlateNumber: VehicleList.filter(item => item.vehicleId == $('#vehicleId').val())[0].LicensePlateNumber,
-        CustomerName: Customer.CustomerName,       
+        CustomerName: Customer.CustomerName,
         ContactPersonName: $('#ContactPerson').val(),
         ContactNumber: $('#ContactNo').val(),
         VehicleId: $('#VehicleId').val(),
@@ -302,10 +284,10 @@ export function addAppointment() {
         CustomerEmail: $('#Email').val(),
         CustomerNote: $('#CustomerNote').val(),
         PickUpAddress: $('#PickUpAddress').val(),
-        DropAddress: $('#DropAddress').val(),        
+        DropAddress: $('#DropAddress').val(),
         SelectedServices: SelectedServicesList
     };
-    
+
     $.ajax({
         url: API_URL + 'Appointment/Add/',
         type: 'POST',

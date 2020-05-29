@@ -82,9 +82,8 @@ export function disableFrame1() {
 }
 
 export function init() {
-    disableAllButtons();
+    //disableAllButtons();
     $('#date-picker').datepicker({
-        daysOfWeekDisabled: [0, 6],
         format: "mm/dd/yyyy",
         startDate: "+2d",
         endDate: "+14d",
@@ -97,7 +96,7 @@ export function init() {
     }, 600);
     $('.mapboxgl-canvas').css('width', '100%');
     $('.mapboxgl-canvas').css('height', '100%');
-    $("body").tooltip({ selector: '[data-toggle=tooltip]' });    
+    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
     $.validator.addMethod("valueNotEquals", function (value, element, arg) {
         return arg !== value;
     }, "Value must not equal arg.");
@@ -144,31 +143,38 @@ export function addserviceCategory(categoryId, name) {
 
 export function addService(categoryId, serviceId, name, price, description) {
     $('#serviceCategoryCollpase' + categoryId)
-        .append('<div class="form-group m-0 d-flex justify-content-between">'            
-                    + '<div id="category' + categoryId + 'service' + serviceId + 'description"'
-                        + 'class="custom-control custom-checkbox" data-toggle="tooltip"'
-                        + 'data-placement="left" title="' + description + '">'
-                            + '<input type="checkbox" class="custom-control-input service-checkbox"'
-                                + 'id="category' + categoryId + 'service' + serviceId + '"'
-                                + 'service-id="' + serviceId + '"'
-                                + 'category-id="' + categoryId + '">'
-                            + '<label class="custom-control-label"'
-                                + 'id="category' + categoryId + 'service' + serviceId + 'name"'
-                                + 'for="category' + categoryId + 'service' + serviceId + '">' + name + '</label>'                            
-                    + '</div>'
-                    + '<small id="category' + categoryId + 'service' + serviceId + 'price">' + price + '<i class="fa fa-inr" aria-hidden="true"></i> </small>'
+        .append('<div class="form-group m-0 d-flex justify-content-between">'
+            + '<div id="category' + categoryId + 'service' + serviceId + 'description"'
+            + 'class="custom-control custom-checkbox" data-toggle="tooltip"'
+            + 'data-placement="left" title="' + description + '">'
+            + '<input type="checkbox" class="custom-control-input service-checkbox"'
+            + 'id="category' + categoryId + 'service' + serviceId + '"'
+            + 'service-id="' + serviceId + '"'
+            + 'category-id="' + categoryId + '">'
+            + '<label class="custom-control-label"'
+            + 'id="category' + categoryId + 'service' + serviceId + 'name"'
+            + 'for="category' + categoryId + 'service' + serviceId + '">' + name + '</label>'
+            + '</div>'
+            + '<small id="category' + categoryId + 'service' + serviceId + 'price">' + price + '<i class="fa fa-inr" aria-hidden="true"></i> </small>'
             + '</div>');
 }
 
 export function selectService(serviceId, categoryId, name, price) {
-    let vat = parseInt(ServiceList[serviceId].ServiceDetailModels[0].VAT) + parseInt(ServiceList[serviceId].ServiceDetailModels[1].VAT);
+
+    let vat = parseInt(ServiceList
+        .filter(x => x.ServiceId == serviceId)[0]
+        .ServiceDetailModels[0].VAT)
+        + parseInt(ServiceList
+            .filter(x => x.ServiceId == serviceId)[0]
+            .ServiceDetailModels[1].VAT);
+
     $('#selectedServiceContainer')
         .append('<tr class="rounded" id="selectedService' + serviceId + categoryId + '">'
-            + '<td id="selectedServiceName' + serviceId + categoryId + '">' 
-            + name + '<br> <small>' 
-            + '<em> VAT : </em> '+ vat + '<i class="fa fa-inr" aria-hidden="true"></i>'
+            + '<td id="selectedServiceName' + serviceId + categoryId + '">'
+            + name + '<br> <small>'
+            + '<em> VAT : </em> ' + vat + '<i class="fa fa-inr" aria-hidden="true"></i>'
             + '<em> Duration : <em>' + ServiceList[0].Duration + 'hrs.'
-            +'</small>'
+            + '</small>'
             + '</td>'
             + '<td id="selectedServicePrice' + serviceId + categoryId + '">' + price + '</td>'
             + '<td>'
@@ -190,8 +196,8 @@ export function selectService(serviceId, categoryId, name, price) {
 
     //Updating Total Cost Hiddne Field 
     $('#TotalCost')
-        .val($('#serviceTotalCost')
-            .html());
+        .val(parseInt($('#serviceTotalCost')
+            .html()));
 
     //Updating Selected Services Hidden Field
     $('#SelectedServices')
@@ -215,8 +221,8 @@ export function diselectService(serviceId, categoryId, price) {
 
     //Updating Total Cost Hiddne Field 
     $('#TotalCost')
-        .val($('#serviceTotalCost')
-            .html());
+        .val(parseInt($('#serviceTotalCost')
+            .html()));
 
     //Updating Selected Services Hidden Field
     $('#SelectedServices')
@@ -225,8 +231,8 @@ export function diselectService(serviceId, categoryId, price) {
                 .replace('-' + serviceId, ''));
 }
 
-export function serviceQuery(service){
-    return (service.Name.search($('#ServiceSearch').val()) > 0) ;
+export function serviceQuery(service) {
+    return (service.Name.search($('#ServiceSearch').val()) > 0);
 }
 
 export function addDealer(dealerId, name, phoneNo) {
@@ -258,22 +264,22 @@ export function addPreferredDealer(dealerId, name, phoneNo) {
 }
 
 export function parseServices() {
-    if(SelectedServicesList.length == 0){
-        var selectedServices = $('#SelectedServices').val();
-        selectedServices = selectedServices.substring(1, selectedServices.length);
-        var start = 0;
-        for (let i = 0; i <= selectedServices.length; i++) {
-            if (selectedServices.charAt(i) == '-' || i == selectedServices.length) {
-                SelectedServicesList.push(parseInt(selectedServices.substring(start, i), 10));
-                start = i + 1;
-            }
+    SelectedServicesList = []
+    var selectedServices = $('#SelectedServices').val();
+    selectedServices = selectedServices.substring(1, selectedServices.length);
+    var start = 0;
+    for (let i = 0; i <= selectedServices.length; i++) {
+        if (selectedServices.charAt(i) == '-' || i == selectedServices.length) {
+            SelectedServicesList.push(parseInt(selectedServices.substring(start, i), 10));
+            start = i + 1;
         }
     }
 }
 
-export function calculateDuration(){
+export function calculateDuration() {
+    parseServices();
     let TotalDuration = 0;
-    for(let i=0;i<SelectedServicesList.length;i++){
+    for (let i = 0; i < SelectedServicesList.length; i++) {
         TotalDuration = TotalDuration + ServiceList.filter(item => item.ServiceId == SelectedServicesList[i])[0].Duration;
     }
     return TotalDuration;
@@ -296,6 +302,8 @@ export function showSummary() {
             + '<dd>' + ServiceList.filter(item => item.ServiceId == SelectedServicesList[i])[0].Cost + ' <i class="fa fa-inr" aria-hidden="true"></i> </dd>'
         );
     }
+    $('#servicesContainerSummary').append('</dl>');
+    $('#AddressSummary').html('');
     if (PickUp) {
         $('#AddressSummary').append(
             '<dt> <i class="fa fa-location-arrow" aria-hidden="true"></i> Pick Up Address </dt>'
@@ -307,16 +315,15 @@ export function showSummary() {
             '<dt> <i class="fa fa-location-arrow" aria-hidden="true"></i> Drop Address </dt>'
             + '<dd>' + $('#DropAddress').val() + '</dd>'
         )
-    }
-    $('#servicesContainerSummary').append('</dl>');
+    }    
 }
 
-export function changeColorTheme(primary,primaryDark,primaryLight,primaryText,secondaryText){
+export function changeColorTheme(primary, primaryDark, primaryLight, primaryText, secondaryText) {
     var html = document.getElementsByTagName('html')[0];
-    html.style.setProperty("--theme-color-primary", primary); 
-    html.style.setProperty("--theme-color-primary-dark", primaryDark); 
-    html.style.setProperty("--theme-color-primary-light", primaryLight); 
-    html.style.setProperty("--theme-color-accent", primary); 
-    html.style.setProperty("--theme-color-primary-text", primaryText); 
-    html.style.setProperty("--theme-color-secondary-text", secondaryText); 
+    html.style.setProperty("--theme-color-primary", primary);
+    html.style.setProperty("--theme-color-primary-dark", primaryDark);
+    html.style.setProperty("--theme-color-primary-light", primaryLight);
+    html.style.setProperty("--theme-color-accent", primary);
+    html.style.setProperty("--theme-color-primary-text", primaryText);
+    html.style.setProperty("--theme-color-secondary-text", secondaryText);
 }

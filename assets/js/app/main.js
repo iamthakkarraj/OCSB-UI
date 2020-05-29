@@ -20,18 +20,22 @@ $(function () {
         }
     });
 
+    $(document).on('hover', '.disabled-date', function () {
+        $('.disabled-date').attr('title', ' <i class="fa fa-calendar-times-o" aria-hidden="true"></i> Dealer not available');
+        $('.disabled-date').attr('data-toggle', 'tooltip');
+        $('.disabled-date').attr('data-placement', 'left');
+        $('.disabled-date').attr('data-html', 'true');
+    });
+
 
     $(document).on('click', '.collapse-button-enabled', function () {
-
         let elementId = '#' + this.id;
         let dataTartgetId = $(elementId).attr('data-target');
         let visiableFrames = $('.form-frame');
-
         if ($(dataTartgetId).hasClass('fade')) {
             $(dataTartgetId).removeClass('fade');
             $(dataTartgetId).addClass('show');
         }
-
         for (let i = 0; i < visiableFrames.length; i++) {
             if ($('#' + visiableFrames[i].id).hasClass('show') && '#' + visiableFrames[i].id != dataTartgetId) {
                 $('#' + visiableFrames[i].id).removeClass('show')
@@ -39,7 +43,6 @@ $(function () {
                 enableCollapseButton($('#' + visiableFrames[i].id).attr('data-control'));
             }
         }
-
     });
 
     //===================================================
@@ -159,11 +162,10 @@ $(function () {
         $("#VehicleId").val($(this).attr('data-provide'));
         enableThemeButton('#submitButtonForm3');
     });
-    
+
     $(document).on('click', '#submitButtonForm3', function () {
         disableThemeButton("#submitButtonForm3");
         if (ServiceList == null) {
-            enableThemeButton("#submitButtonForm3");
             getServiceGroupList();
         } else {
             enableThemeButton("#submitButtonForm3");
@@ -205,6 +207,7 @@ $(function () {
         var price = $('#' + this.id + 'price').html();
         var serviceId = $('#' + this.id).attr('service-id');
         var categoryId = $('#' + this.id).attr('category-id');
+        //console.log(`Name : ${name} Price ${price} serviceId ${serviceId} categoryId ${categoryId}`);
         //if checkbox was checked 
         if ($(this).prop("checked") == true) {
             //select that service
@@ -212,7 +215,7 @@ $(function () {
         } else if ($(this).prop("checked") == false) {
             //diselect that service
             diselectService(serviceId, categoryId, price);
-        }
+        }        
         //after each checkbox click validate the form 
         if ($("#serviceBookingForm4").valid()) {
             enableThemeButton("#submitButtonForm4");
@@ -233,13 +236,18 @@ $(function () {
         }
         for (let i = 0; i < ServiceList.length; i++) {
             if (ServiceList[i].Name.toLowerCase().includes($('#serviceSearch').val().toLowerCase())) {
+                var checked = ""
+                if ($('#category' + ServiceList[i].ServiceGroupServiceGroupId + 'service' + ServiceList[i].ServiceId).not(':checked').length == 0) {
+                    checked = 'checked';
+                }
                 $('#searchResults')
                     .append('<div class="form-group m-0 d-flex justify-content-between">'
                         + '<div id="searcQuerycategory' + ServiceList[i].ServiceGroupServiceGroupId + 'service' + ServiceList[i].ServiceGroupServiceGroupId + 'description"'
                         + 'class="custom-control custom-checkbox" data-toggle="tooltip"'
                         + 'data-placement="left" title="' + ServiceList[i].ServiceDetailModels[0].Description + '">'
-                        + '<input type="checkbox" class="custom-control-input service-checkbox"'
-                        + 'onClick="$(\'#category' + ServiceList[i].ServiceGroupServiceGroupId + 'service' + ServiceList[i].ServiceId + '\').click();" '
+                        + '<input type="checkbox" class="custom-control-input" '
+                        + checked
+                        + ' onClick="$(\'#category' + ServiceList[i].ServiceGroupServiceGroupId + 'service' + ServiceList[i].ServiceId + '\').click();" '
                         + 'id="searcQuerycategory' + ServiceList[i].ServiceGroupServiceGroupId + 'service' + ServiceList[i].ServiceId + '"/>'
                         + '<label class="custom-control-label"'
                         + 'id="searcQuerycategory' + ServiceList[i].ServiceGroupServiceGroupId + 'service' + ServiceList[i].ServiceId + 'name"'
@@ -254,11 +262,16 @@ $(function () {
     });
 
     $(document).on('click', '#submitButtonForm4', function () {
+        disableThemeButton('#submitButtonForm4');
         if (DealerList == null) {
             getDealerList();
+        } else {
+            if($('#dealerId').val().length != 0){
+                getDisabledDates();
+            }
+            enableThemeButton('#submitButtonForm4');
+            $('#collapseButton4').click();
         }
-        $('.mapboxgl-canvas').css('width', '100%');
-        $('.mapboxgl-canvas').css('height', '100%');
     });
     //=================================================
     //Form 4 Validation and Flow Control Ends From Here
@@ -314,9 +327,9 @@ $(function () {
             enableThemeButton("#submitButtonForm5");
             showToast('Error', 'Select a valid date for your appointment');
         } else {
-            enableCollapseButton("#collapseButton5");
-            $("#collapseButton5").click();
-            disableThemeButton("#submitButtonForm5");
+            enableThemeButton("#submitButtonForm5");
+            enableCollapseButton("#collapseButton5");            
+            $("#collapseButton5").click();            
         }
     });
     //===================================================
