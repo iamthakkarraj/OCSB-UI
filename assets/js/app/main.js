@@ -393,29 +393,29 @@ $(function () {
     var geoCoders = $('.mapboxgl-ctrl-geocoder input');
 
     geoCoders[0].addEventListener('change', function () {
-        reverseGeoCode(PickUpMarker, $('.mapboxgl-ctrl-geocoder input').val(), PickUpMap, DragEndForPickUp, '#PickUpAddress', '#PickUpCoord');
+        reverseGeoCode(PickUpMarker, geoCoders[0].value, PickUpMap, DragEndForPickUp, '#PickUpAddress', '#PickUpCoord');
     });
 
-    geoCoders[0].addEventListener('change', function () {
-        reverseGeoCode(DropMarker, $('.mapboxgl-ctrl-geocoder input').val(), DropMap, DragEndForDrop, '#DropAddress', '#DropCoord');
+    geoCoders[1].addEventListener('change', function () {
+        reverseGeoCode(DropMarker, geoCoders[1].value, DropMap, DragEndForDrop, '#DropAddress', '#DropCoord');
     });
 
     $(document).on('click', '#submitButtonForm6', function () {
         if ($('#serviceBookingForm6').valid()) {
             console.log('Form is valid');
-            if (PickUp && $('#PickUpAddress').val().length > 5) {
+            if (PickUp && $('#PickUpAddress').val().length < 5) {
                 console.log('Pickup Added' + $('#PickUpAddress').length);
                 showToast('Error', 'Please enter a valid pick up address');
             } else {
-                console.log('Pickup Added' + $('#PickUpAddress').length);
-                if (Drop && $('#DropAddress').val().length > 5) {
-                    console.log('Drop Added' + $('#DropAddress').length);
-                    showToast('Error', 'Please enter a valid drop address');
-                } else {
-                    console.log('Drop Added' + $('#DropAddress').length);
-                    showSummary();
-                    $('#DisplaySummaryButton').click();
-                }
+                console.log('Pickup Added' + $('#PickUpAddress').length);                
+            }
+            if (Drop && $('#DropAddress').val().length < 5) {
+                console.log('Drop Added' + $('#DropAddress').length);
+                showToast('Error', 'Please enter a valid drop address');
+            } else {
+                console.log('Drop Added' + $('#DropAddress').length);
+                showSummary();
+                $('#DisplaySummaryButton').click();
             }
         } else {
             showToast('Error', 'Please fill in all details.');

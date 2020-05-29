@@ -260,8 +260,8 @@ export function getDisabledDates() {
                 var dateList = [];
                 for (let i = 0; i < response.length; i++) {
                     dateList.push(new Date(response[i]).toLocaleDateString());
-                }                
-                $('#date-picker').datepicker('setDatesDisabled', dateList);                
+                }
+                $('#date-picker').datepicker('setDatesDisabled', dateList);
             } else {
 
             }
@@ -276,13 +276,17 @@ export function addAppointment() {
     var Appointment = {
         PlanDateTime: $('#PlanDateTime').val(),
         LicensePlateNumber: VehicleList.filter(item => item.vehicleId == $('#vehicleId').val())[0].LicensePlateNumber,
-        CustomerName: Customer.CustomerName,
+        CustomerName: Customer.Name,
         ContactPersonName: $('#ContactPerson').val(),
         ContactNumber: $('#ContactNo').val(),
         VehicleId: $('#VehicleId').val(),
         DealerId: $('#DealerId').val(),
         CustomerEmail: $('#Email').val(),
         CustomerNote: $('#CustomerNote').val(),
+        PickUpLat: PickUpMarker.getLngLat().lat,
+        PickUpLong: PickUpMarker.getLngLat().lng,
+        DropLat: DropMarker.getLngLat().lat,
+        DropLong: DropMarker.getLngLat().lng,
         PickUpAddress: $('#PickUpAddress').val(),
         DropAddress: $('#DropAddress').val(),
         SelectedServices: SelectedServicesList
