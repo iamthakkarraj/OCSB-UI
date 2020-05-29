@@ -207,6 +207,10 @@ export function selectService(serviceId, categoryId, name, price) {
 
 export function diselectService(serviceId, categoryId, price) {
 
+    if($('#searcQuerycategory'+categoryId+'service'+serviceId).length == 1){
+        $('#searcQuerycategory'+categoryId+'service'+serviceId).prop('checked',false);
+    }
+
     $('#selectedService' + serviceId + categoryId)
         .hide('slide', function () {
             $('#selectedService' + serviceId + categoryId)
