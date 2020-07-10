@@ -8,9 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Google Fonts CDN -->
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
-    <!-- Google Fonts CDN -->
-    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&family=Montserrat&display=swap"
-        rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css">
     <!-- Font-Awesome CSS -->
@@ -21,7 +18,7 @@
 
 <body>
 
-    <!-- ================== -->
+    <!-- ================== -->    
     <!-- Header Starts Here -->
     <!-- ================== -->
     <header class="shadow-md-b">
@@ -84,10 +81,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav mr-auto">
-                        <li class="active"> <a class="p-3 m-2" href="#">Home</a> </li>
+                        <li> <a class="p-3 m-2" href="./index.html">Home</a> </li>
                         <li> <a class="p-3 m-2 active" href="./service.html">Book Service</a> </li>
                         <li> <a class="p-3 m-2" href="./about.html">About</a> </li>
-                        <li> <a class="p-3 m-2" href="./contact.html">Contact</a> </li>
+                        <li class="active"> <a class="p-3 m-2" href="#">Contact</a> </li>
                     </ul>
                 </div>
             </div>
@@ -100,38 +97,23 @@
     <!-- ============================= -->
     <!-- Main Content Starts From Here -->
     <!-- ============================= -->
-    <section class="py-5">
-        <section class="container-fluid" id="home-container">
-            <div class="card py-5 shadow-md-b border-0">
+    <section class="main-content">
+        <section class="container">
+            <div class="card mx-auto my-5 border-0 shadow-md" style="width: 18rem;">                
+                <img src="./assets/img/confirm.png"" class="card-img-top" alt="Confirmed">                
                 <div class="card-body">
-                    <h5 class="card-title">
-                        <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
-                        Book Your Appointment
-                    </h5>
-                    <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                  <p class="card-text">Your appointment is booked ! <br> Check your email for more details.</p>
                 </div>
-                <div class="p-4">
-                    <div class="form-group">
-                        <label for="home_customer_email">Enter Your Registered Email Address</label>
-                        <input id="home_customer_email" type="email" class="theme-form-control"
-                            aria-describedby="email_help" placeholder="Enter email">
-                        <small id="email_help" class="form-text text-muted">We'll never share your email with anyone
-                            else.</small>
-                    </div>
-                    <div class="form-group">
-                        <input id="home_submit_button" type="submit" class="theme-button-primary">
-                    </div>
-                </div>
-            </div>
+              </div>
         </section>
     </section>
     <!-- =========================== -->
     <!-- Main Content Ends From Here -->
     <!-- =========================== -->
 
-    <!-- ===================-->
+    <!-- ================== -->
     <!-- Footer Starts Here -->
-    <!-- ===================-->
+    <!-- ================== -->
     <footer class="shadow-md-t">
         <div class="container">
             <div class="p-3 d-flex flex-wrap justify-content-between">
@@ -152,7 +134,7 @@
                         </span>
                         <!-- Instagram Link -->
                         <span>
-                            <i class="fa fa-instagram p-1" aria-hidden="true"></i>
+                            <i class="fa fa-instagram p-1" aria-hidden="true"></i> 
                             <a id="company_instagram_link" class="footer-links" href="#"> Instagram </a><br />
                         </span>
                     </div>
@@ -172,8 +154,7 @@
                         <!-- Support Link -->
                         <a id="company_support_link" class="footer-links" href="#">Support</a><br />
                         <!-- Terms Of Usage Link -->
-                        <a id="company_terms_condition_link" class="footer-links" href="#">Terms and
-                            Conditions</a><br />
+                        <a id="company_terms_condition_link" class="footer-links" href="#">Terms and Conditions</a><br />
                         <!-- Privacy Policy Link -->
                         <a id="company_privacy_policy_link" href="#" class="footer-links">Privacy Policy</a>
                     </div>
@@ -182,21 +163,24 @@
             </div>
         </div>
     </footer>
-    <!-- =================-->
+    <!-- ================ -->
     <!-- Footer Ends Here -->
-    <!-- =================-->
+    <!-- ================ -->
 
     <!-- ================================= -->
     <!-- Script Embedding Starts From Here -->
     <!-- ================================= -->
     <!-- Jquery -->
     <script src="./assets/js/jquery-3.4.1.slim.min.js"></script>
-
     <!-- Popper Js -->
     <script src="./assets/js/popper.min.js"></script>
-
     <!-- Bootstrap JS -->
     <script src="./assets/js/bootstrap.min.js"></script>
+    <script>
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $(".page-heading").offset().top - 20
+        }, 600);
+    </script>
     <!-- =============================== -->
     <!-- Script Embedding Ends From Here -->
     <!-- =============================== -->

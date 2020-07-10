@@ -11,8 +11,10 @@ export function sendOtp() {
         contentType: "application/json;charset=utf-8",
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
+            displayLoader(); displayLoader();
         },
         success: function (response) {
+            hideLoader();
             if (response != null) {
                 if (response == "s_1111") { //TODO replace with text
                     showToast("Attention", "Otp has been sent successfully to your email.Otp is valid for next 5 mins!");
@@ -28,6 +30,7 @@ export function sendOtp() {
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
+            hideLoader();
             showToast("Error", "It seems like our server is offline please try again later");
             enableThemeButton("#submitButtonForm1");
         }
@@ -41,8 +44,10 @@ export function verifyOtp() {
         contentType: "application/json;charset=utf-8",
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
+            displayLoader();
         },
         success: function (response) {
+            hideLoader();
             if (response != null) {
                 if (response == "s_1112") { //TODO replace with Text
                     showToast("Attention", "Your otp is Valid");
@@ -67,6 +72,7 @@ export function verifyOtp() {
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
+            hideLoader();
             showToast("Error", "It seems like our server is offline please try again later");
             enableThemeButton("#submitButtonForm2");
         }
@@ -80,14 +86,17 @@ export function getCustomer() {
         contentType: "application/json;charset=utf-8",
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
+            displayLoader();
         },
         success: function (response) {
+            hideLoader();
             if (response != null) {
                 Customer = response;
                 getVehicleList();
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
+            hideLoader();
             showToast("Error", "Unable to get your details right now.");
             enableThemeButton("#submitButtonForm2");
         }
@@ -102,8 +111,10 @@ export function getVehicleList() {
         contentType: "application/json;charset=utf-8",
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
+            displayLoader();
         },
         success: function (response) {
+            hideLoader();
             if (response != null) {
                 if (response.length > 0 && response.length != 0) {
                     VehicleList = response;
@@ -127,6 +138,7 @@ export function getVehicleList() {
             }
         },
         error: function (errormessage) {
+            hideLoader();
             showToast("Error", "It seems like our server is offline please try again later");
         }
     });
@@ -139,8 +151,10 @@ export function getServiceList() {
         contentType: 'application/json',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
+            displayLoader();
         },
         success: function (response) {
+            hideLoader();
             enableThemeButton("#submitButtonForm3");
             if (response != null) {
                 ServiceList = response;
@@ -158,6 +172,7 @@ export function getServiceList() {
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
+            hideLoader();
             enableThemeButton("#submitButtonForm3");
             showToast("Error", "It seems like our server is offline please try again later");
             enableThemeButton("#submitButtonForm3");
@@ -172,8 +187,10 @@ export function getServiceGroupList() {
         contentType: 'application/json',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
+            displayLoader();
         },
         success: function (response) {
+            hideLoader();
             if (response != null) {
                 ServiceGroupList = response
                 for (let i = 0; i < response.length; i++) {
@@ -185,6 +202,7 @@ export function getServiceGroupList() {
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
+            hideLoader();
             showToast("Error", "It seems like our server is offline please try again later");
             enableThemeButton("#submitButtonForm3");
         }
@@ -198,8 +216,10 @@ export function getDealerList() {
         contentType: 'application/json',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
+            displayLoader();
         },
         success: function (response) {
+            hideLoader();
             enableThemeButton('#submitButtonForm4');
             if (response != null) {
                 DealerList = response;
@@ -241,6 +261,7 @@ export function getDealerList() {
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
+            hideLoader();
             enableThemeButton('#submitButtonForm4');
             showToast("Error", "It seems like our server is offline please try again later");
         }
@@ -254,8 +275,10 @@ export function getDisabledDates() {
         contentType: 'application/json',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
+            displayLoader();
         },
         success: function (response) {
+            hideLoader();
             if (response != null && response.length > 0) {
                 var dateList = [];
                 for (let i = 0; i < response.length; i++) {
@@ -267,6 +290,7 @@ export function getDisabledDates() {
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
+            hideLoader();
             showToast("Error", "It seems like our server is offline please try again later");
         }
     });
@@ -299,9 +323,11 @@ export function addAppointment() {
         contentType: 'application/json',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Basic b3NiOmFkbWluQG9zYkAxMjM=");
+            displayLoader();
         },
         dataType: "json",
         success: function (response) {
+            hideLoader();
             if (response != null) {
                 showToast("Attention", "Your Appointment is Booked Successfully!An Email is sent with Appointment Details!");
                 displayElement("#successForm");
@@ -310,6 +336,7 @@ export function addAppointment() {
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
+            hideLoader();
             showToast("Error", "It seems like our server is offline please try again later");
         }
     });

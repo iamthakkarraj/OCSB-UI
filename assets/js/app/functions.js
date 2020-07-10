@@ -21,6 +21,20 @@ export function showToast(title, text) {
     }
 }
 
+export function displayLoader(){
+    if($('#loading').hasClass('fade')){
+        $('#loading').removeClass('fade');
+        $('#loading').addClass('loading');
+    }
+}
+
+export function hideLoader(){
+    if(!$('#loading').hasClass('fade')){
+        $('#loading').addClass('fade');
+        $('#loading').removeClass('loading');
+    }
+}
+
 export function disableThemeButton(id) {
     if ($(id).hasClass("theme-button-primary")) {
         $(id).removeClass("theme-button-primary");

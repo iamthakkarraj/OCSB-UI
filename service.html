@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Google Fonts CDN -->
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css">
     <!-- DatePicker CSS -->
@@ -25,7 +27,7 @@
     <link type="text/css" rel="stylesheet" href="./assets/css/styles.css" />
 </head>
 
-<body>
+<body class="position-relative">
 
     <!-- ================== -->
     <!-- Header Starts Here -->
@@ -108,7 +110,7 @@
     <!-- ============================= -->
     <section class="main-content">
 
-        <section class="container pt-5">
+        <section class="container pt-4">
 
             <!-- Section Header -->
             <section class="page-heading bg-white rounded shadow-md">
@@ -116,24 +118,24 @@
             </section>
 
             <!-- Frame Button List  -->
-            <div class="d-flex justify-content-center my-4">
-                <button id="collapseButton1" class="collapse-button collapse-button-enabled" type="button"
+            <div class="col-12 my-4 d-flex justify-content-center flex-wrap">
+                <button id="collapseButton1" class="collapse-button collapse-button-enabled col-2" type="button"
                     data-target="#frame-1">
                     <i class="fa fa-envelope-o" aria-hidden="true"></i> <br>Verification
                 </button>
-                <button id="collapseButton2" class="collapse-button collapse-button-enabled" type="button"
+                <button id="collapseButton2" class="collapse-button collapse-button-enabled col-2" type="button"
                     data-target="#frame-2">
                     <i class="fa fa-car" aria-hidden="true"></i> <br>Vehicle Selection
                 </button>
-                <button id="collapseButton3" class="collapse-button collapse-button-enabled" type="button"
+                <button id="collapseButton3" class="collapse-button collapse-button-enabled col-2" type="button"
                     data-target="#frame-3">
                     <i class="fa fa-cogs" aria-hidden="true"></i> <br>Service Selection
                 </button>
-                <button id="collapseButton4" class="collapse-button collapse-button-enabled" type="button"
+                <button id="collapseButton4" class="collapse-button collapse-button-enabled col-2" type="button"
                     data-target="#frame-4">
                     <i class="fa fa-id-card-o" aria-hidden="true"></i> <br>Dealer Selection
                 </button>
-                <button id="collapseButton5" class="collapse-button collapse-button-enabled" type="button"
+                <button id="collapseButton5" class="collapse-button collapse-button-enabled col-2" type="button"
                     data-target="#frame-5" aria-expanded="false">
                     <i class="fa fa-location-arrow" aria-hidden="true"></i> <br> Contact Details
                 </button>
@@ -151,11 +153,11 @@
                             </h4>
                             <form id="serviceBookingForm1">
                                 <div class="form-group">
-                                    <input name="Email" class="theme-form-control" type="email" id="Email" required
+                                    <input name="Email" class="theme-form-control rounded-0 shadow-md" type="email" id="Email" required
                                         placeholder="Your email" />
                                 </div>
                                 <div class="form-group">
-                                    <button class="theme-button-disabled w-100" type="button" id="submitButtonForm1">
+                                    <button class="theme-button-disabled shadow-md w-100 shadow-md" type="button" id="submitButtonForm1">
                                         Send
                                         OTP &nbsp; <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
                                     </button>
@@ -171,7 +173,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button class="theme-button-disabled w-100" type="button"
+                                    <button class="theme-button-disabled shadow-md w-100" type="button"
                                         id="submitButtonForm2">Verify
                                         OTP &nbsp; <i class="fa fa-key" aria-hidden="true"></i>
                                     </button>
@@ -192,10 +194,9 @@
                             style="overflow-y:scroll;max-height:320px">
                         </div>
                         <div class="row mr-3">
-                            <button class="ml-auto px-5 mr-5 theme-button-disabled" type="button"
+                            <button class="ml-auto px-5 mr-5 theme-button-disabled shadow-md" type="button"
                                 id="submitButtonForm3">
-                                Next <i class="fa fa-chevron-right" aria-hidden="true"></i>
-
+                                Next <i class="fa fa-arrow-right" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>
@@ -219,7 +220,7 @@
                                         class="col-5 my-2 ml-5 d-flex flex-column justify-content-center">Search your
                                         service :</span>
                                     <input type="text" name="ServiceSearch" placeholder="search" id="serviceSearch"
-                                        class="theme-form-control mr-2 mb-2 col-6">
+                                        class="theme-form-control rounded-0 shadow-md mr-2 mb-2 col-6">
                                 </div>
                                 <div id="searchResults" class="d-none">
 
@@ -259,10 +260,9 @@
                                     <input type="number" class="fade hidden-input-control" name="TotalCost"
                                         id="TotalCost" />
                                     <div class="row mx-0">
-                                        <button class="ml-auto px-5 theme-button-disabled" type="button"
+                                        <button class="ml-auto px-5 theme-button-disabled shadow-md" type="button"
                                             id="submitButtonForm4">
-                                            Next <i class="fa fa-chevron-right" aria-hidden="true"></i>
-
+                                            Next <i class="fa fa-arrow-right" aria-hidden="true"></i>
                                         </button>
                                     </div>
                                 </form>
@@ -300,10 +300,9 @@
                             <input type="hidden" name="PlanDateTime" class="" id="PlanDateTime" />
                         </form>
                         <div class="row mr-5">
-                            <button class="ml-auto px-5 mx-5 theme-button-disabled" type="button"
+                            <button class="ml-auto px-5 mx-5 theme-button-disabled shadow-md" type="button"
                                 id="submitButtonForm5">
-                                Next <i class="fa fa-chevron-right" aria-hidden="true"></i>
-
+                                Next <i class="fa fa-arrow-right" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>
@@ -322,21 +321,21 @@
                                     <div class="d-flex justify-content-center col-4 flex-column">
                                         <form id="serviceBookingForm6">
                                             <div class="form-group">
-                                                <input type="text" class="rounded theme-form-control"
+                                                <input type="text" class="rounded theme-form-control rounded-0 shadow-md"
                                                     name="ContactPerson" id="ContactPerson"
                                                     placeholder="Contact person name">
                                             </div>
                                             <div class="form-group">
-                                                <input type="number" class="roudned theme-form-control"
+                                                <input type="number" class="roudned theme-form-control rounded-0 shadow-md"
                                                     placeholder="Contact number" name="ContactNo" id="ContactNo">
                                             </div>
                                             <div class="form-group">
                                                 <textarea id="CustomerNote" name="CustomerNote"
-                                                    class="rounded theme-form-control"
+                                                    class="rounded theme-form-control rounded-0 shadow-md"
                                                     placeholder="Any special instruction that your want to provide us."></textarea>
                                             </div>
                                             <div class="form-group collapse" id="PickUpDetails">
-                                                <input type="text" class="roudned theme-form-control"
+                                                <input type="text" class="roudned theme-form-control rounded-0 shadow-md"
                                                     placeholder="Pick Up Address" id="PickUpAddress"
                                                     name="PickUpAddress">
                                                 <span onclick="$('#DisplayPickUpMap').click();" title="edit"
@@ -344,7 +343,7 @@
                                                         class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                             </div>
                                             <div class="form-group collapse" id="DropDetails">
-                                                <input type="text" class="roudned theme-form-control"
+                                                <input type="text" class="roudned theme-form-control rounded-0 shadow-md"
                                                     placeholder="Drop Address" name="DropAddress" id="DropAddress">
                                                 <span onclick="$('#DisplayDropMap').click();" title="edit"
                                                     class="rounded shadow-md px-2 bg-white"> <i
@@ -399,6 +398,473 @@
     <!-- =========================== -->
     <!-- Main Content Ends From Here -->
     <!-- =========================== -->
+
+    <section id="loading" class="fade">
+        
+            <svg id="e89t57poham1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                version="1.1" width="128px" height="128px" style="animation-play-state:running" viewBox="0 0 100 100"
+                shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+                <style>
+                    #e89t57poham3_to {
+                        animation: e89t57poham3_to__to 3000ms 1s infinite
+                    }
+
+                    @keyframes e89t57poham3_to__to {
+                        0% {
+                            transform: translate(-105.773772px, -0.062500px)
+                        }
+
+                        33.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        40% {
+                            transform: translate(7.918083px, -0.062500px)
+                        }
+
+                        73.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        100% {
+                            transform: translate(179.615973px, -0.062500px)
+                        }
+                    }
+
+                    #e89t57poham4_to {
+                        animation: e89t57poham4_to__to 3000ms 1s infinite
+                    }
+
+                    @keyframes e89t57poham4_to__to {
+                        0% {
+                            transform: translate(-105.773772px, -0.062500px)
+                        }
+
+                        33.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        40% {
+                            transform: translate(7.918083px, -0.062500px)
+                        }
+
+                        73.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        100% {
+                            transform: translate(179.615973px, -0.062500px)
+                        }
+                    }
+
+                    #e89t57poham5_to {
+                        animation: e89t57poham5_to__to 3000ms 1s infinite
+                    }
+
+                    @keyframes e89t57poham5_to__to {
+                        0% {
+                            transform: translate(-105.773772px, -0.062500px)
+                        }
+
+                        33.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        40% {
+                            transform: translate(7.918083px, -0.062500px)
+                        }
+
+                        73.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        100% {
+                            transform: translate(179.615973px, -0.062500px)
+                        }
+                    }
+
+                    #e89t57poham6_to {
+                        animation: e89t57poham6_to__to 3000ms 1s infinite
+                    }
+
+                    @keyframes e89t57poham6_to__to {
+                        0% {
+                            transform: translate(-105.773772px, -0.062500px)
+                        }
+
+                        33.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        40% {
+                            transform: translate(7.918083px, -0.062500px)
+                        }
+
+                        73.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        100% {
+                            transform: translate(179.615973px, -0.062500px)
+                        }
+                    }
+
+                    #e89t57poham7_to {
+                        animation: e89t57poham7_to__to 3000ms 1s infinite
+                    }
+
+                    @keyframes e89t57poham7_to__to {
+                        0% {
+                            transform: translate(-105.773772px, -0.062500px)
+                        }
+
+                        33.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        40% {
+                            transform: translate(7.918083px, -0.062500px)
+                        }
+
+                        73.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        100% {
+                            transform: translate(179.615973px, -0.062500px)
+                        }
+                    }
+
+                    #e89t57poham8_to {
+                        animation: e89t57poham8_to__to 3000ms 1s infinite
+                    }
+
+                    @keyframes e89t57poham8_to__to {
+                        0% {
+                            transform: translate(-105.773772px, -0.062500px)
+                        }
+
+                        33.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        40% {
+                            transform: translate(7.918083px, -0.062500px)
+                        }
+
+                        73.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        100% {
+                            transform: translate(179.615973px, -0.062500px)
+                        }
+                    }
+
+                    #e89t57poham10_to {
+                        animation: e89t57poham10_to__to 3000ms 1s infinite
+                    }
+
+                    @keyframes e89t57poham10_to__to {
+                        0% {
+                            transform: translate(-105.773772px, -0.062500px)
+                        }
+
+                        33.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        40% {
+                            transform: translate(7.918083px, -0.062500px)
+                        }
+
+                        73.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        100% {
+                            transform: translate(179.615973px, -0.062500px)
+                        }
+                    }
+
+                    #e89t57poham11_to {
+                        animation: e89t57poham11_to__to 3000ms 1s infinite
+                    }
+
+                    @keyframes e89t57poham11_to__to {
+                        0% {
+                            transform: translate(-105.773772px, -0.062500px)
+                        }
+
+                        33.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        40% {
+                            transform: translate(7.918083px, -0.062500px)
+                        }
+
+                        73.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        100% {
+                            transform: translate(179.615973px, -0.062500px)
+                        }
+                    }
+
+                    #e89t57poham12_to {
+                        animation: e89t57poham12_to__to 3000ms 1s infinite
+                    }
+
+                    @keyframes e89t57poham12_to__to {
+                        0% {
+                            transform: translate(-105.773772px, -0.062500px)
+                        }
+
+                        33.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        40% {
+                            transform: translate(7.918083px, -0.062500px)
+                        }
+
+                        73.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        100% {
+                            transform: translate(179.615973px, -0.062500px)
+                        }
+                    }
+
+                    #e89t57poham14_to {
+                        animation: e89t57poham14_to__to 3000ms 1s infinite
+                    }
+
+                    @keyframes e89t57poham14_to__to {
+                        0% {
+                            transform: translate(-105.773772px, -0.062500px)
+                        }
+
+                        33.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        40% {
+                            transform: translate(7.918083px, -0.062500px)
+                        }
+
+                        73.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        100% {
+                            transform: translate(179.615973px, -0.062500px)
+                        }
+                    }
+
+                    #e89t57poham16_to {
+                        animation: e89t57poham16_to__to 3000ms 1s infinite
+                    }
+
+                    @keyframes e89t57poham16_to__to {
+                        0% {
+                            transform: translate(-105.773772px, -0.062500px)
+                        }
+
+                        33.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        40% {
+                            transform: translate(7.918083px, -0.062500px)
+                        }
+
+                        73.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        100% {
+                            transform: translate(179.615973px, -0.062500px)
+                        }
+                    }
+
+                    #e89t57poham17_to {
+                        animation: e89t57poham17_to__to 3000ms 1s infinite
+                    }
+
+                    @keyframes e89t57poham17_to__to {
+                        0% {
+                            transform: translate(-105.773772px, -0.062500px)
+                        }
+
+                        33.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        40% {
+                            transform: translate(7.918083px, -0.062500px)
+                        }
+
+                        73.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        100% {
+                            transform: translate(179.615973px, -0.062500px)
+                        }
+                    }
+
+                    #e89t57poham19_to {
+                        animation: e89t57poham19_to__to 3000ms 1s infinite
+                    }
+
+                    @keyframes e89t57poham19_to__to {
+                        0% {
+                            transform: translate(-105.773772px, -0.062500px)
+                        }
+
+                        33.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        40% {
+                            transform: translate(7.918083px, -0.062500px)
+                        }
+
+                        73.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        100% {
+                            transform: translate(179.615973px, -0.062500px)
+                        }
+                    }
+
+                    #e89t57poham20_to {
+                        animation: e89t57poham20_to__to 3000ms 1s infinite
+                    }
+
+                    @keyframes e89t57poham20_to__to {
+                        0% {
+                            transform: translate(-105.773772px, -0.062500px)
+                        }
+
+                        33.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        40% {
+                            transform: translate(7.918083px, -0.062500px)
+                        }
+
+                        73.333333% {
+                            transform: translate(0.046547px, -0.062500px)
+                        }
+
+                        100% {
+                            transform: translate(179.615973px, -0.062500px)
+                        }
+                    }
+                </style>
+                <g id="e89t57poham2">
+                    <g id="e89t57poham3_to" transform="translate(-105.773772,-0.062500)">
+                        <path id="e89t57poham3"
+                            d="M76.800000,46.700000L64.700000,48.900000C64.200000,44.400000,59.700000,38.900000,51.300000,33C50.600000,32.100000,50.700000,30.900000,51.600000,30.200000C52.300000,29.700000,53.200000,29.700000,53.800000,30.200000L76.800000,46.700000Z"
+                            transform="translate(0,0)" fill="rgb(27,57,78)" stroke="none" stroke-width="1" />
+                    </g>
+                    <g id="e89t57poham4_to" transform="translate(-105.773772,-0.062500)">
+                        <path id="e89t57poham4"
+                            d="M38.400000,44.900000L17,44.900000C17,42.300000,19.100000,40.200000,21.700000,40.200000L33.800000,40.200000C36.300000,40.200000,38.400000,42.300000,38.400000,44.900000Z"
+                            transform="translate(0,0)" fill="rgb(33,33,33)" stroke="none" stroke-width="1" />
+                    </g>
+                    <g id="e89t57poham5_to" transform="translate(-105.773772,-0.062500)">
+                        <path id="e89t57poham5"
+                            d="M87.800000,54C87.600000,53.600000,87.500000,53.300000,87.300000,52.900000C86.600000,51.400000,85.900000,49.900000,84.800000,48.700000C82.500000,46,79,44.500000,75.500000,44.400000C71.300000,44.300000,67.100000,44.400000,62.900000,44.400000L15.500000,44.400000C12.400000,44.400000,9.800000,46.600000,9.300000,49.600000C9.300000,49.700000,9.200000,49.800000,9.200000,49.900000L8.600000,53.800000L7.800000,59.200000C7.800000,61.400000,9.600000,63.300000,11.900000,63.300000L89,63.300000C89.700000,63.300000,90.900000,63.500000,90.600000,62.500000C89.900000,59.600000,88.900000,56.800000,87.800000,54Z"
+                            transform="translate(0,0)" fill="rgb(207,216,220)" stroke="none" stroke-width="1" />
+                    </g>
+                    <g id="e89t57poham6_to" transform="translate(-105.773772,-0.062500)">
+                        <path id="e89t57poham6"
+                            d="M13.500000,49.600000L9.500000,49.600000C9.200000,49.600000,9,49.800000,9,50L8.500000,53.400000C8.500000,53.700000,8.700000,53.900000,8.900000,53.900000L13.500000,53.900000C14.600000,53.900000,15.400000,53.100000,15.400000,52L15.400000,51.500000C15.400000,50.500000,14.500000,49.600000,13.500000,49.600000Z"
+                            transform="translate(0,0)" fill="rgb(14,29,40)" stroke="none" stroke-width="1" />
+                    </g>
+                    <g id="e89t57poham7_to" transform="translate(-105.773772,-0.062500)">
+                        <path id="e89t57poham7"
+                            d="M88,51.500000C87.700000,50.400000,86.700000,49.600000,85.500000,49.600000L84,49.600000C83.200000,49.600000,82.600000,50.200000,82.600000,50.900000L82.600000,52.500000C82.600000,53.200000,83.200000,53.800000,84,53.800000L87.100000,53.800000C87.900000,53.800000,88.500000,53,88.300000,52.300000L88,51.500000Z"
+                            transform="translate(0,0)" fill="rgb(255,255,255)" stroke="none" stroke-width="1" />
+                    </g>
+                    <g id="e89t57poham8_to" transform="translate(-105.773772,-0.062500)">
+                        <path id="e89t57poham8"
+                            d="M90.300000,58.900000L7.900000,58.900000C7.900000,58.900000,7.500000,58.900000,7.500000,59.300000C7.500000,61.700000,9.200000,63.400000,11.700000,63.400000L90.200000,63.400000C91.400000,63.400000,92.400000,62.400000,92.400000,61.200000C92.500000,59.900000,91.500000,58.900000,90.300000,58.900000Z"
+                            transform="translate(0,0)" fill="rgb(27,57,78)" stroke="none" stroke-width="1" />
+                    </g>
+                    <g id="e89t57poham9">
+                        <g id="e89t57poham10_to" transform="translate(-105.773772,-0.062500)">
+                            <circle id="e89t57poham10" r="7.500000" transform="translate(23.900000,61.200000)"
+                                fill="rgb(255,255,255)" stroke="none" stroke-width="1" />
+                        </g>
+                        <g id="e89t57poham11_to" transform="translate(-105.773772,-0.062500)">
+                            <path id="e89t57poham11"
+                                d="M23.900000,55.300000C27.200000,55.300000,29.900000,58,29.900000,61.300000C29.900000,64.600000,27.200000,67.300000,23.900000,67.300000C20.600000,67.300000,17.900000,64.600000,17.900000,61.300000C17.900000,57.900000,20.600000,55.300000,23.900000,55.300000M23.900000,52.300000C18.900000,52.300000,14.900000,56.300000,14.900000,61.300000C14.900000,66.300000,18.900000,70.300000,23.900000,70.300000C28.900000,70.300000,32.900000,66.300000,32.900000,61.300000C32.900000,56.300000,28.800000,52.300000,23.900000,52.300000Z"
+                                transform="translate(0,0)" fill="rgb(33,33,33)" stroke="none" stroke-width="1" />
+                        </g>
+                    </g>
+                    <g id="e89t57poham12_to" transform="translate(-105.773772,-0.062500)">
+                        <path id="e89t57poham12" d="M26.300000,49C29.900000,49.700000,33,51.800000,35,54.700000"
+                            transform="translate(0,0)" fill="rgb(255,255,255)" stroke="rgb(27,57,78)" stroke-width="3"
+                            stroke-linecap="round" stroke-miterlimit="10" />
+                    </g>
+                    <g id="e89t57poham13">
+                        <g id="e89t57poham14_to" transform="translate(-105.773772,-0.062500)">
+                            <circle id="e89t57poham14" r="4" transform="translate(23.900000,61.200000)"
+                                fill="rgb(230,230,230)" stroke="none" stroke-width="1" />
+                        </g>
+                    </g>
+                    <g id="e89t57poham15">
+                        <g id="e89t57poham16_to" transform="translate(-105.773772,-0.062500)">
+                            <circle id="e89t57poham16" r="7.500000" transform="translate(71.500000,61.200000)"
+                                fill="rgb(255,255,255)" stroke="none" stroke-width="1" />
+                        </g>
+                        <g id="e89t57poham17_to" transform="translate(-105.773772,-0.062500)">
+                            <path id="e89t57poham17"
+                                d="M71.500000,55.300000C74.800000,55.300000,77.500000,58,77.500000,61.300000C77.500000,64.600000,74.800000,67.300000,71.500000,67.300000C68.200000,67.300000,65.500000,64.600000,65.500000,61.300000C65.500000,57.900000,68.200000,55.300000,71.500000,55.300000M71.500000,52.300000C66.500000,52.300000,62.500000,56.300000,62.500000,61.300000C62.500000,66.300000,66.500000,70.300000,71.500000,70.300000C76.500000,70.300000,80.500000,66.300000,80.500000,61.300000C80.500000,56.300000,76.500000,52.300000,71.500000,52.300000Z"
+                                transform="translate(0,0)" fill="rgb(33,33,33)" stroke="none" stroke-width="1" />
+                        </g>
+                    </g>
+                    <g id="e89t57poham18">
+                        <g id="e89t57poham19_to" transform="translate(-105.773772,-0.062500)">
+                            <circle id="e89t57poham19" r="4" transform="translate(71.500000,61.200000)"
+                                fill="rgb(230,230,230)" stroke="none" stroke-width="1" />
+                        </g>
+                    </g>
+                    <g id="e89t57poham20_to" transform="translate(-105.773772,-0.062500)">
+                        <path id="e89t57poham20"
+                            d="M58.700000,56.600000L35.200000,56.600000C34.500000,56.600000,34,56.100000,34,55.400000L34,55.100000C34,54.400000,34.500000,53.900000,35.200000,53.900000L58.700000,53.900000C59.400000,53.900000,59.900000,54.400000,59.900000,55.100000L59.900000,55.400000C59.900000,56.100000,59.400000,56.600000,58.700000,56.600000Z"
+                            transform="translate(0,0)" fill="rgb(27,57,78)" stroke="none" stroke-width="1" />
+                    </g>
+                </g>
+            </svg>
+
+            <h3>Please Wait..</h3>
+
+        </div>
+
+    </section>
+
+
+    <!-- Confirmed Card -->
+    <section class="main-content fade collapse">
+        <section class="container">
+            <div class="card mx-auto my-5 border-0 shadow-md" style="width: 18rem;">
+                <img src="./assets/img/confirm.png"" class=" card-img-top" alt="Confirmed">
+                <div class="card-body">
+                    <p class="card-text">Your appointment is booked ! <br> Check your email for more details.</p>
+                </div>
+            </div>
+        </section>
+    </section>
 
     <!-- Button trigger modal -->
     <button type="button" id="DisplayPickUpMap" class="btn btn-primary hidden-input-control fade" data-toggle="modal"
@@ -478,7 +944,7 @@
         </div>
     </div>
 
-    <!-- Modal Button -->
+    <!-- Button trigger modal -->
     <button id="DisplaySummaryButton" type="button" class="btn btn-primary hidden-input-control fade"
         data-toggle="modal" data-target="#Summary">
         Launch demo modal
@@ -556,7 +1022,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="theme-button-disabled" data-dismiss="modal">Close</button>
+                    <button type="button" class="theme-button-disabled shadow-md" data-dismiss="modal">Close</button>
                     <button type="button" class="theme-button-primary">Confirm</button>
                 </div>
             </div>
